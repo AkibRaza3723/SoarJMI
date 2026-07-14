@@ -8,7 +8,7 @@ import Link from 'next/link';
 const NAV_LINKS = [
   { label: 'Home', href: '/' },
   { label: 'Events', href: '/events' },
-  { label: 'Contact Us', href: '#contact' },
+  { label: 'Contact Us', href: '/contact' },
 ];
 
 export default function Navbar() {
