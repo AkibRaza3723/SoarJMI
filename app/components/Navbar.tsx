@@ -6,8 +6,8 @@ import SoarLogo from './SoarLogo';
 import Link from 'next/link';
 
 const NAV_LINKS = [
-  { label: 'Home', href: '#home' },
-  { label: 'Events', href: '#events' },
+  { label: 'Home', href: '/' },
+  { label: 'Events', href: '/events' },
   { label: 'Contact Us', href: '#contact' },
 ];
 
