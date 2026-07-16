@@ -82,14 +82,14 @@ export default function LogoSplash() {
       <div className="splash-center">
         <div ref={logoRef} className="splash-logo float-anim">
           <div className="logo-frame">
-            <SoarLogo size={220} />
+            <SoarLogo size={350} />
           </div>
         </div>
         <div ref={textRef} className="splash-text">
           <h1 className="splash-title">
             Soar<span className="accent-gradient">JMI</span>
           </h1>
-          <p className="splash-subtitle">Where Culture Meets Innovation</p>
+          <p className="splash-subtitle">Strengths, Opportunities, Aspirations, Results</p>
           <div className="scroll-hint">
             <span>Scroll to explore</span>
             <div className="scroll-arrow" />
@@ -157,7 +157,7 @@ export default function LogoSplash() {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 32px;
+          gap: 2px;
           text-align: center;
         }
 
@@ -168,8 +168,13 @@ export default function LogoSplash() {
         .logo-frame {
           border-radius: 24px;
           overflow: hidden;
-          box-shadow: 0 0 0 3px var(--accent-1), 0 20px 60px var(--glow);
           transition: box-shadow 0.4s ease;
+        }
+
+        .splash-text {
+          margin-top: -40px; /* Adjust this value to overlap more or less */
+          position: relative;
+          z-index: 10;
         }
 
         .splash-title {

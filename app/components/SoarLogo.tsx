@@ -11,7 +11,7 @@ interface SoarLogoProps {
 export default function SoarLogo({ size = 80, className = '' }: SoarLogoProps) {
   return (
     <Image
-      src="/logo.svg"
+      src="/logo.png"
       alt="SoarJMI Logo"
       width={size}
       height={size}
