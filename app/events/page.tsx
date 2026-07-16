@@ -890,7 +890,8 @@ export default function TrialEventsPage() {
 
           .te-track { left: 25px; transform: none; }
 
-          .tlc { width: 100% !important; max-width: 100% !important; flex-direction: row !important; }
+          .tlc { width: 100% !important; max-width: 100% !important; flex-direction: column !important; }
+          .tlc__art { width: 100% !important; height: 140px !important; border-bottom: 1px solid var(--border); }
         }
       `}</style>
     </>

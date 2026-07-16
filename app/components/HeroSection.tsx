@@ -16,7 +16,7 @@ export default function HeroSection() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: any = {
     hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
   };
@@ -76,9 +76,9 @@ export default function HeroSection() {
           {/* Stats row */}
           <motion.div variants={itemVariants} className="hero-stats">
             {[
-              { value: '500+', label: 'Members' },
-              { value: '30+', label: 'Events/Year' },
-              { value: '5', label: 'Years Strong' },
+              { value: '40+', label: 'Members' },
+              { value: '15+', label: 'Events' },
+              { value: '4', label: 'Years Strong' },
             ].map((stat) => (
               <div key={stat.label} className="stat-item">
                 <span className="stat-value accent-gradient">{stat.value}</span>
@@ -324,6 +324,34 @@ export default function HeroSection() {
           .hero-stats { justify-content: center; }
           .hero-ctas { justify-content: center; }
           .hero-illustration { max-width: 300px; }
+        }
+
+        @media (max-width: 480px) {
+          .hero-section {
+            padding: 100px 4% 60px;
+          }
+          .hero-stats {
+            flex-wrap: wrap;
+            gap: 20px;
+          }
+          .stat-item {
+            flex: 1 1 40%;
+            align-items: center;
+          }
+          .hero-ctas {
+            flex-direction: column;
+            width: 100%;
+          }
+          .btn-primary, .btn-secondary {
+            width: 100%;
+            text-align: center;
+          }
+          .hero-illustration {
+            max-width: 220px;
+          }
+          .illustration-core {
+            font-size: 3.5rem;
+          }
         }
       `}</style>
     </section>

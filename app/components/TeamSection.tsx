@@ -287,6 +287,9 @@ export default function TeamSection() {
           .team-grid {
             grid-template-columns: 1fr;
           }
+          .team-section {
+            padding: 60px 4%;
+          }
         }
       `}</style>
     </section>

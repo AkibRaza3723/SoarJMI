@@ -535,6 +535,15 @@ export default function FounderMentorsSection() {
             grid-template-columns: 1fr;
           }
         }
+        @media (max-width: 480px) {
+          .leadership-section { padding: 60px 4%; }
+          .founder-identity { padding: 20px; flex-direction: column; align-items: center; text-align: center; }
+          .founder-stats-ribbon { flex-direction: column; }
+          .ribbon-item { border-right: none; border-bottom: 1px solid var(--border); }
+          .ribbon-item:last-child { border-bottom: none; }
+          .founder-quote { font-size: 0.9rem; }
+          .mentor-top { flex-direction: column; align-items: flex-start; text-align: left; }
+        }
       `}</style>
     </section>
   );

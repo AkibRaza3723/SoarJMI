@@ -212,6 +212,16 @@ export default function FAQSection() {
           flex-direction: column;
           gap: 12px;
         }
+
+        @media (max-width: 480px) {
+          .faq-section {
+            padding: 60px 4%;
+          }
+          .faq-question {
+            padding: 16px 20px;
+            font-size: 0.9rem;
+          }
+        }
       `}</style>
     </section>
   );

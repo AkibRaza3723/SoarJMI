@@ -85,12 +85,14 @@ export default function LogoSplash() {
             <SoarLogo size={350} />
           </div>
         </div>
-        <div ref={textRef} className="splash-text">
+        <div ref={textRef} className="splash-text flex flex-col justify-center items-center" >
           <h1 className="splash-title">
             Soar<span className="accent-gradient">JMI</span>
           </h1>
-          <p className="splash-subtitle">Strengths, Opportunities, Aspirations, Results</p>
+          
+          <p className='splash-subtitle mt-7 w-3/4 '>To foster a community of student innovators at Jamia Millia Islamia who use technology, design, and creativity to solve real-world problems while learning, leading, and creating lasting impact.</p>
           <div className="scroll-hint">
+            
             <span>Scroll to explore</span>
             <div className="scroll-arrow" />
           </div>
@@ -159,6 +161,10 @@ export default function LogoSplash() {
           align-items: center;
           gap: 2px;
           text-align: center;
+          width: 100%;
+          max-width: 100vw;
+          padding: 0 20px;
+          box-sizing: border-box;
         }
 
         .splash-logo {
@@ -169,6 +175,12 @@ export default function LogoSplash() {
           border-radius: 24px;
           overflow: hidden;
           transition: box-shadow 0.4s ease;
+          max-width: 90vw;
+        }
+
+        .logo-frame :global(svg) {
+          max-width: 100%;
+          height: auto;
         }
 
         .splash-text {
@@ -186,11 +198,13 @@ export default function LogoSplash() {
         }
 
         .splash-subtitle {
-          font-size: clamp(1rem, 2.5vw, 1.4rem);
+          font-size: clamp(0.7rem, 2.5vw, 1.4rem);
           color: var(--text-muted);
           font-weight: 400;
           letter-spacing: 0.08em;
           text-transform: uppercase;
+          padding: 0 20px;
+          line-height: 1.5;
         }
 
         .scroll-hint {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 
 const TESTIMONIALS = [
@@ -71,11 +71,10 @@ function TestimonialCard({
 }) {
   return (
     <motion.div
-      layout
       initial={{ opacity: 0, scale: 0.9, y: 30 }}
       animate={{ opacity: active ? 1 : 0.45, scale: active ? 1 : 0.92, y: 0 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className={`testimonial-card glass-card ${active ? 'active' : ''}`}
+      className={`testimonial-card ${active ? 'active' : ''}`}
     >
       <div className="t-header">
         <div className="t-avatar">{t.avatar}</div>
@@ -91,11 +90,15 @@ function TestimonialCard({
 
       <style jsx>{`
         .testimonial-card {
-          padding: 28px;
+          padding: 32px;
           flex: 1;
           cursor: default;
           transition: all 0.4s ease;
           min-width: 0;
+          border-radius: 20px;
+          background: var(--bg-card);
+          border: 1px solid var(--border);
+          box-shadow: var(--shadow-card);
         }
 
         .testimonial-card.active {
@@ -176,14 +179,24 @@ function TestimonialCard({
 
 export default function TestimonialsSection() {
   const [activeIdx, setActiveIdx] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
-  const displayed = [
-    TESTIMONIALS[(activeIdx) % TESTIMONIALS.length],
-    TESTIMONIALS[(activeIdx + 1) % TESTIMONIALS.length],
-    TESTIMONIALS[(activeIdx + 2) % TESTIMONIALS.length],
-  ];
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 900);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const displayed = isMobile 
+    ? [TESTIMONIALS[activeIdx % TESTIMONIALS.length]]
+    : [
+        TESTIMONIALS[(activeIdx) % TESTIMONIALS.length],
+        TESTIMONIALS[(activeIdx + 1) % TESTIMONIALS.length],
+        TESTIMONIALS[(activeIdx + 2) % TESTIMONIALS.length],
+      ];
 
   return (
     <section id="testimonials" className="t-section">
@@ -199,22 +212,28 @@ export default function TestimonialsSection() {
           <h2 className="section-title t-title">
             What Our <span className="accent-gradient">Members Say</span>
           </h2>
-          <p className="section-desc">
-            Real words from real people whose journeys were shaped by this community.
-          </p>
         </motion.div>
 
         {/* Cards */}
         <motion.div
-          className="t-cards"
+          className="t-cards-container"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.3, duration: 0.6 }}
         >
           <AnimatePresence mode="popLayout">
-            {displayed.map((t, i) => (
-              <TestimonialCard key={t.name + activeIdx} t={t} index={i} active={i === 1} />
-            ))}
+            <motion.div
+              key={activeIdx}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.4 }}
+              className="t-cards"
+            >
+              {displayed.map((t, i) => (
+                <TestimonialCard key={t.name} t={t} index={i} active={isMobile ? true : i === 1} />
+              ))}
+            </motion.div>
           </AnimatePresence>
         </motion.div>
 
@@ -276,12 +295,19 @@ export default function TestimonialsSection() {
           margin: 0 auto;
         }
 
+        .t-cards-container {
+          position: relative;
+          width: 100%;
+        }
+
         .t-cards {
           display: grid;
           grid-template-columns: 1fr 1.15fr 1fr;
-          gap: 20px;
-          align-items: stretch;
+          gap: 24px;
+          align-items: start;
           margin-bottom: 40px;
+          width: 100%;
+          padding: 8px 0;
         }
 
         .t-nav {
@@ -332,6 +358,11 @@ export default function TestimonialsSection() {
         @media (max-width: 900px) {
           .t-cards {
             grid-template-columns: 1fr;
+          }
+        }
+        @media (max-width: 480px) {
+          .t-section {
+            padding: 60px 4%;
           }
         }
       `}</style>

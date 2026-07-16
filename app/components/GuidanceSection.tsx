@@ -26,22 +26,7 @@ const GUIDANCE_PILLARS = [
   },
 ];
 
-const MENTOR_WORDS = [
-  {
-    mentor: 'Prof. Imran Siddiqui',
-    role: 'Cultural Mentor',
-    avatar: '👨‍🏫',
-    message:
-      'My guidance philosophy is simple: I never tell a student what art should look like. I ask them what it feels like. That shift — from instruction to exploration — is where real growth happens.',
-  },
-  {
-    mentor: 'Dr. Fatima Ansari',
-    role: 'Tech Mentor',
-    avatar: '👩‍🔬',
-    message:
-      'I show students that every problem is just a system waiting to be understood. Once they see that pattern, they stop being afraid of complex challenges and start getting excited by them.',
-  },
-];
+
 
 export default function GuidanceSection() {
   const ref = useRef(null);
@@ -52,7 +37,7 @@ export default function GuidanceSection() {
     visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
   };
 
-  const cardVariants = {
+  const cardVariants: any = {
     hidden: { opacity: 0, y: 40, scale: 0.94 },
     visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
   };
@@ -72,10 +57,7 @@ export default function GuidanceSection() {
           <h2 className="section-title guidance-title">
             Our <span className="accent-gradient">Guidance</span> Framework
           </h2>
-          <p className="section-desc">
-            We don't just organize events — we build environments where students genuinely develop.
-            Here's how we structure growth at SoarJMI.
-          </p>
+          
         </motion.div>
 
         {/* ── Pillars Grid ── */}
@@ -85,63 +67,12 @@ export default function GuidanceSection() {
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
         >
-          {GUIDANCE_PILLARS.map((p) => (
-            <motion.div key={p.title} variants={cardVariants} className="pillar-block glass-card">
-              <div className="pillar-icon-wrap">
-                <span className="pillar-icon">{p.icon}</span>
-                <div className="pillar-icon-glow" />
-              </div>
-              <h4 className="pillar-heading">{p.title}</h4>
-              <p className="pillar-text">{p.desc}</p>
-            </motion.div>
-          ))}
+          <div className="flex flex-col justify-center items-center w-full section-desc ">
+            <p>To maintain a positive, professional, and inclusive environment, all members of SOAR JMI are expected to uphold the values and standards of the society. Every member should actively participate in meetings, events, workshops, and society activities while respecting the time, efforts, and contributions of fellow members. Punctuality, discipline, teamwork, and mutual respect are fundamental principles that every member must follow. Members are encouraged to communicate openly, share innovative ideas, and contribute positively to the growth of the society. Any form of discrimination, harassment, misconduct, or behavior that harms the reputation of the society or the university will not be tolerated. By adhering to these guidelines, every member plays a vital role in creating a collaborative, inspiring, and supportive community where learning, innovation, leadership, and creativity can thrive.</p>
+          </div>
         </motion.div>
 
-        {/* ── Divider ── */}
-        <div className="guidance-divider">
-          <span className="divider-text">Words from our Mentors</span>
-        </div>
-
-        {/* ── Mentor words ── */}
-        <motion.div
-          className="mentor-words-grid"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-        >
-          {MENTOR_WORDS.map((m) => (
-            <motion.div key={m.mentor} variants={cardVariants} className="mentor-word-card">
-              <div className="mw-top">
-                <div className="mw-avatar">{m.avatar}</div>
-                <div>
-                  <p className="mw-name">{m.mentor}</p>
-                  <p className="mw-role">{m.role}</p>
-                </div>
-              </div>
-              <blockquote className="mw-quote">
-                <span className="mw-open-quote">"</span>
-                {m.message}
-                <span className="mw-close-quote">"</span>
-              </blockquote>
-
-              {/* Decorative gradient line bottom */}
-              <div className="mw-line" />
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* ── CTA ── */}
-        <motion.div
-          className="guidance-cta"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.7, duration: 0.6 }}
-        >
-          <p className="cta-text">Ready to start your journey?</p>
-          <a href="#contact" className="btn-primary">
-            🚀 Join SoarJMI Today
-          </a>
-        </motion.div>
+        
 
       </div>
 
@@ -187,10 +118,10 @@ export default function GuidanceSection() {
 
         .section-desc {
           color: var(--text-muted);
-          font-size: 1rem;
+          font-size: 1.3rem;
           line-height: 1.7;
-          max-width: 560px;
-          margin: 0 auto;
+          max-width: 100%;
+          margin: 0 auto
         }
 
         /* ─── Pillars ─── */
@@ -408,6 +339,11 @@ export default function GuidanceSection() {
           }
           .mentor-words-grid {
             grid-template-columns: 1fr;
+          }
+        }
+        @media (max-width: 480px) {
+          .guidance-section {
+            padding: 60px 4%;
           }
         }
       `}</style>

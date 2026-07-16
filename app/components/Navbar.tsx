@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import SoarLogo from './SoarLogo';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const NAV_LINKS = [
   { label: 'Home', href: '/' },
@@ -15,6 +16,8 @@ export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const navRef = useRef<HTMLElement>(null);
   const logoWrapRef = useRef<HTMLDivElement>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => {
@@ -28,6 +31,21 @@ export default function Navbar() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileMenuOpen]);
 
   return (
     <nav ref={navRef} className="soar-nav">
@@ -52,10 +70,34 @@ export default function Navbar() {
         ))}
       </ul>
 
-      {/* Theme toggle */}
-      <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-        {theme === 'cultural' ? '🌙 Tech' : '🎭 Cultural'}
-      </button>
+      <div className="nav-actions">
+        {/* Theme toggle */}
+        <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+          {theme === 'cultural' ? '🌙 Tech' : '🎭 Cultural'}
+        </button>
+
+        {/* Mobile menu toggle */}
+        <button className="mobile-menu-btn" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Toggle menu">
+          <div className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <div className={`mobile-menu-overlay ${isMobileMenuOpen ? 'open' : ''}`}>
+        <ul className="mobile-nav-links">
+          {NAV_LINKS.map((link) => (
+            <li key={link.label}>
+              <Link href={link.href} className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <style jsx>{`
         .soar-nav {
@@ -140,9 +182,101 @@ export default function Navbar() {
           width: 100%;
         }
 
+        .nav-actions {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+
+        .mobile-menu-btn {
+          display: none;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          padding: 8px;
+          z-index: 2000;
+        }
+
+        .hamburger {
+          width: 24px;
+          height: 20px;
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        .hamburger span {
+          display: block;
+          width: 100%;
+          height: 2px;
+          background: var(--text-primary);
+          border-radius: 2px;
+          transition: all 0.3s ease;
+          transform-origin: left center;
+        }
+
+        .hamburger.open span:nth-child(1) {
+          transform: rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+          width: 0%;
+          opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+          transform: rotate(-45deg);
+        }
+
+        .mobile-menu-overlay {
+          position: fixed;
+          inset: 0;
+          background: var(--bg-primary);
+          z-index: 1500;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          opacity: 0;
+          pointer-events: none;
+          transform: translateY(-20px);
+          transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .mobile-menu-overlay.open {
+          opacity: 1;
+          pointer-events: auto;
+          transform: translateY(0);
+        }
+
+        .mobile-nav-links {
+          display: flex;
+          flex-direction: column;
+          gap: 32px;
+          list-style: none;
+          text-align: center;
+        }
+
+        .mobile-nav-link {
+          font-family: var(--font-display);
+          font-size: 2rem;
+          font-weight: 800;
+          color: var(--text-primary);
+          text-decoration: none;
+          transition: color 0.3s ease;
+        }
+
+        .mobile-nav-link:hover {
+          color: var(--accent-1);
+        }
+
         @media (max-width: 768px) {
           .nav-links {
             display: none;
+          }
+          .mobile-menu-btn {
+            display: flex;
           }
         }
       `}</style>

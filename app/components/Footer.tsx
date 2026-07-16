@@ -58,6 +58,12 @@ export default function Footer() {
           font-size: 0.8rem;
           opacity: 0.7;
         }
+
+        @media (max-width: 480px) {
+          .footer {
+            padding: 32px 4%;
+          }
+        }
       `}</style>
     </footer>
   );

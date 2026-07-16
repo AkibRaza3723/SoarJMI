@@ -25,7 +25,7 @@ export default function AboutSection() {
 
   return (
     <section id="about" className="about-section">
-      <div className="about-container" ref={ref}>
+      <div className="about-container flex flex-col justify-center items-center gap-10"  ref={ref}>
         {/* Left: text */}
         <motion.div
           className="about-text"
@@ -36,45 +36,37 @@ export default function AboutSection() {
           <p className="section-eyebrow">About SoarJMI</p>
           <h2 className="section-title about-title">
             {theme === 'cultural'
-              ? <>We Are <span className="accent-gradient">Art.</span></>
-              : <>We Are <span className="accent-gradient">Code.</span></>
+              ? <>We Are <span className="accent-gradient">SoarJMI.</span></>
+              : <>We Are <span className="accent-gradient">SoarJMI.</span></>
             }
           </h2>
           <p className="about-body">
-            {theme === 'cultural'
-              ? `Founded in 2020, SoarJMI began as a small collective of passionate artists at Jamia Millia Islamia. Today, we are a vibrant community of 500+ students, alumni, and faculty — united by the belief that culture is the soul of education.`
-              : `SoarJMI's Tech wing was born from a simple idea: students learn best by building. Since 2020, our technical community has grown into a powerhouse of engineers, designers, and problem-solvers who ship real products.`
-            }
+            SOAR JMI is the technology and creative society of Jamia Millia Islamia, built for students who want to turn ideas into reality. The society brings together coding, graphic designing, photography, video editing, management, and hackathons under one platform, giving members a space to learn, build, and collaborate across disciplines. Whether it is writing clean code, designing a striking visual identity, capturing a moment through the lens, editing a compelling video, organising a large-scale event, or competing in a high-energy hackathon, SOAR JMI is where students from every background come together to innovate with technology and creativity. The society is driven by the belief that the best ideas come to life when curiosity meets collaboration, and it continues to build an ecosystem where every member finds a domain to grow in and a team to grow with.
           </p>
-          <p className="about-body about-body-2">
+          <h2 className="section-title about-title">
             {theme === 'cultural'
-              ? `From grand cultural fests to intimate open-mic nights, every event we curate is a testament to the richness of human expression. We don't just celebrate culture — we create it.`
-              : `Whether you're a first-year discovering your first algorithm or a final-year shipping your startup, SoarJMI is the launchpad you've been looking for. We build, we break, we learn, we grow.`
+              ? <>Our <span className="accent-gradient">Mission</span></>
+              : <>Our <span className="accent-gradient">Mission</span></>
             }
+          </h2>
+          <p className='about-body'>
+         To nurture practical skills in coding, design, photography, video editing, event management, and hackathons through hands-on projects, workshops, and collaborative events, while fostering a culture of teamwork, innovation, and continuous learning.
+          </p>
+         <h2 className="section-title about-title">
+            {theme === 'cultural'
+              ? <>Core <span className="accent-gradient">Values</span></>
+              : <>Core <span className="accent-gradient">Values</span></>
+            }
+          </h2>
+          <p className='about-body'>
+          Innovation, Collaboration, Integrity, and Excellence — SOAR JMI is committed to creating an inclusive space where every idea is welcomed, every skill is valued, and every member is encouraged to soar.
           </p>
           <div className="about-badge-row">
-            <span className="about-badge">Est. 2020</span>
+            <span className="about-badge">Est. 2022</span>
             <span className="about-badge">JMI Campus</span>
-            <span className="about-badge">500+ Members</span>
+            <span className="about-badge">40+ Active Members</span>
           </div>
         </motion.div>
-
-        {/* Right: pillar cards */}
-        <div className="about-pillars">
-          {pillars.map((p, i) => (
-            <motion.div
-              key={p.title}
-              className="pillar-card glass-card"
-              initial={{ opacity: 0, scale: 0.88 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <span className="pillar-icon">{p.icon}</span>
-              <h4 className="pillar-title">{p.title}</h4>
-              <p className="pillar-desc">{p.desc}</p>
-            </motion.div>
-          ))}
-        </div>
       </div>
 
       <style jsx>{`
@@ -84,14 +76,7 @@ export default function AboutSection() {
           position: relative;
         }
 
-        .about-container {
-          max-width: 1200px;
-          margin: 0 auto;
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 70px;
-          align-items: center;
-        }
+        
 
         .about-text {
           display: flex;
@@ -108,12 +93,13 @@ export default function AboutSection() {
         }
 
         .about-title {
-          line-height: 1.05;
+          line-height:1.8 ;
         }
 
         .about-body {
-          font-size: 1rem;
+          font-size: 1.2rem;
           line-height: 1.8;
+          max-width: 100%;
           color: var(--text-secondary);
         }
 
@@ -176,6 +162,9 @@ export default function AboutSection() {
         @media (max-width: 500px) {
           .about-pillars {
             grid-template-columns: 1fr;
+          }
+          .about-section {
+            padding: 60px 4%;
           }
         }
       `}</style>
