@@ -40,10 +40,6 @@ function EventCard({ event, stackIndex, totalVisible, onDismiss, isTop }: CardPr
   const scaleBack = 1 - stackIndex * 0.05;
   const yBack = stackIndex * 22;
 
-  const seats = event.seats;
-  const registered = event.registered;
-  const pct = Math.round((registered / seats) * 100);
-  const almostFull = pct >= 85;
 
   async function handleDragEnd(_: unknown, info: PanInfo) {
     const offset = info.offset.x;
@@ -144,29 +140,6 @@ function EventCard({ event, stackIndex, totalVisible, onDismiss, isTop }: CardPr
 
           {/* Description */}
           <p className="card-desc">{event.description}</p>
-
-          {/* Seat progress */}
-          <div className="seat-block">
-            <div className="seat-label-row">
-              <span className="seat-label">Seats Filled</span>
-              <span className={`seat-count ${almostFull ? 'almost-full' : ''}`}>
-                {registered}/{seats} {almostFull && '🔥 Almost Full!'}
-              </span>
-            </div>
-            <div className="seat-bar">
-              <motion.div
-                className="seat-fill"
-                initial={{ width: 0 }}
-                animate={{ width: `${pct}%` }}
-                transition={{ duration: 1.2, delay: 0.3, ease: 'easeOut' }}
-              />
-            </div>
-          </div>
-
-          {/* Register button */}
-          <button className="register-btn">
-            Register Now →
-          </button>
         </div>
       </div>
 

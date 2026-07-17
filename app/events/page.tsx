@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from '../components/Navbar';
+import EventPopupModal from '../components/EventPopupModal';
 import { EVENTS, SoarEvent } from '../data/events';
 
 if (typeof window !== 'undefined') {
@@ -223,13 +224,20 @@ const ILLUSTRATIONS_MAP: Record<number, () => React.JSX.Element> = {
 };
 
 /* ─── Single timeline card ─── */
-function TLCard({ event, side }: { event: SoarEvent; side: 'left' | 'right' }) {
-  const pct = Math.round((event.registered / event.seats) * 100);
-  const hot = pct >= 85;
+function TLCard({ event, side, onClick }: { event: SoarEvent; side: 'left' | 'right'; onClick?: () => void }) {
   const IllustrationComponent = ILLUSTRATIONS_MAP[event.id] ?? IllustrationSoarFest;
 
   return (
-    <div className="tlc" id={`tlc-${event.id}`} style={{ flexDirection: side === 'right' ? 'row-reverse' : 'row' }}>
+    <div
+      className="tlc"
+      id={`tlc-${event.id}`}
+      style={{ flexDirection: side === 'right' ? 'row-reverse' : 'row' }}
+      onClick={onClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onClick?.(); }}
+      aria-label={`View details for ${event.title}`}
+    >
       <div className="tlc__art">
         <IllustrationComponent />
         <span className="tlc__emoji">{event.category === 'Cultural' ? '🎭' : '⚡'}</span>
@@ -250,17 +258,6 @@ function TLCard({ event, side }: { event: SoarEvent; side: 'left' | 'right' }) {
         </ul>
 
         <p className="tlc__desc">{event.description}</p>
-
-        <div className="tlc__footer">
-          <div className="tlc__bar-wrap">
-            <div className="tlc__bar-labels">
-              <span>Seats</span>
-              <span className={hot ? 'tlc__hot' : ''}>{event.registered}/{event.seats}{hot ? ' 🔥' : ''}</span>
-            </div>
-            <div className="tlc__bar"><div className="tlc__bar-fill" style={{ width: `${pct}%` }} /></div>
-          </div>
-          <button className="tlc__btn" id={`register-${event.id}`}>Register →</button>
-        </div>
       </div>
 
       <style jsx>{`
@@ -279,6 +276,12 @@ function TLCard({ event, side }: { event: SoarEvent; side: 'left' | 'right' }) {
         .tlc:hover {
           box-shadow: 0 32px 80px rgba(0,0,0,0.3), 0 0 40px var(--glow);
           transform: translateY(-4px);
+          cursor: pointer;
+        }
+
+        .tlc:focus-visible {
+          outline: 2px solid var(--accent-1);
+          outline-offset: 4px;
         }
 
         .tlc__art {
@@ -505,6 +508,21 @@ export default function TrialEventsPage() {
   const progressRef = useRef<SVGPathElement>(null);
   const particlesRef = useRef<HTMLDivElement>(null);
 
+  // Popup state
+  const [selectedEvent, setSelectedEvent] = useState<SoarEvent | null>(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const handleCardClick = useCallback((event: SoarEvent) => {
+    setSelectedEvent(event);
+    setIsPopupOpen(true);
+  }, []);
+
+  const handlePopupClose = useCallback(() => {
+    setIsPopupOpen(false);
+    // Delay clearing event to allow exit animation
+    setTimeout(() => setSelectedEvent(null), 450);
+  }, []);
+
   useEffect(() => {
     const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
     const nodes = nodeRefs.current.filter(Boolean) as HTMLDivElement[];
@@ -675,7 +693,7 @@ export default function TrialEventsPage() {
                   ref={(el) => { cardRefs.current[i] = el; }}
                   className={`te-card-col te-card-col--${side}`}
                 >
-                  <TLCard event={ev} side={side} />
+                  <TLCard event={ev} side={side} onClick={() => handleCardClick(ev)} />
                 </div>
 
                 {/* Node */}
@@ -696,6 +714,16 @@ export default function TrialEventsPage() {
         {/* Bottom fade */}
         <div className="te-bottom-glow" aria-hidden="true" />
       </div>
+
+      {/* Event Popup Modal */}
+      <EventPopupModal
+        event={selectedEvent}
+        isOpen={isPopupOpen}
+        onClose={handlePopupClose}
+        IllustrationComponent={
+          selectedEvent ? (ILLUSTRATIONS_MAP[selectedEvent.id] ?? IllustrationSoarFest) : null
+        }
+      />
 
       <style jsx global>{`
         /* ── Page ── */
