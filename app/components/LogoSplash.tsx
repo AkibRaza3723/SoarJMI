@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SoarLogo from './SoarLogo';
+import Typewriter from 'typewriter-effect';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -93,10 +94,22 @@ export default function LogoSplash() {
         </div>
         <div ref={textRef} className="splash-text flex flex-col justify-center items-center" >
           <h1 className=" splash-title ">
-            Soar<span style={{ color: '#006B3F', WebkitTextFillColor: '#006B3F' }}>JMI</span>
+            Soar<span style={{ color: 'var(--primary)', WebkitTextFillColor: 'var(--primary)' }}>JMI</span>
           </h1>
           
-          <p className='splash-subtitle mt-7 w-3/4 '>To foster a community of student innovators at Jamia Millia Islamia who use technology, design, and creativity to solve real-world problems while learning, leading, and creating lasting impact.</p>
+          <div className='splash-subtitle mt-7 w-3/4 min-h-[60px]'>
+            <Typewriter
+              options={{
+                delay: 35,
+                cursor: '',
+              }}
+              onInit={(typewriter) => {
+                typewriter.pauseFor(1500)
+                  .typeString('To foster a community of student innovators at Jamia Millia Islamia who use technology, design, and creativity to solve real-world problems while learning, leading, and creating lasting impact.')
+                  .start();
+              }}
+            />
+          </div>
           <div className="scroll-hint">
             
             <span>Scroll to explore</span>
@@ -199,7 +212,7 @@ export default function LogoSplash() {
         }
 
         .splash-text {
-          margin-top: -40px; /* Adjust this value to overlap more or less */
+          margin-top: -10px; /* Adjust this value to overlap more or less */
           position: relative;
           z-index: 10;
         }

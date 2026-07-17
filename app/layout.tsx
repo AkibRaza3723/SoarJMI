@@ -49,6 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${sora.variable} ${hankenGrotesk.variable} ${jetbrainsMono.variable} ${orbitron.variable}`}
       data-theme="cultural"
+      data-scroll-behavior="smooth"
     >
       <body>
         <ThemeProvider>{children}</ThemeProvider>

@@ -22,7 +22,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="hero-section">
+    <section id="hero" className="hero-section">
       {/* Floating tech circles (Tech theme decorations) */}
       <div className="hero-bg-decoration">
         {[...Array(5)].map((_, i) => (
@@ -61,8 +61,8 @@ export default function HeroSection() {
           {/* Description */}
           <motion.p variants={itemVariants} className="hero-desc">
             {theme === 'cultural'
-              ? 'SoarJMI is the beating heart of creativity at Jamia Millia Islamia. We celebrate art, music, theatre, dance, and cultural exchange — uniting hundreds of passionate students under one roof.'
-              : 'SoarJMI drives technological innovation at Jamia Millia Islamia. From hackathons to AI workshops, we empower the next generation of engineers, designers, and entrepreneurs.'}
+              ? 'SoarJMI is a dynamic cultural platform dedicated to fostering creativity, confidence, and holistic development among students. The society regularly organizes engaging events such as debate competitions, public speaking contests, extempore, quizzes, panel discussions, talent showcases, cultural celebrations, and interactive activities that encourage students to step beyond their academic boundaries. These events provide members with opportunities to enhance their communication, leadership, teamwork, and critical thinking skills while building lasting friendships and unforgettable experiences.'
+              : 'SoarJMI is a technical society, built for students who want to turn ideas into reality. The society brings together coding, designing, photography, video editing, management, and hackathons under one platform, giving members a space to learn, build, and collaborate across disciplines. Whether it is writing clean code, designing a striking visual identity, capturing a moment through the lens, editing a compelling video, organising a large-scale event, or competing in a high-energy hackathon, SOAR JMI is where students from every background come together to innovate with technology and creativity'}
           </motion.p>
 
           {/* CTAs */}
@@ -100,7 +100,7 @@ export default function HeroSection() {
             <div className="illustration-ring ring-2" />
             <div className="illustration-ring ring-3" />
             <div className="illustration-core">
-              {theme === 'cultural' ? '🎭' : '⚡'}
+              {theme === 'cultural' ? '🎭' : '🚀'}
             </div>
             {/* Orbiting icons */}
             {(theme === 'cultural'

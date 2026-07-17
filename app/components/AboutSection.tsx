@@ -8,21 +8,6 @@ export default function AboutSection() {
   const { theme } = useTheme();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
-
-  const pillars = theme === 'cultural'
-    ? [
-        { icon: '🎭', title: 'Theatre & Drama', desc: 'Annual plays, improv sessions, and drama workshops that bring stories to life.' },
-        { icon: '🎵', title: 'Music & Dance', desc: 'Classical, fusion, and contemporary performances celebrating every art form.' },
-        { icon: '🖼️', title: 'Visual Arts', desc: 'Exhibitions, installations, and murals transforming campus into a living gallery.' },
-        { icon: '✍️', title: 'Literature', desc: 'Poetry slams, open mics, and creative writing clubs for voices to be heard.' },
-      ]
-    : [
-        { icon: '💻', title: 'Hackathons', desc: '48-hour build marathons where teams create solutions to real-world problems.' },
-        { icon: '🤖', title: 'AI & ML', desc: 'Workshops and projects exploring cutting-edge machine learning and AI tools.' },
-        { icon: '🔗', title: 'Web3 & Blockchain', desc: 'Exploring decentralized tech, smart contracts, and the future of the internet.' },
-        { icon: '🚀', title: 'Entrepreneurship', desc: 'Startup bootcamps and mentorship programs for aspiring founders.' },
-      ];
-
   return (
     <section id="about" className="about-section">
       <div className="about-container flex flex-col justify-center items-center gap-10"  ref={ref}>
