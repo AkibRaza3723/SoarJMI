@@ -6,74 +6,71 @@
    ────────────────────────────────────────────────── */
 /* Fonts are loaded via next/font/google in layout.tsx — no @import needed */
 
-/* ──────────────────────────────────────────────────
-   DESIGN TOKENS — Ascendant Editorial (Light / Cultural)
-   ────────────────────────────────────────────────── */
 :root,
 [data-theme="cultural"] {
-  /* ── Surface scale ── */
-  --surface:                    #f8faf8;
-  --surface-dim:                #d8dad9;
-  --surface-bright:             #f8faf8;
-  --surface-container-lowest:   #ffffff;
-  --surface-container-low:      #f2f4f2;
-  --surface-container:          #eceeec;
-  --surface-container-high:     #e6e9e7;
-  --surface-container-highest:  #e1e3e1;
-  --on-surface:                 #191c1b;
-  --on-surface-variant:         #434843;
-  --inverse-surface:            #2e3130;
-  --inverse-on-surface:         #eff1ef;
+  /* ── Surface scale — Warm Cream / Parchment ── */
+  --surface:                    #FBF5EC;
+  --surface-dim:                #EDE4D6;
+  --surface-bright:             #FEF9F2;
+  --surface-container-lowest:   #F7EFDF;
+  --surface-container-low:      #F2E8D4;
+  --surface-container:          #EBE0C8;
+  --surface-container-high:     #E4D8BD;
+  --surface-container-highest:  #DCCFB2;
+  --on-surface:                 #2C1F0E;
+  --on-surface-variant:         #5C4A32;
+  --inverse-surface:            #3A2910;
+  --inverse-on-surface:         #FBF5EC;
 
   /* ── Outlines ── */
-  --outline:          #737973;
-  --outline-variant:  #c3c8c1;
+  --outline:          #9E825E;
+  --outline-variant:  #D4BFA0;
 
-  /* ── Primary — Deep Forest ── */
-  --primary:                    #061b0e;
-  --on-primary:                 #ffffff;
-  --primary-container:          #1b3022;
-  --on-primary-container:       #819986;
-  --inverse-primary:            #b4cdb8;
-  --primary-fixed:              #d0e9d4;
-  --primary-fixed-dim:          #b4cdb8;
-  --on-primary-fixed:           #0b2013;
-  --on-primary-fixed-variant:   #364c3c;
+  /* ── Primary — Rich Espresso Brown ── */
+  --primary:                    #4A2C0A;
+  --on-primary:                 #FBF5EC;
+  --primary-container:          #6B3F12;
+  --on-primary-container:       #F0C98A;
+  --inverse-primary:            #D4915A;
+  --primary-fixed:              #F5D9A8;
+  --primary-fixed-dim:          #E8C08A;
+  --on-primary-fixed:           #2C1A04;
+  --on-primary-fixed-variant:   #5C3610;
 
-  /* ── Secondary — Ethereal Mint ── */
-  --secondary:                  #37684e;
-  --on-secondary:               #ffffff;
-  --secondary-container:        #baefce;
-  --on-secondary-container:     #3d6e54;
-  --secondary-fixed:            #baefce;
-  --secondary-fixed-dim:        #9ed2b3;
-  --on-secondary-fixed:         #002112;
-  --on-secondary-fixed-variant: #1e5038;
+  /* ── Secondary — Warm Terracotta / Amber ── */
+  --secondary:                  #A0522D;
+  --on-secondary:               #FBF5EC;
+  --secondary-container:        #F5C59A;
+  --on-secondary-container:     #6B2F0E;
+  --secondary-fixed:            #F5C59A;
+  --secondary-fixed-dim:        #E8AA78;
+  --on-secondary-fixed:         #3A1A04;
+  --on-secondary-fixed-variant: #7A3D18;
 
-  /* ── Tertiary — Dusty Sage ── */
-  --tertiary:                   #101916;
-  --on-tertiary:                #ffffff;
-  --tertiary-container:         #242e2a;
-  --on-tertiary-container:      #8b9691;
-  --tertiary-fixed:             #dae5df;
-  --tertiary-fixed-dim:         #bec9c3;
-  --on-tertiary-fixed:          #141e1a;
-  --on-tertiary-fixed-variant:  #3f4945;
+  /* ── Tertiary — Muted Gold / Ochre ── */
+  --tertiary:                   #7A5C28;
+  --on-tertiary:                #FBF5EC;
+  --tertiary-container:         #C4A060;
+  --on-tertiary-container:      #3A2908;
+  --tertiary-fixed:             #EDD9A0;
+  --tertiary-fixed-dim:         #DEC27E;
+  --on-tertiary-fixed:          #2C1E06;
+  --on-tertiary-fixed-variant:  #5C4220;
 
   /* ── Error ── */
-  --error:              #ba1a1a;
-  --on-error:           #ffffff;
-  --error-container:    #ffdad6;
-  --on-error-container: #93000a;
+  --error:              #9B2020;
+  --on-error:           #FBF5EC;
+  --error-container:    #F8DCD9;
+  --on-error-container: #7A1010;
 
   /* ── Surface tint ── */
   --surface-tint:       #4d6453;
   --splash-wave:        var(--secondary-fixed);
 
   /* ── Background ── */
-  --background:         #f8faf8;
-  --on-background:      #191c1b;
-  --surface-variant:    #e1e3e1;
+  --background:         #FBF5EC;
+  --on-background:      #2C1F0E;
+  --surface-variant:    #EBE0C8;
 
   /* ─── Legacy aliases (keep old consumer code working) ─── */
   --bg-primary:   var(--surface);
@@ -89,11 +86,11 @@
   --text-muted:     var(--outline);
 
   --border:        var(--outline-variant);
-  --glow:          rgba(55, 104, 78, 0.22);
+  --glow:          rgba(160, 82, 45, 0.15);
 
-  --gradient-hero:   linear-gradient(135deg, #f8faf8 0%, #eceeec 50%, #e1e3e1 100%);
+  --gradient-hero:   linear-gradient(135deg, #FBF5EC 0%, #EBE0C8 50%, #DCCFB2 100%);
   --gradient-accent: linear-gradient(135deg, var(--secondary), var(--secondary-fixed-dim));
-  --nav-bg:          rgba(248, 250, 248, 0.60);   /* 60 % off-white for glassmorphism */
+  --nav-bg:          rgba(251, 245, 236, 0.78);   /* 78 % warm cream for glassmorphism */
   --shadow-card:     none;
 
   /* ─── Typography scale ─── */
@@ -178,10 +175,10 @@
   --on-tertiary-fixed-variant:  #135228;
 
   /* ── Error ── */
-  --error:              #ffb4ab;
-  --on-error:           #690005;
-  --error-container:    #93000a;
-  --on-error-container: #ffdad6;
+  --error:              #F87171;
+  --on-error:           #7F1D1D;
+  --error-container:    #991B1B;
+  --on-error-container: #FEE2E2;
 
   /* ── Surface tint ── */
   --surface-tint:       #22c55e;
@@ -197,9 +194,9 @@
   --bg-secondary: #041208;
   --bg-card:      #06180a;
 
-  --accent-1:   #22c55e;
-  --accent-2:   #4ade80;
-  --accent-3:   #86efac;
+  --accent-1:   #38BDF8;
+  --accent-2:   #60A5FA;
+  --accent-3:   #34D399;
 
   --text-primary:   #f0fff0;
   --text-secondary: #86efac;
