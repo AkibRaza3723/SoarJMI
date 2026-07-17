@@ -88,39 +88,43 @@ export default function HeroSection() {
           </motion.div>
         </motion.div>
 
-        {/* Right side illustration */}
-        <motion.div
-          className="hero-illustration"
-          initial={{ opacity: 0, x: 60 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <div className="illustration-ring ring-1" />
-          <div className="illustration-ring ring-2" />
-          <div className="illustration-ring ring-3" />
-          <div className="illustration-core">
-            {theme === 'cultural' ? '🎭' : '⚡'}
-          </div>
-          {/* Orbiting icons */}
-          {(theme === 'cultural'
-            ? ['🎵', '🖼️', '💃', '🎬', '🎨']
-            : ['💻', '🤖', '🔗', '📡', '🛰️']
-          ).map((icon, i) => (
-            <div
-              key={i}
-              className="orbit-icon"
-              style={{
-                '--angle': `${i * 72}deg`,
-                animationDelay: `${i * 0.4}s`,
-              } as React.CSSProperties}
-            >
-              {icon}
+        {/* Right side illustration — wrapped for overflow clipping */}
+        <div className="hero-illustration-wrapper">
+          <motion.div
+            className="hero-illustration"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="illustration-ring ring-1" />
+            <div className="illustration-ring ring-2" />
+            <div className="illustration-ring ring-3" />
+            <div className="illustration-core">
+              {theme === 'cultural' ? '🎭' : '⚡'}
             </div>
-          ))}
-        </motion.div>
+            {/* Orbiting icons */}
+            {(theme === 'cultural'
+              ? ['🎵', '🖼️', '💃', '🎬', '🎨']
+              : ['💻', '🤖', '🔗', '📡', '🛰️']
+            ).map((icon, i) => (
+              <div
+                key={i}
+                className="orbit-icon"
+                style={{
+                  '--angle': `${i * 72}deg`,
+                  animationDelay: `${i * 0.4}s`,
+                } as React.CSSProperties}
+              >
+                {icon}
+              </div>
+            ))}
+          </motion.div>
+        </div>
       </div>
 
-      <style jsx>{`
+      {/* GLOBAL so styles apply to motion.div (third-party) elements */}
+      <style jsx global>{`
+        /* ─── Hero Section ─── */
         .hero-section {
           position: relative;
           min-height: 100vh;
@@ -148,6 +152,7 @@ export default function HeroSection() {
         .deco-circle-4 { width: 80px; height: 80px; top: 30%; left: 5%; background: var(--accent-2); opacity: 0.1; }
         .deco-circle-5 { width: 40px; height: 40px; bottom: 20%; right: 10%; background: var(--accent-1); opacity: 0.2; }
 
+        /* ─── Grid Layout ─── */
         .hero-content {
           position: relative;
           z-index: 2;
@@ -155,8 +160,8 @@ export default function HeroSection() {
           max-width: 1200px;
           margin: 0 auto;
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 60px;
+          grid-template-columns: 1.2fr 0.8fr;
+          gap: 40px;
           align-items: center;
         }
 
@@ -166,6 +171,7 @@ export default function HeroSection() {
           gap: 28px;
         }
 
+        /* ─── Badge ─── */
         .hero-badge {
           display: inline-flex;
           align-items: center;
@@ -188,6 +194,7 @@ export default function HeroSection() {
           animation: pulse-glow 2s ease-in-out infinite;
         }
 
+        /* ─── Text ─── */
         .hero-headline {
           color: var(--text-primary);
         }
@@ -199,6 +206,7 @@ export default function HeroSection() {
           max-width: 500px;
         }
 
+        /* ─── CTAs ─── */
         .hero-ctas {
           display: flex;
           gap: 16px;
@@ -239,6 +247,7 @@ export default function HeroSection() {
           border-color: var(--accent-1);
         }
 
+        /* ─── Stats ─── */
         .hero-stats {
           display: flex;
           gap: 40px;
@@ -266,54 +275,71 @@ export default function HeroSection() {
           letter-spacing: 0.08em;
         }
 
-        /* ─── Illustration ─── */
-        .hero-illustration {
-          position: relative;
-          width: 100%;
-          aspect-ratio: 1;
-          max-width: 460px;
-          margin: 0 auto;
+        /* ─── Illustration (right side, elliptical) ─── */
+        .hero-illustration-wrapper {
+          overflow: hidden;
           display: flex;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-end;
+          justify-self: end;
+        }
+
+        .hero-illustration {
+          position: relative;
+          width: 440px;
+          height: 320px;
+          flex-shrink: 0;
         }
 
         .illustration-ring {
           position: absolute;
           border-radius: 50%;
           border: 1px dashed var(--border);
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          margin: auto;
         }
 
-        .ring-1 { width: 100%; height: 100%; animation: spin-slow 20s linear infinite; }
-        .ring-2 { width: 75%; height: 75%; animation: spin-slow 14s linear infinite reverse; border-color: var(--accent-1); opacity: 0.3; }
-        .ring-3 { width: 50%; height: 50%; animation: spin-slow 9s linear infinite; border-color: var(--accent-2); opacity: 0.4; }
+        .ring-1 { width: 92%; height: 88%; animation: spin-slow 20s linear infinite; }
+        .ring-2 { width: 68%; height: 64%; animation: spin-slow 14s linear infinite reverse; border-color: var(--accent-1); opacity: 0.3; }
+        .ring-3 { width: 44%; height: 40%; animation: spin-slow 9s linear infinite; border-color: var(--accent-2); opacity: 0.4; }
 
         .illustration-core {
-          position: relative;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          margin: auto;
+          width: fit-content;
+          height: fit-content;
           z-index: 5;
-          font-size: 5rem;
+          font-size: 4rem;
           filter: drop-shadow(0 0 30px var(--glow));
           animation: float 4s ease-in-out infinite;
         }
 
         .orbit-icon {
           position: absolute;
-          font-size: 1.8rem;
-          width: 56px;
-          height: 56px;
+          font-size: 1.4rem;
+          width: 44px;
+          height: 44px;
           display: flex;
           align-items: center;
           justify-content: center;
           background: var(--bg-card);
           border: 1px solid var(--border);
           border-radius: 50%;
-          /* Place on the outer ring at angle */
-          top: calc(50% - 28px + sin(var(--angle)) * 170px);
-          left: calc(50% - 28px + cos(var(--angle)) * 170px);
+          top: calc(50% - 22px + sin(var(--angle)) * 120px);
+          left: calc(50% - 22px + cos(var(--angle)) * 175px);
           animation: float 3s ease-in-out infinite;
           box-shadow: var(--shadow-card);
+          z-index: 6;
         }
 
+        /* ─── Tablet ─── */
         @media (max-width: 900px) {
           .hero-content {
             grid-template-columns: 1fr;
@@ -323,9 +349,24 @@ export default function HeroSection() {
           .hero-desc { max-width: 100%; }
           .hero-stats { justify-content: center; }
           .hero-ctas { justify-content: center; }
-          .hero-illustration { max-width: 300px; }
+          .hero-illustration-wrapper {
+            justify-content: center;
+            justify-self: center;
+          }
+          .hero-illustration {
+            width: 340px;
+            height: 250px;
+          }
+          .orbit-icon {
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            top: calc(50% - 20px + sin(var(--angle)) * 95px);
+            left: calc(50% - 20px + cos(var(--angle)) * 135px);
+          }
         }
 
+        /* ─── Mobile ─── */
         @media (max-width: 480px) {
           .hero-section {
             padding: 100px 4% 60px;
@@ -347,10 +388,18 @@ export default function HeroSection() {
             text-align: center;
           }
           .hero-illustration {
-            max-width: 220px;
+            width: 280px;
+            height: 210px;
           }
           .illustration-core {
-            font-size: 3.5rem;
+            font-size: 2.8rem;
+          }
+          .orbit-icon {
+            width: 36px;
+            height: 36px;
+            font-size: 1.1rem;
+            top: calc(50% - 18px + sin(var(--angle)) * 75px);
+            left: calc(50% - 18px + cos(var(--angle)) * 110px);
           }
         }
       `}</style>

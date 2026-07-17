@@ -6,73 +6,70 @@
    ────────────────────────────────────────────────── */
 /* Fonts are loaded via next/font/google in layout.tsx — no @import needed */
 
-/* ──────────────────────────────────────────────────
-   DESIGN TOKENS — Ascendant Editorial (Light / Cultural)
-   ────────────────────────────────────────────────── */
 :root,
 [data-theme="cultural"] {
-  /* ── Surface scale ── */
-  --surface:                    #f8faf8;
-  --surface-dim:                #d8dad9;
-  --surface-bright:             #f8faf8;
-  --surface-container-lowest:   #ffffff;
-  --surface-container-low:      #f2f4f2;
-  --surface-container:          #eceeec;
-  --surface-container-high:     #e6e9e7;
-  --surface-container-highest:  #e1e3e1;
-  --on-surface:                 #191c1b;
-  --on-surface-variant:         #434843;
-  --inverse-surface:            #2e3130;
-  --inverse-on-surface:         #eff1ef;
+  /* ── Surface scale — Warm Cream / Parchment ── */
+  --surface:                    #FBF5EC;
+  --surface-dim:                #EDE4D6;
+  --surface-bright:             #FEF9F2;
+  --surface-container-lowest:   #F7EFDF;
+  --surface-container-low:      #F2E8D4;
+  --surface-container:          #EBE0C8;
+  --surface-container-high:     #E4D8BD;
+  --surface-container-highest:  #DCCFB2;
+  --on-surface:                 #2C1F0E;
+  --on-surface-variant:         #5C4A32;
+  --inverse-surface:            #3A2910;
+  --inverse-on-surface:         #FBF5EC;
 
   /* ── Outlines ── */
-  --outline:          #737973;
-  --outline-variant:  #c3c8c1;
+  --outline:          #9E825E;
+  --outline-variant:  #D4BFA0;
 
-  /* ── Primary — Deep Forest ── */
-  --primary:                    #061b0e;
-  --on-primary:                 #ffffff;
-  --primary-container:          #1b3022;
-  --on-primary-container:       #819986;
-  --inverse-primary:            #b4cdb8;
-  --primary-fixed:              #d0e9d4;
-  --primary-fixed-dim:          #b4cdb8;
-  --on-primary-fixed:           #0b2013;
-  --on-primary-fixed-variant:   #364c3c;
+  /* ── Primary — Rich Espresso Brown ── */
+  --primary:                    #4A2C0A;
+  --on-primary:                 #FBF5EC;
+  --primary-container:          #6B3F12;
+  --on-primary-container:       #F0C98A;
+  --inverse-primary:            #D4915A;
+  --primary-fixed:              #F5D9A8;
+  --primary-fixed-dim:          #E8C08A;
+  --on-primary-fixed:           #2C1A04;
+  --on-primary-fixed-variant:   #5C3610;
 
-  /* ── Secondary — Ethereal Mint ── */
-  --secondary:                  #37684e;
-  --on-secondary:               #ffffff;
-  --secondary-container:        #baefce;
-  --on-secondary-container:     #3d6e54;
-  --secondary-fixed:            #baefce;
-  --secondary-fixed-dim:        #9ed2b3;
-  --on-secondary-fixed:         #002112;
-  --on-secondary-fixed-variant: #1e5038;
+  /* ── Secondary — Warm Terracotta / Amber ── */
+  --secondary:                  #A0522D;
+  --on-secondary:               #FBF5EC;
+  --secondary-container:        #F5C59A;
+  --on-secondary-container:     #6B2F0E;
+  --secondary-fixed:            #F5C59A;
+  --secondary-fixed-dim:        #E8AA78;
+  --on-secondary-fixed:         #3A1A04;
+  --on-secondary-fixed-variant: #7A3D18;
 
-  /* ── Tertiary — Dusty Sage ── */
-  --tertiary:                   #101916;
-  --on-tertiary:                #ffffff;
-  --tertiary-container:         #242e2a;
-  --on-tertiary-container:      #8b9691;
-  --tertiary-fixed:             #dae5df;
-  --tertiary-fixed-dim:         #bec9c3;
-  --on-tertiary-fixed:          #141e1a;
-  --on-tertiary-fixed-variant:  #3f4945;
+  /* ── Tertiary — Muted Gold / Ochre ── */
+  --tertiary:                   #7A5C28;
+  --on-tertiary:                #FBF5EC;
+  --tertiary-container:         #C4A060;
+  --on-tertiary-container:      #3A2908;
+  --tertiary-fixed:             #EDD9A0;
+  --tertiary-fixed-dim:         #DEC27E;
+  --on-tertiary-fixed:          #2C1E06;
+  --on-tertiary-fixed-variant:  #5C4220;
 
   /* ── Error ── */
-  --error:              #ba1a1a;
-  --on-error:           #ffffff;
-  --error-container:    #ffdad6;
-  --on-error-container: #93000a;
+  --error:              #9B2020;
+  --on-error:           #FBF5EC;
+  --error-container:    #F8DCD9;
+  --on-error-container: #7A1010;
 
   /* ── Surface tint ── */
-  --surface-tint:       #4d6453;
+  --surface-tint:       #A0522D;
 
   /* ── Background ── */
-  --background:         #f8faf8;
-  --on-background:      #191c1b;
-  --surface-variant:    #e1e3e1;
+  --background:         #FBF5EC;
+  --on-background:      #2C1F0E;
+  --surface-variant:    #EBE0C8;
 
   /* ─── Legacy aliases (keep old consumer code working) ─── */
   --bg-primary:   var(--surface);
@@ -88,11 +85,11 @@
   --text-muted:     var(--outline);
 
   --border:        var(--outline-variant);
-  --glow:          rgba(55, 104, 78, 0.22);
+  --glow:          rgba(160, 82, 45, 0.15);
 
-  --gradient-hero:   linear-gradient(135deg, #f8faf8 0%, #eceeec 50%, #e1e3e1 100%);
+  --gradient-hero:   linear-gradient(135deg, #FBF5EC 0%, #EBE0C8 50%, #DCCFB2 100%);
   --gradient-accent: linear-gradient(135deg, var(--secondary), var(--secondary-fixed-dim));
-  --nav-bg:          rgba(248, 250, 248, 0.60);   /* 60 % off-white for glassmorphism */
+  --nav-bg:          rgba(251, 245, 236, 0.78);   /* 78 % warm cream for glassmorphism */
   --shadow-card:     none;
 
   /* ─── Typography scale ─── */
@@ -128,87 +125,88 @@
    ────────────────────────────────────────────────── */
 [data-theme="tech"] {
   /* ── Surface scale (dark) ── */
-  --surface:                    #0a1a0f;
-  --surface-dim:                #071208;
-  --surface-bright:             #112218;
-  --surface-container-lowest:   #071208;
-  --surface-container-low:      #0e2016;
-  --surface-container:          #142a1a;
-  --surface-container-high:     #1a3320;
-  --surface-container-highest:  #1f3c26;
-  --on-surface:                 #e8f5ec;
-  --on-surface-variant:         #9dc9a8;
-  --inverse-surface:            #dff2e5;
-  --inverse-on-surface:         #0f2016;
+  --surface:                    #0F141F;
+  --surface-dim:                #0A0D15;
+  --surface-bright:             #161C2C;
+  --surface-container-lowest:   #0C0F18;
+  --surface-container-low:      #121927;
+  --surface-container:          #182031;
+  --surface-container-high:     #1E283C;
+  --surface-container-highest:  #243048;
+  --on-surface:                 #E2E8F0;
+  --on-surface-variant:         #94A3B8;
+  --inverse-surface:            #FAF8F5;
+  --inverse-on-surface:         #0F141F;
 
   /* ── Outlines (dark) ── */
-  --outline:          #4a7a58;
-  --outline-variant:  rgba(34, 197, 94, 0.18);
+  --outline:          #475569;
+  --outline-variant:  rgba(56, 189, 248, 0.15);
 
   /* ── Primary (dark) ── */
-  --primary:                    #22c55e;
-  --on-primary:                 #07200d;
-  --primary-container:          #0e3318;
-  --on-primary-container:       #4ade80;
-  --inverse-primary:            #1a7a3c;
-  --primary-fixed:              #baefce;
-  --primary-fixed-dim:          #86efac;
-  --on-primary-fixed:           #051a09;
-  --on-primary-fixed-variant:   #1a5c2e;
+  --primary:                    #38BDF8;
+  --on-primary:                 #0F141F;
+  --primary-container:          #0369A1;
+  --on-primary-container:       #E0F2FE;
+  --inverse-primary:            #0284C7;
+  --primary-fixed:              #BAE6FD;
+  --primary-fixed-dim:          #7DD3FC;
+  --on-primary-fixed:           #0369A1;
+  --on-primary-fixed-variant:   #075985;
 
   /* ── Secondary (dark) ── */
-  --secondary:                  #22c55e;
-  --on-secondary:               #07200d;
-  --secondary-container:        #0e3318;
-  --on-secondary-container:     #4ade80;
-  --secondary-fixed:            #baefce;
-  --secondary-fixed-dim:        #86efac;
-  --on-secondary-fixed:         #051a09;
-  --on-secondary-fixed-variant: #1a5c2e;
+  --secondary:                  #60A5FA;
+  --on-secondary:               #0F141F;
+  --secondary-container:        #1D4ED8;
+  --on-secondary-container:     #BFDBFE;
+  --secondary-fixed:            #DBEAFE;
+  --secondary-fixed-dim:        #93C5FD;
+  --on-secondary-fixed:         #1E40AF;
+  --on-secondary-fixed-variant: #1E3A8A;
 
   /* ── Tertiary (dark) ── */
-  --tertiary:                   #4ade80;
-  --on-tertiary:                #07200d;
-  --tertiary-container:         #0d2e15;
-  --on-tertiary-container:      #86efac;
-  --tertiary-fixed:             #c2f5d4;
-  --tertiary-fixed-dim:         #86efac;
-  --on-tertiary-fixed:          #04180a;
-  --on-tertiary-fixed-variant:  #1a5a2c;
+  --tertiary:                   #34D399;
+  --on-tertiary:                #0A0D15;
+  --tertiary-container:         #065F46;
+  --on-tertiary-container:      #A7F3D0;
+  --tertiary-fixed:             #D1FAE5;
+  --tertiary-fixed-dim:         #A7F3D0;
+  --on-tertiary-fixed:          #064E3B;
+  --on-tertiary-fixed-variant:  #065F46;
 
   /* ── Error ── */
-  --error:              #ffb4ab;
-  --on-error:           #690005;
-  --error-container:    #93000a;
-  --on-error-container: #ffdad6;
+  --error:              #F87171;
+  --on-error:           #7F1D1D;
+  --error-container:    #991B1B;
+  --on-error-container: #FEE2E2;
 
   /* ── Surface tint ── */
-  --surface-tint:       #22c55e;
+  --surface-tint:       #38BDF8;
 
   /* ── Background ── */
-  --background:         #0a1a0f;
-  --on-background:      #e8f5ec;
-  --surface-variant:    #1a3320;
+  --background:         #0F141F;
+  --on-background:      #E2E8F0;
+  --surface-variant:    #1E283C;
 
   /* ─── Legacy aliases ─── */
-  --bg-primary:   #0a1a0f;
-  --bg-secondary: #0e2016;
-  --bg-card:      #142a1a;
+  --bg-primary:   #0F141F;
+  --bg-secondary: #121927;
+  --bg-card:      #182031;
 
-  --accent-1:   #22c55e;
-  --accent-2:   #4ade80;
-  --accent-3:   #86efac;
+  --accent-1:   #38BDF8;
+  --accent-2:   #60A5FA;
+  --accent-3:   #34D399;
 
-  --text-primary:   #e8f5ec;
-  --text-secondary: #9dc9a8;
-  --text-muted:     #4a7a58;
+  --text-primary:   #E2E8F0;
+  --icon-color:      #020c04;
+  --text-secondary: #94A3B8;
+  --text-muted:     #475569;
 
-  --border:           rgba(34, 197, 94, 0.18);
-  --glow:             rgba(34, 197, 94, 0.28);
-  --gradient-hero:    linear-gradient(135deg, #0a1a0f 0%, #0f2b18 50%, #091808 100%);
-  --gradient-accent:  linear-gradient(135deg, #22c55e, #4ade80);
-  --nav-bg:           rgba(10, 26, 15, 0.88);
-  --shadow-card:      0 8px 32px rgba(34, 197, 94, 0.14);
+  --border:           rgba(56, 189, 248, 0.15);
+  --glow:             rgba(56, 189, 248, 0.2);
+  --gradient-hero:    linear-gradient(135deg, #0F141F 0%, #182031 50%, #0A0D15 100%);
+  --gradient-accent:  linear-gradient(135deg, #38BDF8, #60A5FA);
+  --nav-bg:           rgba(15, 20, 31, 0.85);
+  --shadow-card:      0 8px 32px rgba(56, 189, 248, 0.08);
 }
 
 /* ─── BASE RESET ─── */

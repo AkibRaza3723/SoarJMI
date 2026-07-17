@@ -86,8 +86,8 @@ export default function LogoSplash() {
           </div>
         </div>
         <div ref={textRef} className="splash-text flex flex-col justify-center items-center" >
-          <h1 className="splash-title">
-            Soar<span className="accent-gradient">JMI</span>
+          <h1 className=" splash-title ">
+            Soar<span style={{ color: '#006B3F', WebkitTextFillColor: '#006B3F' }}>JMI</span>
           </h1>
           
           <p className='splash-subtitle mt-7 w-3/4 '>To foster a community of student innovators at Jamia Millia Islamia who use technology, design, and creativity to solve real-world problems while learning, leading, and creating lasting impact.</p>
