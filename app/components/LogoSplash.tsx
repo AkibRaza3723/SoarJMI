@@ -70,9 +70,15 @@ export default function LogoSplash() {
 
   return (
     <div ref={splashRef} id="home" className="logo-splash">
-      {/* Decorative blobs */}
-      <div className="blob blob-1" />
-      <div className="blob blob-2" />
+      <svg className="splash-wave splash-wave-diagonal" viewBox="0 0 1440 1024" preserveAspectRatio="none" aria-hidden="true">
+        <path fill="var(--splash-wave)" d="M1440,0 L1440,450 C900,150 500,1300 0,1024 L0,574 C500,850 900,-200 1440,0 Z"></path>
+      </svg>
+      <svg className="splash-wave splash-wave-tl" viewBox="0 0 400 400" preserveAspectRatio="none" aria-hidden="true">
+        <path fill="var(--splash-wave)" d="M0,0 L400,0 C300,300 100,100 0,400 Z"></path>
+      </svg>
+      <svg className="splash-wave splash-wave-br" viewBox="0 0 400 400" preserveAspectRatio="none" aria-hidden="true">
+        <path fill="var(--splash-wave)" d="M400,400 L0,400 C100,100 300,300 400,0 Z"></path>
+      </svg>
       <div className="particles">
         {Array.from({ length: 18 }).map((_, i) => (
           <span key={i} className="particle" style={{ '--delay': `${i * 0.4}s`, '--x': PARTICLE_POSITIONS[i] } as React.CSSProperties} />
@@ -110,30 +116,39 @@ export default function LogoSplash() {
           overflow: hidden;
         }
 
-        .blob {
+        .splash-wave {
           position: absolute;
-          border-radius: 50%;
-          filter: blur(80px);
-          opacity: 0.35;
           pointer-events: none;
+          z-index: 0;
         }
 
-        .blob-1 {
-          width: 500px;
-          height: 500px;
-          background: var(--accent-1);
-          top: -100px;
-          right: -100px;
+        .splash-wave-diagonal {
+          width: 100vw;
+          height: 100vh;
+          top: 0;
+          left: 0;
+          opacity: 0.7;
         }
 
-        .blob-2 {
-          width: 400px;
-          height: 400px;
-          background: var(--accent-3);
-          bottom: -80px;
-          left: -80px;
+        .splash-wave-tl {
+          width: 30vw;
+          max-width: 450px;
+          height: 30vw;
+          max-height: 450px;
+          top: 0;
+          left: 0;
+          opacity: 0.8;
         }
 
+        .splash-wave-br {
+          width: 35vw;
+          max-width: 500px;
+          height: 35vw;
+          max-height: 500px;
+          bottom: 0;
+          right: 0;
+          opacity: 0.8;
+        }
         .particles {
           position: absolute;
           inset: 0;
@@ -190,9 +205,10 @@ export default function LogoSplash() {
         }
 
         .splash-title {
-          font-size: clamp(3rem, 8vw, 6rem);
-          font-weight: 900;
-          letter-spacing: -0.04em;
+          font-family: var(--font-orbitron);
+          font-size: clamp(3rem, 7.5vw, 6rem);
+          font-weight: 800;
+          letter-spacing: -0.02em;
           color: var(--text-primary);
           line-height: 1;
         }

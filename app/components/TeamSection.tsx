@@ -16,26 +16,34 @@ interface TeamMember {
 
 const TEAM: TeamMember[] = [
   {
-    name: 'Zara Hussain',
+    name: 'Anam Tabrez',
     role: 'President',
-    avatar: '👩‍💼',
+    avatar: `https://res.cloudinary.com/wyuzj0og/image/upload/v1784204156/anam_lqyqxf.jpg`,
     quote: 'Together, we turn ideas into movements.',
+    social: 'https://www.instagram.com/',
   },
   {
-    name: 'Aryan Malik',
+    name: 'Faizan Sheikh',
     role: 'Vice President',
-    avatar: '👨‍🎓',
+    avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1784204713/Faizan_or6ar8.jpg',
     quote: 'Innovation is our language, creativity is our voice.',
   },
   {
-    name: 'Prof. Imran Siddiqui',
-    role: 'Faculty Mentor',
-    avatar: '👨‍🏫',
+    name: 'Mohammad Ayaan',
+    role: 'General Secretary',
+    avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1784204076/ayaan_alhdtt.jpg',
     quote: 'I guide them to soar beyond their limits.',
+    social: 'https://www.instagram.com/',
   },
   {
-    name: 'Dr. Fatima Ansari',
-    role: 'Co-Mentor',
+    name: 'Sufiyan Nehal',
+    role: 'Joint Secretary',
+    avatar: '👩‍🔬',
+    quote: 'Nurturing excellence, one student at a time.',
+  },
+  {
+    name: 'Nijam Rizvi',
+    role: 'Vice President',
     avatar: '👩‍🔬',
     quote: 'Nurturing excellence, one student at a time.',
   },
@@ -67,10 +75,22 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
     );
   }, [index]);
 
+  const handleClick = () => {
+    if (member.social) {
+      window.open(member.social, '_blank');
+    }
+  }
+
   return (
-    <div ref={cardRef} className="member-card glass-card">
+    <div ref={cardRef} className="member-card glass-card" onClick={handleClick}>
       <div className="card-glow" />
-      <div className="member-avatar">{member.avatar}</div>
+      <div className="member-avatar">
+        {member.avatar.startsWith('http') || member.avatar.startsWith('/') ? (
+          <img src={member.avatar} alt={member.name} className="avatar-img" />
+        ) : (
+          member.avatar
+        )}
+      </div>
       <div className="member-role">{member.role}</div>
       <h3 className="member-name">{member.name}</h3>
       <p className="member-quote">"{member.quote}"</p>
@@ -123,6 +143,13 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
           justify-content: center;
           line-height: 1;
           transition: transform 0.3s ease;
+          overflow: hidden;
+        }
+
+        .avatar-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
 
         .member-card:hover .member-avatar {
@@ -278,8 +305,9 @@ export default function TeamSection() {
         }
 
         .team-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+          display: flex;
+          justify-content: center;
+          align-items: center;
           gap: 28px;
         }
 

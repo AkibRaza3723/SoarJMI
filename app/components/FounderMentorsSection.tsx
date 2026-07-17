@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 /* ─── Data ─── */
 const FOUNDER = {
-  name: 'Mohammed Akib Raza',
+  name: 'Ali Nasir',
   role: 'Founder & Director',
   avatar: '👨‍💻',
   year: '2020',

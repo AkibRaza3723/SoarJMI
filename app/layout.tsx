@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Sora, Hanken_Grotesk, JetBrains_Mono } from 'next/font/google';
+import { Sora, Hanken_Grotesk, JetBrains_Mono, Orbitron } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from './context/ThemeContext';
 
@@ -24,6 +24,13 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ['400', '500'],
 });
 
+const orbitron = Orbitron({
+  subsets: ['latin'],
+  variable: '--font-orbitron',
+  display: 'swap',
+  weight: ['400', '500', '600', '700', '800', '900'],
+});
+
 export const metadata: Metadata = {
   title: 'SoarJMI — Where Culture Meets Innovation',
   description:
@@ -40,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${sora.variable} ${hankenGrotesk.variable} ${jetbrainsMono.variable}`}
+      className={`${sora.variable} ${hankenGrotesk.variable} ${jetbrainsMono.variable} ${orbitron.variable}`}
       data-theme="cultural"
     >
       <body>
