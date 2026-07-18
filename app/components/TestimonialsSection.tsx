@@ -260,7 +260,7 @@ export default function TestimonialsSection() {
       <style jsx>{`
         .t-section {
           padding: 100px 6%;
-          background: var(--bg-primary);
+          background: var(--bg-secondary);
           overflow: hidden;
         }
 

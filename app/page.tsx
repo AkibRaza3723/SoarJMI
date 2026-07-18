@@ -8,6 +8,7 @@ import TeamSection from './components/TeamSection';
 import TestimonialsSection from './components/TestimonialsSection';
 import AboutSection from './components/AboutSection';
 import GuidanceSection from './components/GuidanceSection';
+import MovingGallery from './components/MovingGallery';
 import FAQSection from './components/FAQSection';
 import Footer from './components/Footer';
 
@@ -28,16 +29,19 @@ export default function HomePage() {
       {/* 4. President, VP, general team cards */}
       <TeamSection />
 
-      {/* 5. Testimonials carousel */}
-      <TestimonialsSection />
-
-      {/* 6. About Us */}
+      {/* 5. About Us */}
       <AboutSection />
 
-      {/* 7. Guidance framework */}
+      {/* 6. Testimonials carousel */}
+      <TestimonialsSection />
+
+      {/* 7. Gallery Section */}
+      <MovingGallery />
+
+      {/* 8. Guidance framework */}
       <GuidanceSection />
 
-      {/* 8. FAQs */}
+      {/* 9. FAQs */}
       <FAQSection />
 
       <Footer />
