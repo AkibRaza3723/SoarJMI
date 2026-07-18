@@ -33,8 +33,6 @@ export default function SoarLogo({ size = 80, className = '' }: SoarLogoProps) {
         borderRadius: '12px',
         objectFit: 'contain',
         display: 'block',
-        width: 'auto',
-        height: 'auto',
       }}
       priority
     />

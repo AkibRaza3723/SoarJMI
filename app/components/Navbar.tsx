@@ -11,16 +11,17 @@ const NAV_LINKS = [
     label: 'Home', 
     href: '/',
     subLinks: [
-      { label: 'We as art/tech', href: '/#hero' },
+      { label: 'Introduction', href: '/#hero' },
       { label: 'Our leaders', href: '/#leadership' },
       { label: 'Our teams', href: '/#team' },
-      { label: 'Testimony', href: '/#testimonials' },
+      { label: 'Testimonials', href: '/#testimonials' },
       { label: 'About Us', href: '/#about' },
       { label: 'Guidelines', href: '/#guidance' },
       { label: 'FAQs', href: '/#faq' },
     ]
   },
   { label: 'Events', href: '/events' },
+  { label: 'Blogs', href: '/blogs' },
   { label: 'Contact Us', href: '/contact' },
 ];
 

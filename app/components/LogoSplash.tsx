@@ -97,7 +97,7 @@ export default function LogoSplash() {
             Soar<span style={{ color: 'var(--primary)', WebkitTextFillColor: 'var(--primary)' }}>JMI</span>
           </h1>
           
-          <div className='splash-subtitle mt-7 w-3/4 min-h-[60px]'>
+          <div className='splash-subtitle mt-7 w-3/4 min-h-16'>
             <Typewriter
               options={{
                 delay: 35,

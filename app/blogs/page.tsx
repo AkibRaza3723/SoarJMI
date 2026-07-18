@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { useTheme } from './context/ThemeContext';
-import Navbar from './components/Navbar';
+import { useTheme } from '../context/ThemeContext';
+import Navbar from '../components/Navbar';
 
 /* ────────────────────────────────────────────
    Floating Particle System
@@ -226,20 +226,20 @@ function EmptyStageSVG() {
 }
 
 /* ────────────────────────────────────────────
-   Animated Glitch 404 Text
+   Animated Glitch Text
    ──────────────────────────────────────────── */
-function Glitch404() {
+function GlitchSoon() {
   return (
     <div className="nf-glitch-wrap" aria-hidden="true">
-      <span className="nf-glitch" data-text="404">404</span>
+      <span className="nf-glitch" data-text="SOON">SOON</span>
     </div>
   );
 }
 
 /* ════════════════════════════════════════════
-   NOT FOUND PAGE
+   BLOGS COMING SOON PAGE
    ════════════════════════════════════════════ */
-export default function NotFound() {
+export default function Blogs() {
   const { theme } = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
@@ -265,7 +265,7 @@ export default function NotFound() {
     <>
       <Navbar />
 
-      <div ref={containerRef} className="nf-page" id="not-found-page">
+      <div ref={containerRef} className="nf-page" id="blogs-soon-page">
         {/* Ambient glow that follows mouse */}
         <div
           className="nf-mouse-glow"
@@ -286,44 +286,36 @@ export default function NotFound() {
 
         {/* Main content */}
         <div className="nf-content">
-          {/* Glitch 404 */}
-          <Glitch404 />
+          {/* Glitch Text */}
+          <GlitchSoon />
 
           {/* Eyebrow */}
           <p className="nf-eyebrow">
-            {isTech ? '// ERROR: PAGE_NOT_FOUND' : '— The curtain falls on emptiness —'}
+            {isTech ? '// STATUS: COMING_SOON' : '— The curtain is still rising —'}
           </p>
 
           {/* Title */}
           <h1 className="nf-title">
-            {isTech ? (
-              <>
-                Lost in the <span className="accent-gradient">Code</span>
-              </>
-            ) : (
-              <>
-                The Stage is <span className="accent-gradient">Empty</span>
-              </>
-            )}
+            Coming <span className="accent-gradient">Soon</span>
           </h1>
 
           {/* Description */}
           <p className="nf-desc">
             {isTech
-              ? 'Looks like this route hit a dead circuit. The page you\'re looking for doesn\'t exist, was moved, or is still being built.'
-              : 'The performance you\'re looking for hasn\'t been staged yet. This page doesn\'t exist — but plenty of amazing acts are waiting for you.'}
+              ? 'Our tech writers are compiling some amazing content. Check back later!'
+              : 'Our creative minds are drafting some amazing stories. Check back later!'}
           </p>
 
           {/* CTA buttons */}
           <div className="nf-actions">
-            <Link href="/" className="nf-btn-primary" id="not-found-home">
+            <Link href="/" className="nf-btn-primary" id="blogs-home">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
                 <polyline points="9 22 9 12 15 12 15 22" />
               </svg>
               Back to Home
             </Link>
-            <Link href="/events" className="nf-btn-secondary" id="not-found-events">
+            <Link href="/events" className="nf-btn-secondary" id="blogs-events">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
                 <line x1="16" y1="2" x2="16" y2="6" />
@@ -331,13 +323,6 @@ export default function NotFound() {
                 <line x1="3" y1="10" x2="21" y2="10" />
               </svg>
               Explore Events
-            </Link>
-            <Link href="/contact" className="nf-btn-secondary" id="not-found-contact">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                <polyline points="22,6 12,13 2,6" />
-              </svg>
-              Contact Us
             </Link>
           </div>
 
@@ -356,13 +341,13 @@ export default function NotFound() {
                 <span className="nf-prompt">$</span>
                 <span className="nf-typing">
                   {isTech
-                    ? 'fetch("/this-page") → 404 Not Found'
-                    : 'looking for "this-act" → not on tonight\'s playbill'}
+                    ? 'fetch("/blogs") → 202 Accepted (Coming Soon)'
+                    : 'looking for "blogs" → still in rehearsals'}
                 </span>
               </p>
               <p className="nf-terminal-line nf-terminal-hint">
                 <span className="nf-prompt">→</span>
-                <span>Try navigating to a valid route above ↑</span>
+                <span>Stay tuned for updates ↑</span>
               </p>
             </div>
           </div>
@@ -498,7 +483,7 @@ export default function NotFound() {
           }
         }
 
-        /* ═══ Glitch 404 ═══ */
+        /* ═══ Glitch Text ═══ */
         .nf-glitch-wrap {
           position: relative;
           display: inline-block;
@@ -506,7 +491,7 @@ export default function NotFound() {
 
         .nf-glitch {
           font-family: var(--font-display);
-          font-size: clamp(6rem, 18vw, 14rem);
+          font-size: clamp(4rem, 15vw, 10rem);
           font-weight: 900;
           letter-spacing: -0.04em;
           color: var(--text-primary);
@@ -750,7 +735,7 @@ export default function NotFound() {
           }
 
           .nf-glitch {
-            font-size: clamp(5rem, 22vw, 8rem);
+            font-size: clamp(4rem, 15vw, 8rem);
           }
 
           .nf-actions {
