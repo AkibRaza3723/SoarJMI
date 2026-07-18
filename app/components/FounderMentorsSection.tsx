@@ -269,6 +269,14 @@ function FounderCard() {
           color: var(--accent-1);
           background: var(--bg-card);
         }
+
+        @media (max-width: 480px) {
+          .founder-identity { padding: 20px; flex-direction: column; align-items: center; text-align: center; }
+          .founder-stats-ribbon { flex-direction: column; }
+          .ribbon-item { border-right: none; border-bottom: 1px solid var(--border); }
+          .ribbon-item:last-child { border-bottom: none; }
+          .founder-quote { font-size: 0.9rem; }
+        }
       `}</style>
     </div>
   );
@@ -425,6 +433,10 @@ function MentorCard({ mentor, index }: { mentor: typeof MENTORS[0]; index: numbe
           font-weight: 600;
           color: var(--text-secondary);
         }
+
+        @media (max-width: 480px) {
+          .mentor-top { flex-direction: column; align-items: flex-start; text-align: left; }
+        }
       `}</style>
     </div>
   );
@@ -537,12 +549,6 @@ export default function FounderMentorsSection() {
         }
         @media (max-width: 480px) {
           .leadership-section { padding: 60px 4%; }
-          .founder-identity { padding: 20px; flex-direction: column; align-items: center; text-align: center; }
-          .founder-stats-ribbon { flex-direction: column; }
-          .ribbon-item { border-right: none; border-bottom: 1px solid var(--border); }
-          .ribbon-item:last-child { border-bottom: none; }
-          .founder-quote { font-size: 0.9rem; }
-          .mentor-top { flex-direction: column; align-items: flex-start; text-align: left; }
         }
       `}</style>
     </section>

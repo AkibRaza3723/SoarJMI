@@ -536,44 +536,75 @@ export default function TrialEventsPage() {
       gsap.from('.te-sub', { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out', delay: 0.3 });
 
       /* ── SVG path progressive draw ── */
-      if (progressRef.current) {
-        const len = progressRef.current.getTotalLength();
-        gsap.set(progressRef.current, { strokeDasharray: len, strokeDashoffset: len });
+      const progressPaths = document.querySelectorAll('.te-progress-path');
+      progressPaths.forEach((pathEl) => {
+        const path = pathEl as SVGPathElement;
+        const len = path.getTotalLength();
+        gsap.set(path, { strokeDasharray: len, strokeDashoffset: len });
         ScrollTrigger.create({
           trigger: '.te-timeline',
           start: 'top 85%',
           end: 'bottom 15%',
           scrub: 0.7,
           onUpdate: (self) => {
-            if (progressRef.current) {
-              gsap.set(progressRef.current, { strokeDashoffset: len * (1 - self.progress) });
-            }
+            gsap.set(path, { strokeDashoffset: len * (1 - self.progress) });
           },
         });
-      }
+      });
 
-      /* ── Cards bloom in from sides ── */
-      cards.forEach((card, i) => {
-        const fromX = i % 2 === 0 ? -90 : 90;
-        gsap.set(card, { x: fromX, opacity: 0, scale: 0.82, filter: 'blur(4px)' });
+      /* ── Responsive Card Entrance Animations ── */
+      const mm = gsap.matchMedia();
 
-        ScrollTrigger.create({
-          trigger: card,
-          start: 'top 84%',
-          onEnter: () => {
-            gsap.to(card, {
-              x: 0, opacity: 1, scale: 1,
-              filter: 'blur(0px)',
-              duration: 1, ease: 'back.out(1.6)', delay: 0.04,
-            });
-          },
-          onLeaveBack: () => {
-            gsap.to(card, {
-              x: fromX, opacity: 0, scale: 0.82,
-              filter: 'blur(4px)',
-              duration: 0.45, ease: 'power2.in',
-            });
-          },
+      // Desktop/tablet cards entrance (bloom from sides)
+      mm.add("(min-width: 681px)", () => {
+        cards.forEach((card, i) => {
+          const fromX = i % 2 === 0 ? -90 : 90;
+          gsap.set(card, { x: fromX, y: 0, opacity: 0, scale: 0.82, filter: 'blur(4px)' });
+
+          ScrollTrigger.create({
+            trigger: card,
+            start: 'top 84%',
+            onEnter: () => {
+              gsap.to(card, {
+                x: 0, y: 0, opacity: 1, scale: 1,
+                filter: 'blur(0px)',
+                duration: 1, ease: 'back.out(1.6)', delay: 0.04,
+              });
+            },
+            onLeaveBack: () => {
+              gsap.to(card, {
+                x: fromX, y: 0, opacity: 0, scale: 0.82,
+                filter: 'blur(4px)',
+                duration: 0.45, ease: 'power2.in',
+              });
+            },
+          });
+        });
+      });
+
+      // Mobile cards entrance (slide from bottom)
+      mm.add("(max-width: 680px)", () => {
+        cards.forEach((card) => {
+          gsap.set(card, { x: 0, y: 40, opacity: 0, scale: 0.95, filter: 'blur(2px)' });
+
+          ScrollTrigger.create({
+            trigger: card,
+            start: 'top 90%',
+            onEnter: () => {
+              gsap.to(card, {
+                x: 0, y: 0, opacity: 1, scale: 1,
+                filter: 'blur(0px)',
+                duration: 0.8, ease: 'power3.out',
+              });
+            },
+            onLeaveBack: () => {
+              gsap.to(card, {
+                x: 0, y: 40, opacity: 0, scale: 0.95,
+                filter: 'blur(2px)',
+                duration: 0.4, ease: 'power2.in',
+              });
+            },
+          });
         });
       });
 
@@ -658,7 +689,9 @@ export default function TrialEventsPage() {
 
           {/* S-curve track (centred column) */}
           <div className="te-track" aria-hidden="true">
+            {/* Desktop S-curve track */}
             <svg
+              className="te-track-desktop"
               viewBox="0 0 200 1850"
               preserveAspectRatio="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -679,7 +712,33 @@ export default function TrialEventsPage() {
               {/* Ghost track */}
               <path d={PATH_D} stroke="var(--border)" strokeWidth="2.5" fill="none" strokeLinecap="round" opacity="0.6" />
               {/* Animated progress */}
-              <path ref={progressRef} d={PATH_D} stroke="url(#tpg)" strokeWidth="3" fill="none" strokeLinecap="round" filter="url(#tpglow)" />
+              <path className="te-progress-path" d={PATH_D} stroke="url(#tpg)" strokeWidth="3" fill="none" strokeLinecap="round" filter="url(#tpglow)" />
+            </svg>
+
+            {/* Mobile straight line track */}
+            <svg
+              className="te-track-mobile"
+              viewBox="0 0 200 1850"
+              preserveAspectRatio="none"
+              xmlns="http://www.w3.org/2000/svg"
+              width="100%"
+              height="100%"
+            >
+              <defs>
+                <linearGradient id="tpg-m" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="var(--accent-1)" stopOpacity="0.5" />
+                  <stop offset="50%" stopColor="var(--accent-2)" stopOpacity="0.9" />
+                  <stop offset="100%" stopColor="var(--accent-1)" stopOpacity="0.5" />
+                </linearGradient>
+                <filter id="tpglow-m" x="-20%" y="-5%" width="140%" height="110%">
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="b" />
+                  <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+                </filter>
+              </defs>
+              {/* Ghost track */}
+              <path d="M100,0 L100,1850" stroke="var(--border)" strokeWidth="2.5" fill="none" strokeLinecap="round" opacity="0.6" />
+              {/* Animated progress */}
+              <path className="te-progress-path" d="M100,0 L100,1850" stroke="url(#tpg-m)" strokeWidth="3" fill="none" strokeLinecap="round" filter="url(#tpglow-m)" />
             </svg>
           </div>
 
@@ -893,8 +952,14 @@ export default function TrialEventsPage() {
           pointer-events: none;
         }
 
+        .te-track-desktop { display: block; }
+        .te-track-mobile { display: none; }
+
         /* ── Mobile collapse ── */
         @media (max-width: 680px) {
+          .te-track-desktop { display: none; }
+          .te-track-mobile { display: block; }
+
           .te-row {
             grid-template-columns: 50px 1fr;
             grid-template-rows: auto;

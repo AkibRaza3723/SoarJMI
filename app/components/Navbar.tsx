@@ -359,6 +359,19 @@ export default function Navbar() {
             display: flex;
           }
         }
+
+        @media (max-width: 480px) {
+          .soar-nav {
+            padding: 12px 16px;
+          }
+          .nav-brand {
+            font-size: 1.15rem;
+          }
+          .theme-toggle {
+            padding: 4px 10px;
+            font-size: 0.65rem;
+          }
+        }
       `}</style>
     </nav>
   );

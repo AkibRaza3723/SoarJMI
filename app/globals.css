@@ -219,6 +219,12 @@
   padding: 0;
 }
 
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -229,7 +235,6 @@ body {
   font-family: var(--font-body);
   font-size: var(--fs-body-md);
   line-height: 1.6;
-  overflow-x: hidden;
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 

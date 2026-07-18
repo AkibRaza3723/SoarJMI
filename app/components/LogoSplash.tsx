@@ -41,28 +41,41 @@ export default function LogoSplash() {
           '-=0.3'
         );
 
-      // ── Step 2: On scroll, shrink logo towards navbar ──
-      // The splash section itself pins during the scroll shrink
-      ScrollTrigger.create({
-        trigger: splashRef.current,
-        start: 'top top',
-        end: '+=500',
-        pin: true,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          const scale = 1 - progress * 0.6;          // shrinks from 1 → 0.4
-          const opacity = 1 - progress * 0.8;         // fades logo text out
+      // ── Step 2: On scroll, shrink logo towards navbar (only for desktop/tablet > 768px) ──
+      const mm = gsap.matchMedia();
 
-          if (logoRef.current) {
-            gsap.set(logoRef.current, {
-              scale,
-              y: progress * -160, // moves up
-            });
-          }
-          if (textRef.current) {
-            gsap.set(textRef.current, { opacity });
-          }
-        },
+      mm.add("(min-width: 769px)", () => {
+        ScrollTrigger.create({
+          trigger: splashRef.current,
+          start: 'top top',
+          end: '+=500',
+          pin: true,
+          onUpdate: (self) => {
+            const progress = self.progress;
+            const scale = 1 - progress * 0.6;          // shrinks from 1 → 0.4
+            const opacity = 1 - progress * 0.8;         // fades logo text out
+
+            if (logoRef.current) {
+              gsap.set(logoRef.current, {
+                scale,
+                y: progress * -160, // moves up
+              });
+            }
+            if (textRef.current) {
+              gsap.set(textRef.current, { opacity });
+            }
+          },
+        });
+      });
+
+      mm.add("(max-width: 768px)", () => {
+        // Mobile fallback - ensure styles are reset if resizing from desktop
+        if (logoRef.current) {
+          gsap.set(logoRef.current, { scale: 1, y: 0 });
+        }
+        if (textRef.current) {
+          gsap.set(textRef.current, { opacity: 1 });
+        }
       });
     });
 

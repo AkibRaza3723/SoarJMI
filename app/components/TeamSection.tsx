@@ -306,15 +306,13 @@ export default function TeamSection() {
 
         .team-grid {
           display: flex;
+          flex-wrap: wrap;
           justify-content: center;
           align-items: center;
           gap: 28px;
         }
 
         @media (max-width: 600px) {
-          .team-grid {
-            grid-template-columns: 1fr;
-          }
           .team-section {
             padding: 60px 4%;
           }

@@ -126,6 +126,13 @@ function FAQItem({ faq, index }: { faq: { q: string; a: string }; index: number 
           line-height: 1.75;
           color: var(--text-secondary);
         }
+
+        @media (max-width: 480px) {
+          .faq-question {
+            padding: 16px 20px;
+            font-size: 0.9rem;
+          }
+        }
       `}</style>
     </motion.div>
   );
@@ -216,10 +223,6 @@ export default function FAQSection() {
         @media (max-width: 480px) {
           .faq-section {
             padding: 60px 4%;
-          }
-          .faq-question {
-            padding: 16px 20px;
-            font-size: 0.9rem;
           }
         }
       `}</style>

@@ -172,6 +172,12 @@ function TestimonialCard({
           color: var(--text-secondary);
           font-style: italic;
         }
+
+        @media (max-width: 480px) {
+          .testimonial-card {
+            padding: 20px 24px;
+          }
+        }
       `}</style>
     </motion.div>
   );

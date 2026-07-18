@@ -117,11 +117,12 @@ export default function GuidanceSection() {
         }
 
         .section-desc {
+          grid-column: 1 / -1;
           color: var(--text-muted);
           font-size: 1.3rem;
           line-height: 1.7;
           max-width: 100%;
-          margin: 0 auto
+          margin: 0 auto;
         }
 
         /* ─── Pillars ─── */
