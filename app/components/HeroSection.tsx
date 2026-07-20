@@ -57,10 +57,21 @@ export default function HeroSection() {
         );
       });
 
-      // Mobile (max-width: 900px): no pinning or sliding (keep tracks centered)
+      // Mobile (max-width: 900px): use CSS marquee animation instead of scroll-scrub
       mm.add("(max-width: 900px)", () => {
-        if (topTrackRef.current) gsap.set(topTrackRef.current, { x: 0 });
-        if (bottomTrackRef.current) gsap.set(bottomTrackRef.current, { x: 0 });
+        if (topTrackRef.current) {
+          gsap.set(topTrackRef.current, { x: 0 });
+          topTrackRef.current.classList.add('marquee-forward');
+        }
+        if (bottomTrackRef.current) {
+          gsap.set(bottomTrackRef.current, { x: 0 });
+          bottomTrackRef.current.classList.add('marquee-reverse');
+        }
+        // Cleanup: remove classes when this breakpoint is no longer active
+        return () => {
+          topTrackRef.current?.classList.remove('marquee-forward');
+          bottomTrackRef.current?.classList.remove('marquee-reverse');
+        };
       });
     }, sectionRef);
 
@@ -162,7 +173,7 @@ export default function HeroSection() {
 
           {/* CTAs */}
           <motion.div variants={itemVariants} className="hero-ctas">
-            <a href="#events" className="btn-primary">
+            <a href="/events" className="btn-primary">
               {theme === 'cultural' ? '🎪 See Our Events' : '🚀 Explore Projects'}
             </a>
             <a href="#team" className="btn-secondary">Meet the Team</a>
@@ -522,6 +533,29 @@ export default function HeroSection() {
           animation: float 3s ease-in-out infinite;
           box-shadow: var(--shadow-card);
           z-index: 6;
+        }
+
+        /* ─── Mobile Marquee CSS Animation ─── */
+        @keyframes marquee-ltr {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-33.333%); }
+        }
+        @keyframes marquee-rtl {
+          0%   { transform: translateX(-33.333%); }
+          100% { transform: translateX(0); }
+        }
+
+        .marquee-forward {
+          animation: marquee-ltr 18s linear infinite;
+        }
+        .marquee-reverse {
+          animation: marquee-rtl 18s linear infinite;
+        }
+
+        /* Pause on hover for accessibility */
+        .image-track-container:hover .marquee-forward,
+        .image-track-container:hover .marquee-reverse {
+          animation-play-state: paused;
         }
 
         /* ─── Responsive Adjustments ─── */

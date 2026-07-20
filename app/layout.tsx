@@ -32,7 +32,7 @@ const orbitron = Orbitron({
 });
 
 export const metadata: Metadata = {
-  title: 'SoarJMI — Where Culture Meets Innovation',
+  title: 'SoarJMI',
   description:
     'SoarJMI is the official cultural and tech society of Jamia Millia Islamia, New Delhi. Explore events, meet our team, and join a community that soars.',
   keywords: ['SoarJMI', 'JMI', 'Jamia Millia Islamia', 'cultural society', 'tech society', 'student club'],

@@ -6,6 +6,22 @@ import SoarLogo from './SoarLogo';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+// Close dropdown when clicking outside
+function useClickOutside(ref: React.RefObject<HTMLElement | null>, handler: () => void) {
+  useEffect(() => {
+    const listener = (e: MouseEvent | TouchEvent) => {
+      if (!ref.current || ref.current.contains(e.target as Node)) return;
+      handler();
+    };
+    document.addEventListener('mousedown', listener);
+    document.addEventListener('touchstart', listener);
+    return () => {
+      document.removeEventListener('mousedown', listener);
+      document.removeEventListener('touchstart', listener);
+    };
+  }, [ref, handler]);
+}
+
 const NAV_LINKS = [
   { 
     label: 'Home', 
@@ -29,6 +45,7 @@ export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const navRef = useRef<HTMLElement>(null);
   const logoWrapRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
@@ -50,15 +67,8 @@ export default function Navbar() {
     setIsMobileMenuOpen(false);
   }, [pathname]);
 
-  // Lock body scroll when mobile menu is open
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => { document.body.style.overflow = ''; };
-  }, [isMobileMenuOpen]);
+  // Close when clicking outside the nav
+  useClickOutside(navRef, () => setIsMobileMenuOpen(false));
 
   return (
     <nav ref={navRef} className="soar-nav">
@@ -112,12 +122,16 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
-      <div className={`mobile-menu-overlay ${isMobileMenuOpen ? 'open' : ''}`}>
-        <ul className="mobile-nav-links">
+      {/* Mobile Dropdown */}
+      <div ref={dropdownRef} className={`mobile-dropdown ${isMobileMenuOpen ? 'open' : ''}`} aria-hidden={!isMobileMenuOpen}>
+        <ul className="mobile-dropdown-links">
           {NAV_LINKS.map((link) => (
             <li key={link.label}>
-              <Link href={link.href} className="mobile-nav-link" onClick={() => setIsMobileMenuOpen(false)}>
+              <Link
+                href={link.href}
+                className="mobile-dropdown-link "
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
                 {link.label}
               </Link>
             </li>
@@ -227,7 +241,7 @@ export default function Navbar() {
           background: var(--bg-primary);
           border: 1px solid var(--border);
           border-radius: 12px;
-          padding: 16px 12px;
+          padding: 50px
           min-width: 220px;
           opacity: 0;
           visibility: hidden;
@@ -309,45 +323,59 @@ export default function Navbar() {
           transform: rotate(-45deg);
         }
 
-        .mobile-menu-overlay {
-          position: fixed;
-          inset: 0;
-          background: var(--bg-primary);
-          z-index: 1500;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
+        /* ─── Mobile Dropdown ─── */
+        .mobile-dropdown {
+          display: none;
+          position: absolute;
+          top: calc(100% + 8px);
+          right: 6%;
+          width: 220px;
+          background: var(--bg-card, rgba(15,15,20,0.92));
+          backdrop-filter: blur(18px);
+          -webkit-backdrop-filter: blur(18px);
+          border: 1px solid var(--border);
+          border-radius: 14px;
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+          z-index: 1600;
+          overflow: hidden;
           opacity: 0;
+          transform: translateY(-8px) scale(0.97);
           pointer-events: none;
-          transform: translateY(-20px);
-          transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+          transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
-        .mobile-menu-overlay.open {
+        .mobile-dropdown.open {
           opacity: 1;
+          transform: translateY(0) scale(1);
           pointer-events: auto;
-          transform: translateY(0);
         }
 
-        .mobile-nav-links {
-          display: flex;
-          flex-direction: column;
-          gap: 32px;
+        .mobile-dropdown-links {
           list-style: none;
-          text-align: center;
+          padding: 6px 0;
+          margin: 0;
         }
 
-        .mobile-nav-link {
-          font-family: var(--font-display);
-          font-size: 2rem;
-          font-weight: 800;
+        .mobile-dropdown-links li:not(:last-child) {
+          border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-dropdown-link {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          padding: 14px 24px;
           color: var(--text-primary);
           text-decoration: none;
-          transition: color 0.3s ease;
+          font-size: 0.92rem;
+          font-weight: 600;
+          letter-spacing: 0.02em;
+          transition: background 0.15s ease, color 0.15s ease;
         }
 
-        .mobile-nav-link:hover {
+        .mobile-dropdown-link:hover {
+          background: var(--surface-variant, rgba(255,255,255,0.06));
           color: var(--accent-1);
         }
 
@@ -357,6 +385,9 @@ export default function Navbar() {
           }
           .mobile-menu-btn {
             display: flex;
+          }
+          .mobile-dropdown {
+            display: block;
           }
         }
 
