@@ -241,7 +241,7 @@ export default function Navbar() {
           background: var(--bg-primary);
           border: 1px solid var(--border);
           border-radius: 12px;
-          padding: 50px
+          padding: 16px 20px;
           min-width: 220px;
           opacity: 0;
           visibility: hidden;
