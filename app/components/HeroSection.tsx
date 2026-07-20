@@ -14,7 +14,6 @@ export default function HeroSection() {
   const { theme } = useTheme();
   
   const sectionRef = useRef<HTMLDivElement>(null);
-  const topTrackRef = useRef<HTMLDivElement>(null);
   const bottomTrackRef = useRef<HTMLDivElement>(null);
   
   const contentRef = useRef(null);
@@ -27,7 +26,7 @@ export default function HeroSection() {
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
 
-      // Desktop and tablet (min-width: 901px): pin hero and slide image tracks
+      // Desktop and tablet (min-width: 901px): pin hero and slide bottom image track
       mm.add("(min-width: 901px)", () => {
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -40,14 +39,6 @@ export default function HeroSection() {
           },
         });
 
-        // Slide top row of photos from left to right (starts centered, moves right)
-        tl.fromTo(
-          topTrackRef.current,
-          { x: 0 },
-          { x: '30vw', ease: 'none' },
-          0
-        );
-
         // Slide bottom row of photos from right to left (starts centered, moves left)
         tl.fromTo(
           bottomTrackRef.current,
@@ -59,17 +50,12 @@ export default function HeroSection() {
 
       // Mobile (max-width: 900px): use CSS marquee animation instead of scroll-scrub
       mm.add("(max-width: 900px)", () => {
-        if (topTrackRef.current) {
-          gsap.set(topTrackRef.current, { x: 0 });
-          topTrackRef.current.classList.add('marquee-forward');
-        }
         if (bottomTrackRef.current) {
           gsap.set(bottomTrackRef.current, { x: 0 });
           bottomTrackRef.current.classList.add('marquee-reverse');
         }
         // Cleanup: remove classes when this breakpoint is no longer active
         return () => {
-          topTrackRef.current?.classList.remove('marquee-forward');
           bottomTrackRef.current?.classList.remove('marquee-reverse');
         };
       });
@@ -91,15 +77,6 @@ export default function HeroSection() {
   };
 
   // Society Images & Labels
-  const baseTopImages = [
-    { src: '/images/society_tech.png', label: theme === 'cultural' ? 'Creative Debates' : 'Tech Workspace' },
-    { src: '/images/society_cultural.png', label: theme === 'cultural' ? 'Stage Performance' : 'Innovation Hub' },
-    { src: '/images/society_collaboration.png', label: theme === 'cultural' ? 'Artistic Discussions' : 'Team Collaboration' },
-    { src: '/images/society_keynote.png', label: theme === 'cultural' ? 'Annual Festival' : 'Annual Keynote' },
-    { src: '/images/society_tech.png', label: theme === 'cultural' ? 'Speaker Panel' : 'Hackathon Jam' },
-    { src: '/images/society_cultural.png', label: theme === 'cultural' ? 'Drama Showcase' : 'AI Dev Seminar' },
-  ];
-
   const baseBottomImages = [
     { src: '/images/society_collaboration.png', label: theme === 'cultural' ? 'Workshop Brainstorm' : 'Project Ideation' },
     { src: '/images/society_keynote.png', label: theme === 'cultural' ? 'Alumni Panel' : 'Guest Lectures' },
@@ -109,7 +86,6 @@ export default function HeroSection() {
     { src: '/images/society_keynote.png', label: theme === 'cultural' ? 'Award Ceremony' : 'Demo Day' },
   ];
 
-  const topImages = [...baseTopImages, ...baseTopImages, ...baseTopImages];
   const bottomImages = [...baseBottomImages, ...baseBottomImages, ...baseBottomImages];
 
   return (
@@ -121,19 +97,6 @@ export default function HeroSection() {
         ))}
       </div>
 
-      {/* 1. Top sliding track (Left to Right) */}
-      <div className="image-track-container top-track">
-        <div ref={topTrackRef} className="image-track">
-          {topImages.map((img, idx) => (
-            <div key={idx} className="image-card">
-              <img src={img.src} alt={img.label} className="track-img" />
-              <div className="img-overlay">
-                <span className="img-caption">{img.label}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
 
       {/* 2. Middle Hero Content Grid */}
       <div ref={contentRef} className="hero-content">

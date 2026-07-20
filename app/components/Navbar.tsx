@@ -131,8 +131,8 @@ export default function Navbar() {
                 href={link.href}
                 className="mobile-dropdown-link "
                 onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {link.label}
+              ><div className='flex justify-center items-center h-full w-full '>{link.label}</div>
+                
               </Link>
             </li>
           ))}
