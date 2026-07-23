@@ -6,37 +6,54 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* ─── Data ─── */
-const FOUNDER = {
+interface SocialLink {
+  name: string;
+  url: string;
+}
+
+interface FounderData {
+  name: string;
+  role: string;
+  avatar: string;
+  year: string;
+  dept: string;
+  vision: string;
+  achievement: string;
+  socials: SocialLink[];
+}
+
+const FOUNDER: FounderData = {
   name: 'Ali Nasir',
   role: 'Founder & Director',
-  avatar: '👨‍💻',
+  avatar: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784804820/WhatsApp_Image_2026-07-23_at_16.36.42_uurgrb.jpg',
   year: '2020',
   dept: '',
   vision:
-    'I founded SoarJMI with one belief: that every student carries a universe of potential inside them. Culture and technology aren\'t opposites — they are two wings of the same bird. SoarJMI is that bird. We built this space so every voice could be heard, every idea could take flight, and every student could soar beyond the boundaries they thought existed.',
+    'When I looked around, I saw a clear divide: societies were either strictly technical or purely cultural. But creativity doesn\'t exist in a silo, and neither does innovation. I wanted to build a platform where logic and art coexist—where you can write code by day and take the stage by night. SOAR was born out of that vision: a space for young innovators to bridge the gap between technology and culture, proving that you don\'t have to choose between the two.',
   achievement: '500+ members · 5 years · 30+ annual events',
-  socials: ['GitHub', 'LinkedIn', 'Twitter'],
+  socials: [
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/ali-nasir-ba3640230/' },
+  ],
 };
 
 const MENTORS = [
   {
-    name: 'Prof. Imran Siddiqui',
-    role: 'Faculty Mentor — Cultural Wing',
-    avatar: '👨‍🏫',
-    dept: 'Department of Fine Arts, JMI',
+    name: 'Dr Navaid Z. Rizvi',
+    role: 'Faculty Mentor',
+    avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1784802565/Screenshot_2026-07-23_at_3.57.11_PM_hgmzue.png',
+    dept: 'Department of Applied Science, JMI',
     message:
-      'Watching these students grow from hesitant freshers to confident creators has been the greatest reward of my career.',
-    expertise: ['Theatre', 'Literary Arts', 'Cultural Policy'],
+      'I believe in the power of collaboration and welcome new professional connections. Whether you are interested in technology, research, career growth, or startup ventures, I am here to lend my expertise and support your aspirations.',
+    // expertise: ['Theatre', 'Literary Arts', 'Cultural Policy'],
   },
   {
-    name: 'Dr. Fatima Ansari',
-    role: 'Faculty Mentor — Tech Wing',
-    avatar: '👩‍🔬',
-    dept: 'Department of Computer Science, JMI',
+    name: 'Dr Haroon Anwar',
+    role: 'Faculty Mentor',
+    avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1784802560/Screenshot_2026-07-23_at_3.57.55_PM_wkqpco.png',
+    dept: 'Department of Applied Science, JMI',
     message:
-      'SoarJMI bridges the gap between academia and industry. I am proud to guide students who ship real-world solutions.',
-    expertise: ['AI/ML', 'Web Dev', 'Open Source'],
+      '16+ years of vibrant Industry and Academia Experience (8+ Corporate experience in Channel Sales, Business Development, Franchise Development, Corporate Sales and 8+ years of Teaching Experience in Entrepreneurship, Financial Management and Marketing Management.) PhD, UGC NET and MBA (Marketing and Finance)',
+    // expertise: ['AI/ML', 'Web Dev', 'Open Source'],
   },
 ];
 
@@ -69,7 +86,13 @@ function FounderCard() {
       {/* Avatar + name */}
       <div className="founder-identity">
         <div className="founder-avatar-wrap">
-          <div className="founder-avatar">{FOUNDER.avatar}</div>
+          <div className="founder-avatar">
+            {FOUNDER.avatar.startsWith('http') || FOUNDER.avatar.startsWith('/') ? (
+              <img src={FOUNDER.avatar} alt={FOUNDER.name} className="avatar-img" />
+            ) : (
+              FOUNDER.avatar
+            )}
+          </div>
           <div className="founder-glow-ring" />
         </div>
         <div className="founder-meta">
@@ -96,7 +119,15 @@ function FounderCard() {
       {/* Social links */}
       <div className="founder-socials">
         {FOUNDER.socials.map((s) => (
-          <button key={s} className="social-pill">{s}</button>
+          <a
+            key={s.name}
+            href={s.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-pill"
+          >
+            {s.name} ↗
+          </a>
         ))}
       </div>
 
@@ -151,6 +182,7 @@ function FounderCard() {
           font-size: 3rem;
           position: relative;
           z-index: 1;
+          overflow: hidden;
         }
 
         .founder-glow-ring {
@@ -262,6 +294,9 @@ function FounderCard() {
           font-weight: 600;
           cursor: pointer;
           transition: all 0.2s ease;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
         }
 
         .social-pill:hover {
@@ -307,7 +342,13 @@ function MentorCard({ mentor, index }: { mentor: typeof MENTORS[0]; index: numbe
   return (
     <div ref={ref} className="mentor-card">
       <div className="mentor-top">
-        <div className="mentor-avatar">{mentor.avatar}</div>
+        <div className="mentor-avatar">
+          {mentor.avatar.startsWith('http') || mentor.avatar.startsWith('/') ? (
+            <img src={mentor.avatar} alt={mentor.name} className="avatar-img" />
+          ) : (
+            mentor.avatar
+          )}
+        </div>
         <div className="mentor-info">
           <span className="mentor-badge">✦ Mentor</span>
           <h4 className="mentor-name">{mentor.name}</h4>
@@ -318,11 +359,11 @@ function MentorCard({ mentor, index }: { mentor: typeof MENTORS[0]; index: numbe
 
       <p className="mentor-msg">"{mentor.message}"</p>
 
-      <div className="mentor-expertise">
+      {/* <div className="mentor-expertise">
         {mentor.expertise.map((tag) => (
           <span key={tag} className="expertise-tag">{tag}</span>
         ))}
-      </div>
+      </div> */}
 
       <style jsx>{`
         .mentor-card {
@@ -364,7 +405,7 @@ function MentorCard({ mentor, index }: { mentor: typeof MENTORS[0]; index: numbe
           font-size: 2.6rem;
           width: 64px;
           height: 64px;
-          border-radius: 16px;
+          border-radius: 200px;
           background: var(--bg-secondary);
           border: 1px solid var(--border);
           display: flex;
@@ -372,6 +413,14 @@ function MentorCard({ mentor, index }: { mentor: typeof MENTORS[0]; index: numbe
           justify-content: center;
           flex-shrink: 0;
           transition: transform 0.3s ease;
+          overflow: hidden;
+        }
+
+        :global(.avatar-img) {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: inherit;
         }
 
         .mentor-card:hover .mentor-avatar {
@@ -468,10 +517,10 @@ export default function FounderMentorsSection() {
       <div ref={headingRef} className="leadership-header">
         <p className="section-eyebrow">The Visionaries</p>
         <h2 className="section-title leadership-title">
-          Meet Our <span className="accent-gradient">Leadership</span>
+          Meet Our <span className="accent-gradient">Mentors</span>
         </h2>
         <p className="section-desc">
-          The founding spirit and guiding minds behind everything SoarJMI stands for.
+          The guiding minds behind everything SoarJMI stands for.
         </p>
       </div>
 

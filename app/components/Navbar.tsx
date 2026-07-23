@@ -27,8 +27,8 @@ const NAV_LINKS = [
     href: '/',
     subLinks: [
       { label: 'Introduction', href: '/#hero' },
-      { label: 'Our leaders', href: '/#leadership' },
-      { label: 'Our teams', href: '/#team' },
+      { label: 'Our Mentors', href: '/#leadership' },
+      { label: 'Our Leaders', href: '/#team' },
       { label: 'Testimonials', href: '/#testimonials' },
       { label: 'About Us', href: '/#about' },
       { label: 'Guidelines', href: '/#guidance' },

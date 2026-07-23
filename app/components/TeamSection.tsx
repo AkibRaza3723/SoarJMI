@@ -25,7 +25,7 @@ const TEAM: TeamMember[] = [
   {
     name: 'Nijam Rizvi',
     role: 'Vice President',
-    avatar: '👩‍🔬',
+    avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1784801182/nijam_hw3gsp.jpg',
     quote: 'Nurturing excellence, one student at a time.',
   },
   {
@@ -246,7 +246,7 @@ export default function TeamSection() {
         <div ref={headingRef} className="section-header">
           <p className="section-eyebrow">The People Behind the Magic</p>
           <h2 className="section-title team-title">
-            Meet Our <span className="accent-gradient">Team</span>
+            Meet Our <span className="accent-gradient">Leadership</span>
           </h2>
           <p className="section-desc">
             Passionate individuals driving SoarJMI's vision every single day.
