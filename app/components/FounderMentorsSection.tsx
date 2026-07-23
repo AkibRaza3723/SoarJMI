@@ -12,7 +12,7 @@ const FOUNDER = {
   role: 'Founder & Director',
   avatar: '👨‍💻',
   year: '2020',
-  dept: 'Computer Science, JMI',
+  dept: '',
   vision:
     'I founded SoarJMI with one belief: that every student carries a universe of potential inside them. Culture and technology aren\'t opposites — they are two wings of the same bird. SoarJMI is that bird. We built this space so every voice could be heard, every idea could take flight, and every student could soar beyond the boundaries they thought existed.',
   achievement: '500+ members · 5 years · 30+ annual events',

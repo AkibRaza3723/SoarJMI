@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 interface TeamMember {
   name: string;
   role: string;
-  avatar: string;        // emoji avatar for now
+  avatar: string;        
   quote: string;
   social?: string;
 }
@@ -21,6 +21,12 @@ const TEAM: TeamMember[] = [
     avatar: `https://res.cloudinary.com/wyuzj0og/image/upload/v1784204156/anam_lqyqxf.jpg`,
     quote: 'Together, we turn ideas into movements.',
     social: 'https://www.instagram.com/',
+  },
+  {
+    name: 'Nijam Rizvi',
+    role: 'Vice President',
+    avatar: '👩‍🔬',
+    quote: 'Nurturing excellence, one student at a time.',
   },
   {
     name: 'Faizan Sheikh',
@@ -36,16 +42,16 @@ const TEAM: TeamMember[] = [
     social: 'https://www.instagram.com/',
   },
   {
-    name: 'Sufiyan Nehal',
+    name: 'Sufyan Nehal',
     role: 'Joint Secretary',
-    avatar: '👩‍🔬',
+    avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1784798675/sufyan_xmpg7l.jpg',
     quote: 'Nurturing excellence, one student at a time.',
   },
   {
-    name: 'Nijam Rizvi',
-    role: 'Vice President',
-    avatar: '👩‍🔬',
-    quote: 'Nurturing excellence, one student at a time.',
+    name: 'Iqra akhtar',
+    role: 'HR head',
+    avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1784204529/iqra_lkafer.jpg',
+    quote: 'Innovation is our language, creativity is our voice.',
   },
 ];
 
@@ -97,7 +103,7 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
       <div className="card-divider" />
       <div className="card-footer">
         <span className="card-tag">SoarJMI</span>
-        <span className="card-tag">2025–26</span>
+        <span className="card-tag">2026–27</span>
       </div>
 
       <style jsx>{`
@@ -240,7 +246,7 @@ export default function TeamSection() {
         <div ref={headingRef} className="section-header">
           <p className="section-eyebrow">The People Behind the Magic</p>
           <h2 className="section-title team-title">
-            Meet Our <span className="accent-gradient">Leadership</span>
+            Meet Our <span className="accent-gradient">Team</span>
           </h2>
           <p className="section-desc">
             Passionate individuals driving SoarJMI's vision every single day.

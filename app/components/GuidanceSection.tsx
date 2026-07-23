@@ -3,31 +3,6 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
-const GUIDANCE_PILLARS = [
-  {
-    icon: '🧭',
-    title: 'Vision-First Mentorship',
-    desc: 'Our mentors don\'t just teach — they help you discover your own direction. Every session is tailored around where you want to go, not where you\'ve been.',
-  },
-  {
-    icon: '🤝',
-    title: 'Peer-to-Peer Growth',
-    desc: 'The fastest way to grow is to surround yourself with people who are just as hungry as you are. SoarJMI\'s community model ensures everyone lifts everyone.',
-  },
-  {
-    icon: '🛠️',
-    title: 'Learn by Doing',
-    desc: 'We believe portfolios beat certificates. Whether it\'s a stage performance, an open-source commit, or a painting — we push you to create things that matter.',
-  },
-  {
-    icon: '🌐',
-    title: 'Industry Connections',
-    desc: 'Through alumni networks, industry partner workshops, and collaborative fests, SoarJMI ensures you walk out knowing real people in the real world.',
-  },
-];
-
-
-
 export default function GuidanceSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });

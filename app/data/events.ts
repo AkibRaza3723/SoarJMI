@@ -6,11 +6,11 @@ export interface SoarEvent {
   time: string;
   location: string;
   category: 'Cultural' | 'Tech';
-  tag: string;                // short tag like "Annual Fest", "Hackathon" etc
+  tag: string;                
   description: string;
-  fullDescription: string;    // longer description for popup modal
-  image: string | null;       // null → smart placeholder shown
-  gallery: string[];          // photo gallery images for the popup slideshow
+  fullDescription: string;    
+  image: string | null;       
+  gallery: string[];         
 }
 
 export const EVENTS: SoarEvent[] = [

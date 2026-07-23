@@ -125,7 +125,7 @@ export default function LogoSplash() {
           </div>
           <div className="scroll-hint">
             
-            <span>Scroll to explore</span>
+            <span>Scroll to Xplore</span>
             <div className="scroll-arrow" />
           </div>
         </div>
@@ -244,7 +244,7 @@ export default function LogoSplash() {
           color: var(--text-muted);
           font-weight: 400;
           letter-spacing: 0.08em;
-          text-transform: uppercase;
+          text-transform: none;
           padding: 0 20px;
           line-height: 1.5;
         }

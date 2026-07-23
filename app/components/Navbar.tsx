@@ -6,7 +6,6 @@ import SoarLogo from './SoarLogo';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-// Close dropdown when clicking outside
 function useClickOutside(ref: React.RefObject<HTMLElement | null>, handler: () => void) {
   useEffect(() => {
     const listener = (e: MouseEvent | TouchEvent) => {

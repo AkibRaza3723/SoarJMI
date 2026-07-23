@@ -105,7 +105,7 @@ function EventCard({ event, stackIndex, totalVisible, onDismiss, isTop }: CardPr
           ) : (
             <div className="card-placeholder">
               <div className="placeholder-icon">
-                {event.category === 'Cultural' ? '🎭' : '⚡'}
+                {event.category === 'Cultural' ? '🎭' : '🚀'}
               </div>
               <span className="placeholder-label">{event.tag}</span>
             </div>
@@ -113,7 +113,7 @@ function EventCard({ event, stackIndex, totalVisible, onDismiss, isTop }: CardPr
 
           {/* Category badge */}
           <div className={`category-badge ${event.category.toLowerCase()}`}>
-            {event.category === 'Cultural' ? '🎭' : '⚡'} {event.category}
+            {event.category === 'Cultural' ? '🎭' : '🚀'} {event.category}
           </div>
         </div>
 
