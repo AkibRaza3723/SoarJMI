@@ -5,7 +5,7 @@ import Image from 'next/image';
 import gsap from 'gsap';
 
 // Using the same generated image 5 times as requested
-const images = Array(5).fill('/images/gallery_placeholder.png');
+const images = Array(5).fill('https://res.cloudinary.com/wyuzj0og/image/upload/v1784901183/team_wmr4la.jpg');
 
 export default function MovingGallery() {
   const containerRef = useRef<HTMLDivElement>(null);

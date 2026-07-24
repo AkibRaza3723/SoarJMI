@@ -12,24 +12,25 @@ if (typeof window !== 'undefined') {
 
 /* ─── Single magazine ─── */
 const MAGAZINE = {
-  title: 'Soar Chronicle',
-  edition: 'Vol. I',
-  year: '2025–26',
+  title: 'JAHAAN-E-KHAYAAL',
+  edition: 'First Edition',
+  year: '2024–25',
   tag: 'Annual',
   coverColor: 'linear-gradient(145deg, #4A2C0A 0%, #A0522D 55%, #F5C59A 100%)',
-  coverImage: undefined as string | undefined,   // swap in a real URL when ready
+  coverImage: "https://res.cloudinary.com/wyuzj0og/image/upload/v1784875598/magazine_unngc4.jpg",
   pdfUrl: '#',
   downloadUrl: '#',
-  pages: '64',
+  pages: '70',
   language: 'English / Urdu',
   publishedBy: 'SoarJMI Publications',
   description:
-    'Soar Chronicle is the official annual magazine of SoarJMI — Jamia Millia Islamia\'s premier cultural and tech society. Vol. I marks our first print, a milestone document woven from student voices, creative writing, photo essays, event retrospectives, and technology spotlights.',
+    'JAHAAN-E-KHAYAAL is the official annual magazine of SoarJMI — Jamia Millia Islamia\'s premier cultural and tech society. This magazine is a milestone document woven from student voices, creative writing, photo essays, event retrospectives, and technology spotlights.',
   highlights: [
-    'Founder\'s note & society origin story',
-    'Photo essay: SoarFest 2025 in frames',
-    'Student poetry, prose & artwork showcase',
-    'Tech spotlight: projects built by our members',
+    'Reflections from the President',
+    'Creative expressions through poetry & prose',
+    'Visual storytelling through photography',
+    'A look back at the electrifying SoarFest 2025',
+    'Spotlights on innovative tech projects by our members',
     'Interviews with faculty mentors',
     'Behind-the-scenes of our flagship events',
   ],

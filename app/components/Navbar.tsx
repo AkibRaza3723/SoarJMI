@@ -36,8 +36,9 @@ const NAV_LINKS = [
   },
   { label: 'Members', href: '/members' },
   { label: 'Events', href: '/events' },
-  { label: 'Magazine', href: '/magazine' },
+  { label: 'Publication', href: '/publication' },
   { label: 'Blogs', href: '/blogs' },
+  { label: 'Notes', href: '/notes' },
   { label: 'Contact Us', href: '/contact' },
 ];
 

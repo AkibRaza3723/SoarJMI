@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 interface TeamMember {
   name: string;
   role: string;
-  avatar: string;        
+  avatar: string;
   quote: string;
   social?: string;
 }
@@ -19,39 +19,40 @@ const TEAM: TeamMember[] = [
     name: 'Anam Tabrez',
     role: 'President',
     avatar: `https://res.cloudinary.com/wyuzj0og/image/upload/v1784204156/anam_lqyqxf.jpg`,
-    quote: 'Together, we turn ideas into movements.',
+    quote: 'United we stand, together we shine',
     social: 'https://www.instagram.com/',
   },
   {
     name: 'Nijam Rizvi',
     role: 'Vice President',
-    avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1784801182/nijam_hw3gsp.jpg',
-    quote: 'Nurturing excellence, one student at a time.',
+    avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1784903880/Screenshot_2026-07-24_at_8.06.06_PM_tymppu.png',
+    quote: 'And miles to go before I sleep.',
   },
   {
     name: 'Faizan Sheikh',
     role: 'Vice President',
     avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1784204713/Faizan_or6ar8.jpg',
-    quote: 'Innovation is our language, creativity is our voice.',
+    quote: 'Let’s not be strangers, let’s be family.',
   },
   {
     name: 'Mohammad Ayaan',
     role: 'General Secretary',
     avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1784204076/ayaan_alhdtt.jpg',
-    quote: 'I guide them to soar beyond their limits.',
+    quote: 'Every role is an opportunity to make a difference.',
     social: 'https://www.instagram.com/',
   },
   {
-    name: 'Sufyan Nehal',
+    name: 'Muhammad Sufyan Nehal',
     role: 'Joint Secretary',
     avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1784798675/sufyan_xmpg7l.jpg',
-    quote: 'Nurturing excellence, one student at a time.',
+    quote: 'Success is measured by what you achieve; character is measured by how you achieve it.',
+    social: 'https://www.linkedin.com/in/muhammad-sufyan-nehal-95b29a381/',
   },
   {
-    name: 'Iqra akhtar',
+    name: 'Iqra Akhtar',
     role: 'HR head',
     avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1784204529/iqra_lkafer.jpg',
-    quote: 'Innovation is our language, creativity is our voice.',
+    quote: 'Be a good person first, the rest will fall into place.',
   },
 ];
 
