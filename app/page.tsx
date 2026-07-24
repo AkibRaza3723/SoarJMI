@@ -4,7 +4,6 @@ import Navbar from './components/Navbar';
 import LogoSplash from './components/LogoSplash';
 import HeroSection from './components/HeroSection';
 import FounderMentorsSection from './components/FounderMentorsSection';
-import TeamSection from './components/TeamSection';
 import TestimonialsSection from './components/TestimonialsSection';
 import AboutSection from './components/AboutSection';
 import GuidanceSection from './components/GuidanceSection';
@@ -25,9 +24,6 @@ export default function HomePage() {
 
       {/* 3. Founder + Mentors full-page layout */}
       <FounderMentorsSection />
-
-      {/* 4. President, VP, general team cards */}
-      <TeamSection />
 
       {/* 5. About Us */}
       <AboutSection />

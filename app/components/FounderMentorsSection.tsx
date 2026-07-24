@@ -6,34 +6,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface SocialLink {
-  name: string;
-  url: string;
-}
-
-interface FounderData {
-  name: string;
-  role: string;
-  avatar: string;
-  year: string;
-  dept: string;
-  vision: string;
-  achievement: string;
-  socials: SocialLink[];
-}
-
-const FOUNDER: FounderData = {
+/* ─── Data ─── */
+const FOUNDER = {
   name: 'Ali Nasir',
-  role: 'Founder & Director',
+  role: 'Founder & Mentor',
   avatar: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784804820/WhatsApp_Image_2026-07-23_at_16.36.42_uurgrb.jpg',
   year: '2020',
   dept: '',
   vision:
     'When I looked around, I saw a clear divide: societies were either strictly technical or purely cultural. But creativity doesn\'t exist in a silo, and neither does innovation. I wanted to build a platform where logic and art coexist—where you can write code by day and take the stage by night. SOAR was born out of that vision: a space for young innovators to bridge the gap between technology and culture, proving that you don\'t have to choose between the two.',
-  achievement: '500+ members · 5 years · 30+ annual events',
-  socials: [
-    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/ali-nasir-ba3640230/' },
-  ],
+
+  socials: ['LinkedIn'],
 };
 
 const MENTORS = [
@@ -109,26 +92,24 @@ function FounderCard() {
         <p className="founder-quote">{FOUNDER.vision}</p>
       </div>
 
-      {/* Stats ribbon */}
-      <div className="founder-stats-ribbon">
-        {FOUNDER.achievement.split('·').map((s) => (
-          <span key={s} className="ribbon-item">{s.trim()}</span>
-        ))}
-      </div>
-
       {/* Social links */}
       <div className="founder-socials">
-        {FOUNDER.socials.map((s) => (
-          <a
-            key={s.name}
-            href={s.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="social-pill"
-          >
-            {s.name} ↗
-          </a>
-        ))}
+        {FOUNDER.socials.map((s: any) => {
+          const name = typeof s === 'string' ? s : s?.name || 'LinkedIn';
+          const url = typeof s === 'string' ? 'https://www.linkedin.com/' : s?.url || 'https://www.linkedin.com/';
+          const isExternal = url && url !== '#';
+          return (
+            <a
+              key={name}
+              href={url}
+              target={isExternal ? '_blank' : '_self'}
+              rel="noopener noreferrer"
+              className="social-pill"
+            >
+              {name} {isExternal ? '↗' : ''}
+            </a>
+          );
+        })}
       </div>
 
       <style jsx>{`
@@ -136,10 +117,9 @@ function FounderCard() {
           position: relative;
           background: var(--bg-card);
           border: 1px solid var(--border);
-          border-radius: 28px;
-          padding: 0 0 32px 0;
+          border-radius: 20px;
+          padding: 0 0 24px 0;
           overflow: hidden;
-          height: 100%;
           display: flex;
           flex-direction: column;
           gap: 0;
@@ -148,21 +128,23 @@ function FounderCard() {
         }
 
         .founder-card:hover {
-          transform: translateY(-8px);
-          box-shadow: 0 24px 64px var(--glow);
+          transform: translateY(-5px);
+          box-shadow: 0 16px 40px var(--glow);
         }
 
         .founder-accent-bar {
-          height: 6px;
+          height: 3px;
           background: var(--gradient-accent);
+          opacity: 0.8;
           width: 100%;
         }
 
+        /* Stack avatar on top, text below — matches mentor layout */
         .founder-identity {
           display: flex;
-          align-items: flex-start;
-          gap: 20px;
-          padding: 28px 28px 20px;
+          align-items: center;
+          gap: 14px;
+          padding: 24px 24px 16px;
         }
 
         .founder-avatar-wrap {
@@ -171,23 +153,28 @@ function FounderCard() {
         }
 
         .founder-avatar {
-          width: 90px;
-          height: 90px;
-          border-radius: 50%;
+          width: 64px;
+          height: 64px;
+          border-radius: 200px;
           background: var(--bg-secondary);
-          border: 3px solid var(--border);
+          border: 1px solid var(--border);
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 3rem;
+          font-size: 2.6rem;
           position: relative;
           z-index: 1;
           overflow: hidden;
+          transition: transform 0.3s ease;
+        }
+
+        .founder-card:hover .founder-avatar {
+          transform: scale(1.08) rotate(-4deg);
         }
 
         .founder-glow-ring {
           position: absolute;
-          inset: -6px;
+          inset: -5px;
           border-radius: 50%;
           border: 2px solid transparent;
           background: var(--gradient-accent) border-box;
@@ -200,59 +187,61 @@ function FounderCard() {
         .founder-meta {
           display: flex;
           flex-direction: column;
-          gap: 4px;
+          gap: 2px;
         }
 
         .founder-badge {
-          font-size: 0.72rem;
+          font-size: 0.68rem;
           font-weight: 700;
           text-transform: uppercase;
-          letter-spacing: 0.12em;
+          letter-spacing: 0.1em;
           color: var(--accent-2);
-          margin-bottom: 2px;
         }
 
         .founder-name {
-          font-size: 1.35rem;
+          font-size: 1.05rem;
           font-weight: 800;
           color: var(--text-primary);
-          letter-spacing: -0.02em;
+          letter-spacing: -0.01em;
         }
 
         .founder-role {
-          font-size: 0.85rem;
+          font-size: 0.78rem;
           font-weight: 600;
+          color: var(--accent-1);
         }
 
         .founder-dept {
-          font-size: 0.78rem;
+          font-size: 0.72rem;
           color: var(--text-muted);
         }
 
         .founder-quote-wrap {
           position: relative;
-          padding: 0 28px 24px;
+          padding: 0 24px 20px;
           flex: 1;
         }
 
         .quote-mark {
-          font-size: 6rem;
+          font-size: 5rem;
           line-height: 0.5;
           color: var(--accent-1);
-          opacity: 0.15;
+          opacity: 0.12;
           font-family: Georgia, serif;
           position: absolute;
-          top: 8px;
-          left: 20px;
+          top: 4px;
+          left: 16px;
         }
 
         .founder-quote {
-          font-size: 0.97rem;
-          line-height: 1.8;
+          font-size: 0.88rem;
+          line-height: 1.7;
           color: var(--text-secondary);
           position: relative;
           z-index: 1;
           font-style: italic;
+          border-left: 2px solid var(--accent-1);
+          padding-left: 12px;
         }
 
         .founder-stats-ribbon {
@@ -260,15 +249,15 @@ function FounderCard() {
           gap: 0;
           border-top: 1px solid var(--border);
           border-bottom: 1px solid var(--border);
-          margin: 0 0 20px;
+          margin: 0 0 16px;
           overflow: hidden;
         }
 
         .ribbon-item {
           flex: 1;
           text-align: center;
-          padding: 12px 8px;
-          font-size: 0.78rem;
+          padding: 10px 6px;
+          font-size: 0.72rem;
           font-weight: 700;
           color: var(--text-muted);
           border-right: 1px solid var(--border);
@@ -281,7 +270,7 @@ function FounderCard() {
         .founder-socials {
           display: flex;
           gap: 8px;
-          padding: 0 28px;
+          padding: 0 24px;
         }
 
         .social-pill {
@@ -306,11 +295,10 @@ function FounderCard() {
         }
 
         @media (max-width: 480px) {
-          .founder-identity { padding: 20px; flex-direction: column; align-items: center; text-align: center; }
+          .founder-identity { padding: 20px; flex-direction: column; align-items: flex-start; }
           .founder-stats-ribbon { flex-direction: column; }
           .ribbon-item { border-right: none; border-bottom: 1px solid var(--border); }
           .ribbon-item:last-child { border-bottom: none; }
-          .founder-quote { font-size: 0.9rem; }
         }
       `}</style>
     </div>
@@ -524,19 +512,12 @@ export default function FounderMentorsSection() {
         </p>
       </div>
 
-      {/* Two-column layout */}
+      {/* Three-equal-column layout — no priority between cards */}
       <div className="leadership-layout">
-        {/* Left — Founder */}
-        <div className="col-founder">
-          <FounderCard />
-        </div>
-
-        {/* Right — Two mentors stacked */}
-        <div className="col-mentors">
-          {MENTORS.map((mentor, i) => (
-            <MentorCard key={mentor.name} mentor={mentor} index={i} />
-          ))}
-        </div>
+        <FounderCard />
+        {MENTORS.map((mentor, i) => (
+          <MentorCard key={mentor.name} mentor={mentor} index={i} />
+        ))}
       </div>
 
       <style jsx>{`
@@ -572,30 +553,28 @@ export default function FounderMentorsSection() {
           margin: 0 auto;
         }
 
+        /* ── Equal 3-column grid ── */
         .leadership-layout {
           max-width: 1200px;
           margin: 0 auto;
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 32px;
-          align-items: start;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 28px;
+          align-items: stretch;
         }
 
-        .col-founder {
-          height: 100%;
+        @media (max-width: 960px) {
+          .leadership-layout {
+            grid-template-columns: repeat(2, 1fr);
+          }
         }
 
-        .col-mentors {
-          display: flex;
-          flex-direction: column;
-          gap: 24px;
-        }
-
-        @media (max-width: 900px) {
+        @media (max-width: 600px) {
           .leadership-layout {
             grid-template-columns: 1fr;
           }
         }
+
         @media (max-width: 480px) {
           .leadership-section { padding: 60px 4%; }
         }

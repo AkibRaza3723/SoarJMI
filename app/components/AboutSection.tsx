@@ -26,7 +26,8 @@ export default function AboutSection() {
             }
           </h2>
           <p className="about-body">
-            SOAR JMI is the technology and creative society of Jamia Millia Islamia, built for students who want to turn ideas into reality. The society brings together coding, graphic designing, photography, video editing, management, and hackathons under one platform, giving members a space to learn, build, and collaborate across disciplines. Whether it is writing clean code, designing a striking visual identity, capturing a moment through the lens, editing a compelling video, organising a large-scale event, or competing in a high-energy hackathon, SOAR JMI is where students from every background come together to innovate with technology and creativity. The society is driven by the belief that the best ideas come to life when curiosity meets collaboration, and it continues to build an ecosystem where every member finds a domain to grow in and a team to grow with.
+            SoarJMI is the multidisciplinary society of Jamia Millia Islamia, dedicated to empowering students to turn bold ideas into reality. Built on the belief that true innovation thrives at the intersection of logic, artistry, and expression, SoarJMI provides a vibrant umbrella where technology, creativity, and culture coexist.
+            <br/><br/>By bringing together diverse domains spanning over tech, visual design, media production, event management, and hackathons alongside rich cultural initiatives, SoarJMI creates a collaborative ecosystem. Here, technical rigour meets cultural passion, giving members from all backgrounds the platform to build skills, celebrate heritage and modern expression, lead impactful projects, and grow together.
           </p>
           <h2 className="section-title about-title">
             {theme === 'cultural'
@@ -35,7 +36,7 @@ export default function AboutSection() {
             }
           </h2>
           <p className='about-body'>
-         To nurture practical skills in coding, design, photography, video editing, event management, and hackathons through hands-on projects, workshops, and collaborative events, while fostering a culture of teamwork, innovation, and continuous learning.
+         To empower students by creating an inclusive, multidisciplinary ecosystem where technology, creative expression, and cultural heritage converge,  enabling members to build future-ready skills, lead impactful projects, and turn bold ideas into reality
           </p>
          <h2 className="section-title about-title">
             {theme === 'cultural'
@@ -44,7 +45,7 @@ export default function AboutSection() {
             }
           </h2>
           <p className='about-body'>
-          Innovation, Collaboration, Integrity, and Excellence — SOAR JMI is committed to creating an inclusive space where every idea is welcomed, every skill is valued, and every member is encouraged to soar.
+          Innovation, Collaboration, Integrity, and Excellence, SoarJMI is committed to creating an inclusive space where every idea is welcomed, every skill is valued, and every member is encouraged to soar.
           </p>
           <div className="about-badge-row">
             <span className="about-badge">Est. 2022</span>

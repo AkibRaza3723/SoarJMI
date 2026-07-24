@@ -104,7 +104,7 @@ export default function ContactPage() {
               <div className="social-strip-links">
                 {[
                   { label: 'Instagram', icon: '📸', href: 'https://www.instagram.com/soarjmi/?hl=en' },
-                  { label: 'LinkedIn', icon: '💼', href: 'https://www.linkedin.com/search/results/all/?keywords=SoarJMI&origin=RICH_QUERY_SUGGESTION&heroEntityKey=urn%3Ali%3Aorganization%3A102252703&position=0' },
+                  { label: 'LinkedIn', icon: '💼', href: 'https://www.linkedin.com/company/soar-jmi/posts/?feedView=all' },
                 ].map((s) => (
                   <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="social-chip">
                     <span>{s.icon}</span><span>{s.label}</span>

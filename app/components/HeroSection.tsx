@@ -169,12 +169,12 @@ export default function HeroSection() {
             <div className="illustration-ring ring-2" />
             <div className="illustration-ring ring-3" />
             <div className="illustration-core">
-              {theme === 'cultural' ? '🎭' : '🚀'}
+              {theme === 'cultural' ? '🎭' : '🛰️'}
             </div>
             {/* Orbiting icons */}
             {(theme === 'cultural'
               ? ['🎵', '🖼️', '💃', '🎬', '🎨']
-              : ['💻', '🤖', '🔗', '📡', '🛰️']
+              : ['💻', '🤖', '🔗', '📡', '🚀']
             ).map((icon, i) => (
               <div
                 key={i}

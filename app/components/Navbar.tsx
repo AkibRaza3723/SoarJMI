@@ -28,14 +28,15 @@ const NAV_LINKS = [
     subLinks: [
       { label: 'Introduction', href: '/#hero' },
       { label: 'Our Mentors', href: '/#leadership' },
-      { label: 'Our Leaders', href: '/#team' },
       { label: 'Testimonials', href: '/#testimonials' },
       { label: 'About Us', href: '/#about' },
       { label: 'Guidelines', href: '/#guidance' },
       { label: 'FAQs', href: '/#faq' },
     ]
   },
+  { label: 'Members', href: '/members' },
   { label: 'Events', href: '/events' },
+  { label: 'Magazine', href: '/magazine' },
   { label: 'Blogs', href: '/blogs' },
   { label: 'Contact Us', href: '/contact' },
 ];

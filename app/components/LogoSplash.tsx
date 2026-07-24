@@ -118,7 +118,7 @@ export default function LogoSplash() {
               }}
               onInit={(typewriter) => {
                 typewriter.pauseFor(1500)
-                  .typeString('To foster a community of student innovators at Jamia Millia Islamia who use technology, design, and creativity to solve real-world problems while learning, leading, and creating lasting impact.')
+                  .typeString('“Though no one can go back and make a brand new start, anyone can start from now and make a brand new ending.” - Carl Bard')
                   .start();
               }}
             />
