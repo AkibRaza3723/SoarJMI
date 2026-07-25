@@ -121,6 +121,22 @@ const rawEvents: Omit<SoarEvent, 'id'>[] = [
     ],
   },
   {
+    title: 'SOARJMI ORIENTATION 1.0',
+    date: 'October 16, 2024',
+    time: '10:00 AM – 5:00 PM',
+    location: 'JMI', 
+    category: 'Tech',
+    tag: 'Event',
+    description:
+      'Before the official start of the tenure, we came together for SoarJMI Orientation 1.0 an evening dedicated to connecting as one team. The Executive Board and Team Heads introduced themselves, shared their vision, and welcomed every member into the SoarJMI family. Through fun team-bonding activities, conversations, snacks, and a jamming session with live guitar, we got to know each other beyond our roles. It was the perfect beginning to build friendships, strengthen collaboration, and set the tone for an exciting journey ahead. Here\'s to a tenure filled with learning, growth, and unforgettable memories!',
+      image: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1784982377/e1_dqi5ea.jpg',
+    gallery: [
+      'https://res.cloudinary.com/wyuzj0og/image/upload/v1784982377/e1_dqi5ea.jpg',
+      'https://res.cloudinary.com/wyuzj0og/image/upload/v1784982387/e2_znbbez.jpg',
+      'https://res.cloudinary.com/wyuzj0og/image/upload/v1784982401/e3_ej4tct.jpg',
+    ],
+  },
+  {
     title: 'DEMYSTIFYING BLOCKCHAIN',
     date: 'October 09, 2024',
     time: '10:00 AM – 5:00 PM',

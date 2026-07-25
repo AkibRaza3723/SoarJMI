@@ -18,8 +18,8 @@ const MAGAZINE = {
   tag: 'Annual',
   coverColor: 'linear-gradient(145deg, #4A2C0A 0%, #A0522D 55%, #F5C59A 100%)',
   coverImage: "https://res.cloudinary.com/wyuzj0og/image/upload/v1784875598/magazine_unngc4.jpg",
-  pdfUrl: '#',
-  downloadUrl: '#',
+  pdfUrl: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1784981414/Jahaan-e-Khayaal-compressed_lvc5yi.pdf',
+  downloadUrl: 'https://res.cloudinary.com/wyuzj0og/image/upload/fl_attachment/Jahaan-e-Khayaal-compressed_lvc5yi.pdf',
   pages: '70',
   language: 'English / Urdu',
   publishedBy: 'SoarJMI Publications',
@@ -34,7 +34,7 @@ const MAGAZINE = {
     'Interviews with faculty mentors',
     'Behind-the-scenes of our flagship events',
   ],
-};
+}; 
 
 export default function MagazinePage() {
   /* Feature-section refs */
