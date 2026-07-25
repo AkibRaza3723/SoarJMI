@@ -140,7 +140,9 @@ export default function EventPopupModal({
           <div className="epm-header">
             {/* Event illustration at corner */}
             <div className="epm-corner-art">
-              {IllustrationComponent ? (
+              {event.image ? (
+                <img src={event.image} alt={event.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              ) : IllustrationComponent ? (
                 <IllustrationComponent />
               ) : (
                 <div className="epm-corner-placeholder" />
@@ -191,7 +193,7 @@ export default function EventPopupModal({
           {/* ── Description ── */}
           <div className="epm-description">
             <h3 className="epm-section-title">About This Event</h3>
-            {event.fullDescription.split('\n\n').map((para, i) => (
+            {event.description.split('\n\n').map((para, i) => (
               <p key={i} className="epm-desc-para">{para}</p>
             ))}
           </div>

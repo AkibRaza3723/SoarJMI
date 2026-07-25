@@ -8,130 +8,274 @@ export interface SoarEvent {
   category: 'Cultural' | 'Tech';
   tag: string;                
   description: string;
-  fullDescription: string;    
   image: string | null;       
   gallery: string[];         
 }
 
-export const EVENTS: SoarEvent[] = [
+const rawEvents: Omit<SoarEvent, 'id'>[] = [
   {
-    id: 1,
-    title: 'SoarFest 2025 — Annual Cultural Extravaganza',
-    date: 'Aug 15, 2025',
-    time: '5:00 PM onwards',
-    location: 'JMI Amphitheatre, New Delhi',
-    category: 'Cultural',
-    tag: 'Annual Fest',
+    title: 'CAREER GUIDANCE AND RESUME BUILDING',
+    date: 'July 05, 2026',
+    time: '10:00 AM – 5:00 PM',
+    location: 'FET',
+    category: 'Tech',
+    tag: 'Event',
     description:
-      'The flagship event of SoarJMI! Three days of music, dance, theatre, art installations, and spoken word. 50+ performances by students and invited artists. Food stalls, competitions, and open exhibitions.',
-    fullDescription:
-      'The flagship event of SoarJMI! Three days of music, dance, theatre, art installations, and spoken word. 50+ performances by students and invited artists. Food stalls, competitions, and open exhibitions.\n\nSoarFest is the crown jewel of JMI\'s cultural calendar — a vibrant celebration that unites every corner of campus. From classical Kathak recitals under the stars to electrifying rock performances, from interactive art walls to poetry slams, every moment is crafted to inspire. This year features an extended night market, cultural exhibitions representing all departments, and a grand finale concert.',
-    image: null,
+      'Career Guidance and Resume Building is an insightful session designed to equip students with essential career skills. From mastering resume building and interview techniques to understanding Generative AI and GDPR compliance, the event aims to prepare participants for today\'s competitive professional landscape.',
+    image: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784809702/WhatsApp_Image_2026-07-23_at_17.58.00_ywtpfn.jpg',
     gallery: [
-      'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=500&fit=crop',
-      'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&h=500&fit=crop',
-      'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=800&h=500&fit=crop',
-      'https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=800&h=500&fit=crop',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784809702/WhatsApp_Image_2026-07-23_at_17.58.00_ywtpfn.jpg'
     ],
   },
   {
-    id: 2,
-    title: 'HackSoar 2025 — 48‑Hour Build Marathon',
-    date: 'Sep 6–7, 2025',
-    time: '10:00 AM (Day 1) – 10:00 AM (Day 2)',
-    location: 'CS Block Lab, JMI',
+    title: 'SKLATE',
+    date: 'April 21, 2026',
+    time: '10:00 AM – 5:00 PM',
+    location: 'POLYTECHNIQUE AUDITORIUM',
+    category: 'Tech',
+    tag: 'Event',
+    description:
+      'SKLATE – UI/UX & B-Plan Competition is a dynamic two-round event organized by SOAR JMI that unites innovation, creativity, and strategic thinking. Participants tackle real-world challenges through UI/UX design and business planning, showcasing their problem-solving abilities. The competition begins online on Unstop and culminates in an offline grand finale under the theme "Pitch. Design. Disrupt." SKLATE provides a platform for students to collaborate across domains, refine their ideas, and gain recognition for their talent and innovation.',
+      image:  'https://res.cloudinary.com/crxs8dfo/image/upload/v1784919974/sklate2_zg9p4t.jpg',
+    gallery: [
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784919976/WhatsApp_Image_2026-07-23_at_17.38.49_jyq0nv.jpg',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784919974/sklate2_zg9p4t.jpg',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784920342/Screenshot_2026-07-25_at_12.41.17_AM_zju3vv.png',
+    ],
+  },
+  {
+    title: 'TREASURE HUNT',
+    date: 'February 14, 2026',
+    time: '10:00 AM – 5:00 PM',
+    location: 'FET',
+    category: 'Cultural',
+    tag: 'Event',
+    description:
+      'TREASURE HUNT: The Treasure Hunt was organized with the objective of fostering participant engagement, teamwork, and critical thinking. The event featured a campus-wide challenge across the Faculty of Engineering and Technology (FET) and Gate No. 13, where teams navigated through a series of riddles to locate strategically placed QR codes. Each successfully scanned QR code revealed the next clue, guiding participants to subsequent locations. The event encouraged collaboration, problem-solving, and healthy competition while ensuring an engaging and memorable experience for all attendees. The winning team was awarded a cash prize of ₹1,500 in recognition of their outstanding performance.',
+      image: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784919975/WhatsApp_Image_2026-07-23_at_17.31.47_jushws.jpg',
+    gallery: [
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784920018/WhatsApp_Image_2026-07-23_at_17.31.52_xfrnd1.jpg',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784919975/WhatsApp_Image_2026-07-23_at_17.31.47_jushws.jpg',
+    ],
+  },
+  {
+    title: 'GAMEXPO',
+    date: 'February 19, 2025',
+    time: '10:00 AM – 5:00 PM',
+    location: 'JMI',
+    category: 'Tech',
+    tag: 'Event',
+    description:
+      'The tournament featured five highly popular games—BGMI, FC 25, Valorant, Tekken 8, and Among Us—catering to a wide range of gaming enthusiasts. Each game brought its own unique challenges, testing the strategic thinking, reflexes, and teamwork of participants. The format ensured that there was one ultimate winner per game, leading to a total of five champions, each of whom showcased remarkable skill and determination to claim victory.',
+      image: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784919261/IMG_5212_ig5nby.jpg',
+    gallery: [
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784919261/IMG_5212_ig5nby.jpg',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784919260/IMG_5105_lcaazc.jpg',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784919258/IMG_5099_zsco8h.jpg',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784920019/WhatsApp_Image_2026-07-23_at_17.38.48_zlihxx.jpg',
+    ],
+  },
+  {
+    title: 'UNLOCKING EARNINGS WITH FREELANCING',
+    date: 'November 07, 2024',
+    time: '10:00 AM – 5:00 PM',
+    location: 'JMI',
+    category: 'Tech',
+    tag: 'Event',
+    description:
+      'SoarX JMI organized a workshop aimed at empowering participants to advance their tech careers. The session focused on key areas such as freelancing, open-source contributions, and building a professional portfolio. Industry experts shared valuable insights on unlocking income opportunities through freelancing, making meaningful contributions to open-source projects, and effectively developing a professional portfolio to attract potential clients and employers. Speakers: • Insharah Ayyubi Former GDSC JMI Lead, Freelance Voiceover Artist, Full Stack Developer, and one of the highest student PPO (Pre-Placement Offer) recipients at Optum. • Asif Rahman Freelancer & Front-end Engineering Intern at Pixel Bridge.',
+      image: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784919010/Screenshot_2026-07-25_at_12.19.47_AM_bxgppv.png',
+    gallery: [
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784919010/Screenshot_2026-07-25_at_12.19.47_AM_bxgppv.png',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784919026/Screenshot_2026-07-25_at_12.19.54_AM_j7eo5j.png',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784919034/Screenshot_2026-07-25_at_12.20.24_AM_jm3hwg.png',
+    ],
+  },
+  {
+    title: 'COUNTER ARENA- DEBATING CHAMPIONSHIP',
+    date: 'November 05, 2024',
+    time: '10:00 AM – 5:00 PM',
+    location: 'FET',
+    category: 'Tech',
+    tag: 'Cultural',
+    description:
+      'The Grand Annual Debate Competition, the firstever event by SoarX JMI Cultural Society on 5th November 2024, brought students together to explore critical issues that challenge our viewpoints and inspire deep thinking. This inaugural event by SoarX JMI deserves commendation for successfully fostering intellectual and cultural engagement. The competition provided a valuable platform for participants to showcase eloquence, reasoning, and constructive discourse on subjects impacting our lives and society. T.I.M.E. \'s support aligned with its mission of fostering young minds, while Biryanibaaz’s involvement brought an added element of community warmth and enjoyment. This Grand Annual Debate Competition was a celebration of dialogue, learning, and mutual respect, proving the power of debate to unite people and engage with meaningful issues.',
+      image: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784918885/Screenshot_2026-07-25_at_12.17.35_AM_iboafh.png',
+    gallery: [
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784918885/Screenshot_2026-07-25_at_12.17.35_AM_iboafh.png',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784918885/Screenshot_2026-07-25_at_12.17.51_AM_g06xuz.png',
+    ],
+  },
+  {
+    title: 'AR/VR/MR WORKSHOP',
+    date: 'October 26, 2024',
+    time: '10:00 AM – 5:00 PM',
+    location: 'INDUSTRIAL VISIT',
+    category: 'Tech',
+    tag: 'Visit',
+    description:
+      'Team SoarX JMI attended an immersive AR/VR workshop, gaining hands-on experience with state-of-the-art technology. Members explored real-world applications of augmented and virtual reality, from gaming to healthcare, guided by industry experts.',
+      image: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784918791/Screenshot_2026-07-25_at_12.16.20_AM_bjpckd.png',
+    gallery: [
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784918791/Screenshot_2026-07-25_at_12.16.20_AM_bjpckd.png',
+    ],
+  },
+  {
+    title: 'DEMYSTIFYING BLOCKCHAIN',
+    date: 'October 09, 2024',
+    time: '10:00 AM – 5:00 PM',
+    location: 'FET',
+    category: 'Tech',
+    tag: 'Event',
+    description:
+      'SoarX JMI hosted an online session titled "Demystifying Blockchain: Beyond the Hype," aimed at clarifying the fundamentals of blockchain technology. The session addressed common misconceptions, focusing on the real-world applications and transformative potential of blockchain beyond cryptocurrency. Attendees gained insights into how blockchain is reshaping industries like finance, supply chain, and data security. This interactive session provided a clearer understanding of blockchain’s impact, equipping participants with knowledge to navigate its future developments confidently.',
+      image: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784918711/Screenshot_2026-07-25_at_12.14.59_AM_ahudwa.png',
+    gallery: [
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784918711/Screenshot_2026-07-25_at_12.14.59_AM_ahudwa.png',
+    ],
+  },
+  {
+    title: 'NATIONAL SPACE DAY BHARAT MANDAPAM',
+    date: 'August 25, 2024',
+    time: '10:00 AM – 5:00 PM',
+    location: 'BHARAT MANDAPAM',
+    category: 'Tech',
+    tag: 'Visit',
+    description:
+      'Team SoarX JMI attended National Space Day at Bharat Mandapam, an event celebrating advancements in space exploration and technology. The day featured insightful sessions by prominent scientists and industry leaders, sparking inspiration among participants. Team SoarX JMI members had the opportunity to engage in discussions on the latest developments in space research and the potential for future innovation. The event enriched their knowledge and strengthened their passion for contributing to space and technology fields.',
+      image: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784918279/Screenshot_2026-07-25_at_12.07.36_AM_ejqnha.png',
+    gallery: [
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784918279/Screenshot_2026-07-25_at_12.07.36_AM_ejqnha.png',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784918280/Screenshot_2026-07-25_at_12.07.46_AM_nwxm6r.png',
+    ],
+  },
+  {
+    title: 'DEVX JMI',
+    date: 'June 30, 2024',
+    time: '10:00 AM – 5:00 PM',
+    location: 'FET',
     category: 'Tech',
     tag: 'Hackathon',
     description:
-      'Teams of 2–4 build solutions to real-world problems across tracks: AI/ML, FinTech, HealthTech, and Social Impact. ₹1.5 Lakh prize pool. Open to all JMI students and alumni.',
-    fullDescription:
-      'Teams of 2–4 build solutions to real-world problems across tracks: AI/ML, FinTech, HealthTech, and Social Impact. ₹1.5 Lakh prize pool. Open to all JMI students and alumni.\n\nHackSoar brings together the brightest minds at JMI for 48 intense hours of coding, designing, and pitching. With mentorship from industry professionals, free food and caffeine, and a buzzing atmosphere, it\'s the ultimate test of innovation under pressure. Past winners have gone on to build real startups from their hackathon projects.',
-    image: null,
+      'Jamia Millia Islamia (JMI) held its first intercollege hackathon, DevX JMI, gathering engineering students from across Delhi in a virtual format after a month of preparation beginning on May 27. Following budget finalization on June 5, the Google Developer Student Club (GDSC) partnered with SoarX JMI on June 9 to expand the event\'s reach, launching an interactive website on June 17 and unveiling a creative event poster on June 20. Media support from The Jamia Review on June 28 further boosted visibility, making the hackathon a major success and a testament to teamwork and innovation.',
+      image: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784917980/Screenshot_2026-07-25_at_12.01.40_AM_yy7yux.png',
     gallery: [
-      'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=500&fit=crop',
-      'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&h=500&fit=crop',
-      'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=500&fit=crop',
-      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784917980/Screenshot_2026-07-25_at_12.01.40_AM_yy7yux.png',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784917980/Screenshot_2026-07-25_at_12.01.30_AM_jh0oxi.png',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784917980/Screenshot_2026-07-25_at_12.02.38_AM_orzc5u.png',
     ],
   },
   {
-    id: 3,
-    title: 'Open Mic Night — Voices of JMI',
-    date: 'Aug 30, 2025',
-    time: '7:00 PM – 10:30 PM',
-    location: 'Faculty of Humanities Lawn, JMI',
-    category: 'Cultural',
-    tag: 'Open Mic',
+    title: 'WEBINAR FEST',
+    date: 'June 22, 2024',
+    time: '10:00 AM – 5:00 PM',
+    location: 'FET',
+    category: 'Tech',
+    tag: 'Webinar',
     description:
-      'A raw, unfiltered evening of poetry, stand-up, storytelling, and original music. Every voice matters. No audition required — just sign up and take the mic.',
-    fullDescription:
-      'A raw, unfiltered evening of poetry, stand-up, storytelling, and original music. Every voice matters. No audition required — just sign up and take the mic.\n\nUnder the canopy of fairy lights on the Humanities lawn, Open Mic Night has become JMI\'s most intimate gathering. Whether you\'re performing your first poem or your hundredth joke, the crowd is always warm, always real. Past editions have featured surprise musical collaborations and spoken word pieces that went viral. Come with a story — leave with a community.',
-    image: null,
+      'A three-day webinar fest featured topics chosen by students, including "Roadmap to AR, VR, and MR," "Demystifying the Internet of Robotic Things," and "Quantum Computing 101." Each session was conducted online by certified industry experts, giving students valuable insights into these advanced technologies and providing foundational knowledge through interactive sessions.',
+      image: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784917779/Screenshot_2026-07-24_at_11.59.03_PM_wrpmnh.png',
     gallery: [
-      'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&h=500&fit=crop',
-      'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=500&fit=crop',
-      'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&h=500&fit=crop',
-      'https://images.unsplash.com/photo-1598387993441-a364f854c3e1?w=800&h=500&fit=crop',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784917779/Screenshot_2026-07-24_at_11.59.03_PM_wrpmnh.png',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784917779/Screenshot_2026-07-24_at_11.58.50_PM_bdc0bn.png',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784917779/Screenshot_2026-07-24_at_11.59.11_PM_qx1zy8.png',
     ],
   },
   {
-    id: 4,
-    title: 'AI & Machine Learning Workshop',
-    date: 'Sep 14, 2025',
-    time: '11:00 AM – 4:00 PM',
-    location: 'Seminar Hall 3, Engineering Block, JMI',
+    title: 'ARTIFICIAL INTELLIGENCE AT MICROSOFT',
+    date: 'May 18, 2024',
+    time: '10:00 AM – 5:00 PM',
+    location: 'MICROSOFT OFFICE GURUGRAM',
+    category: 'Tech',
+    tag: 'Visit',
+    description:
+      'The Microsoft Visit on May 18 showcased Microsoft’s latest AI advancements, featuring industry leaders and developers. Speakers discussed new AI tools, ethical AI development, and real-world applications, highlighting how AI is boosting productivity and innovation across various fields.',
+      image: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784917669/Screenshot_2026-07-24_at_11.57.35_PM_t4fqoi.png',
+    gallery: [
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784917669/Screenshot_2026-07-24_at_11.57.35_PM_t4fqoi.png',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784917670/Screenshot_2026-07-24_at_11.56.58_PM_urp83r.png',
+    ],
+  },
+  {
+    title: 'BHASHINI CONNECT',
+    date: 'April 30, 2024',
+    time: '10:00 AM – 5:00 PM',
+    location: 'DAIC, BHIM AUDITORIUM',
+    category: 'Tech',
+    tag: 'Event',
+    description:
+      'The Bhashini Velocity Challenge Live Pitching Event on April 30, 2024, brought together industry experts, government officials, and investors to explore advancements in language technology. The event showcased innovative solutions, highlighting the importance of multilingual tech in promoting accessibility and inclusivity across digital platforms.',
+      image: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784917553/Screenshot_2026-07-24_at_11.55.35_PM_itwwjj.png',
+    gallery: [
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784917553/Screenshot_2026-07-24_at_11.55.35_PM_itwwjj.png',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784917553/Screenshot_2026-07-24_at_11.55.41_PM_u4c6rg.png',
+    ],
+  },
+  {
+    title: 'MASTER CLASS ON DSA AND SYSTEM DESIGN',
+    date: 'April 23, 2024',
+    time: '10:00 AM – 5:00 PM',
+    location: 'FET AUDITORIUM',
     category: 'Tech',
     tag: 'Workshop',
     description:
-      'Hands-on workshop covering Python ML fundamentals, neural networks, and building your first model. Led by Dr. Fatima Ansari. Bring your laptop. Certificates provided.',
-    fullDescription:
-      'Hands-on workshop covering Python ML fundamentals, neural networks, and building your first model. Led by Dr. Fatima Ansari. Bring your laptop. Certificates provided.\n\nThis workshop takes you from zero to trained model in one day. Starting with data preprocessing and feature engineering, moving through neural network architectures, and culminating in a live demo where you deploy your model. Dr. Fatima Ansari, who leads JMI\'s AI research lab, will be joined by two industry engineers from Google and Microsoft for Q&A sessions.',
-    image: null,
+      'Partnering again with Coding Blocks, SoarX JMI organized a comprehensive workshop at JMI Auditorium. Esteemed speakers Mosina Ashraf (Data Structures and Algorithms) and Deepak Kumar (System Design) led the session, igniting enthusiasm among attendees and encouraging them to pursue essential skills in programming and system architecture. This event left a lasting impression on participants, equipping them with both technical knowledge and inspiration to deepen their understanding of these key concepts.',
+      image: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784810081/Screenshot_2026-07-23_at_6.04.23_PM_vnatut.png',
     gallery: [
-      'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=500&fit=crop',
-      'https://images.unsplash.com/photo-1515879218367-8466d910auj7?w=800&h=500&fit=crop',
-      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=500&fit=crop',
-      'https://images.unsplash.com/photo-1531545514256-b1400bc00f31?w=800&h=500&fit=crop',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784810081/Screenshot_2026-07-23_at_6.04.23_PM_vnatut.png',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784810088/bharat_mandapam_cpbbv3.jpg',
     ],
   },
   {
-    id: 5,
-    title: 'Pixel & Lens — Photography Exhibition',
-    date: 'Oct 3–5, 2025',
-    time: '10:00 AM – 7:00 PM daily',
-    location: 'Fine Arts Gallery, JMI',
+    title: 'CARRIER MAKEUP MEETUP',
+    date: 'April 13, 2024',
+    time: '11:00 AM – 4:00 PM',
+    location: 'Microsoft Office, Gurugram',
     category: 'Cultural',
-    tag: 'Exhibition',
+    tag: 'Meetup',
     description:
-      'Curated exhibition of student photography exploring the theme "Margins". 60 prints. Interactive digital installations. Panel discussion with photojournalists on Day 2.',
-    fullDescription:
-      'Curated exhibition of student photography exploring the theme "Margins". 60 prints. Interactive digital installations. Panel discussion with photojournalists on Day 2.\n\nPixel & Lens transforms JMI\'s Fine Arts Gallery into a visual narrative of life at the margins — both literal and metaphorical. This year\'s exhibition features 60 large-format prints selected from over 400 submissions, accompanied by interactive digital installations using projection mapping. The Day 2 panel brings together award-winning photojournalists to discuss visual storytelling in the age of social media.',
-    image: null,
+      'This second Microsoft visit provided 40+ students with a unique opportunity to explore career paths in the tech industry. The session, hosted by Mr. Hitesh Bhayana, a Cloud Solution Architect at Microsoft, highlighted critical future-ready skills and delved into the role of a solution architect. The meetup offered valuable career advice and insights into how students could strategically build their skills to align with industry demands.',
+    image: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784809921/Screenshot_2026-07-23_at_5.59.26_PM_mgc8ir.png',
     gallery: [
-      'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=800&h=500&fit=crop',
-      'https://images.unsplash.com/photo-1554080353-a576cf803bda?w=800&h=500&fit=crop',
-      'https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?w=800&h=500&fit=crop',
-      'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=800&h=500&fit=crop',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784809921/Screenshot_2026-07-23_at_5.59.26_PM_mgc8ir.png',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784809922/Screenshot_2026-07-23_at_5.59.32_PM_ndtrtd.png',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784809922/Screenshot_2026-07-23_at_5.59.39_PM_zpbqec.png',
     ],
   },
   {
-    id: 6,
-    title: 'Web3 & Blockchain Bootcamp',
-    date: 'Oct 18–19, 2025',
-    time: '10:00 AM – 5:00 PM',
-    location: 'Innovation Lab, JMI',
+    title: 'CODE WITHOUT BARRIERS MICROSOFT VISIT',
+    date: 'March 30, 2024',
+    time: '10:00 AM – 7:00 PM',
+    location: 'MICROSOFT OFFICE GURUGRAM', 
     category: 'Tech',
-    tag: 'Bootcamp',
+    tag: 'Visit',
     description:
-      'Two-day intensive on blockchain fundamentals, smart contract development with Solidity, and building dApps. Guest sessions from industry engineers. Limited seats — apply early.',
-    fullDescription:
-      'Two-day intensive on blockchain fundamentals, smart contract development with Solidity, and building dApps. Guest sessions from industry engineers. Limited seats — apply early.\n\nGo from "what is a blockchain?" to deploying your own smart contract in two days. This bootcamp covers consensus mechanisms, Ethereum architecture, Solidity development patterns, and frontend integration with Ethers.js. Each participant builds and deploys a working dApp by the end of Day 2. Limited to 50 seats to ensure hands-on mentorship for every attendee.',
-    image: null,
+      'Just ten days after its formation, SoarX JMI organized its first field visit to Microsoft, called "Code Without Barriers." This outing generated significant enthusiasm, with a large number of students eager to join SoarX JMI in this new endeavor. The visit underscored the society\'s commitment to opening doors to industry exposure and creating meaningful learning experiences for members, marking a critical first step in SoarX JMI\'s outreach efforts.',
+    image: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784809410/Screenshot_2026-07-23_at_5.53.03_PM_k3dpzn.png',
     gallery: [
-      'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=500&fit=crop',
-      'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=500&fit=crop',
-      'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&h=500&fit=crop',
-      'https://images.unsplash.com/photo-1591115765373-5b3ee6806810?w=800&h=500&fit=crop',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784809410/Screenshot_2026-07-23_at_5.53.03_PM_k3dpzn.png',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784809411/Screenshot_2026-07-23_at_5.53.09_PM_neu4p7.png',
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784809533/microsoft_s3qfwk.jpg',
+    
+    ],
+  },
+  {
+    title: 'SOARXJMI FOUNDATION',
+    date: 'March 18, 2024',
+    time: '10:00 AM – 5:00 PM',
+    location: 'JMI',
+    category: 'Tech',
+    tag: 'Foundation',
+    description:
+    " Shortly after SoarX JMI's inception, the team launched its first recruitment drive to build a dedicated group of tech enthusiasts. The President, alongside mentors, created an application form to attract candidates, receiving an impressive 75+ responses. The applicants underwent industry-level interviews that closely mirrored the real-world hiring process, allowing them to experience a professional setting while being evaluated on technical and problem-solving skills. This rigorous process resulted in selecting the most promising and committed individuals for the Tech Team, a cornerstone of SoarX JMI's journey.",
+    image: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784809702/WhatsApp_Image_2026-07-23_at_17.58.00_ywtpfn.jpg',
+    gallery: [
+      'https://res.cloudinary.com/crxs8dfo/image/upload/v1784809702/WhatsApp_Image_2026-07-23_at_17.58.00_ywtpfn.jpg', 
     ],
   },
 ];
+
+export const EVENTS: SoarEvent[] = rawEvents.map((event, index) => ({
+  ...event,
+  id: index + 1,
+}));

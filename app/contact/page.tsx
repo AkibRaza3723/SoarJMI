@@ -12,9 +12,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 const INFO_ITEMS = [
   { icon: '📍', label: 'Address', value: 'Jamia Millia Islamia, Maulana Mohammed Ali Jauhar Marg, New Delhi – 110025' },
-  { icon: '🌐', label: 'Website', value: 'www.soarjmi.in' },
+  { icon: '🌐', label: 'Website', value: 'https://soar-jmi-nine.vercel.app/' },
   { icon: '📮', label: 'General Enquiries', value: 'soarxjmichapter@gmail.com' },
-  { icon: '🕐', label: 'Office Hours', value: 'Monday to Friday · 10:00 AM – 6:00 PM IST' },
+  { icon: '🕐', label: 'Office Hours', value: 'Monday to Friday · 10:00 AM – 9:00 PM IST' },
 ];
 
 

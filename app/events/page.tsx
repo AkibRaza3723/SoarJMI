@@ -239,7 +239,11 @@ function TLCard({ event, side, onClick }: { event: SoarEvent; side: 'left' | 'ri
       aria-label={`View details for ${event.title}`}
     >
       <div className="tlc__art">
-        <IllustrationComponent />
+        {event.image ? (
+          <img src={event.image} alt={event.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        ) : (
+          <IllustrationComponent />
+        )}
         <span className="tlc__emoji">{event.category === 'Cultural' ? '🎭' : '⚡'}</span>
         <span className="tlc__cat-badge">{event.category}</span>
       </div>

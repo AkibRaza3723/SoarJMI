@@ -9,7 +9,7 @@ export default function MembersPage() {
     <main>
       <Navbar />
 
-     {/* to add some heads here.*/}
+      {/* to add some heads here.*/}
 
       {/* Team cards */}
       <TeamSection />

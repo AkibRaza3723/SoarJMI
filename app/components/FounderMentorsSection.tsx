@@ -96,7 +96,7 @@ function FounderCard() {
       <div className="founder-socials">
         {FOUNDER.socials.map((s: any) => {
           const name = typeof s === 'string' ? s : s?.name || 'LinkedIn';
-          const url = typeof s === 'string' ? 'https://www.linkedin.com/' : s?.url || 'https://www.linkedin.com/';
+          const url = typeof s === 'string' ? 'https://www.linkedin.com/in/ali-nasir-ba3640230/' : s?.url || 'https://www.linkedin.com/';
           const isExternal = url && url !== '#';
           return (
             <a
