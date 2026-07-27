@@ -14,7 +14,7 @@ const FOUNDER = {
   year: '2020',
   dept: '',
   vision:
-    'When I looked around, I saw a clear divide: societies were either strictly technical or purely cultural. But creativity doesn\'t exist in a silo, and neither does innovation. I wanted to build a platform where logic and art coexist—where you can write code by day and take the stage by night. SOAR was born out of that vision: a space for young innovators to bridge the gap between technology and culture, proving that you don\'t have to choose between the two.',
+    'When I looked around, I saw a clear divide: societies were either strictly technical or purely cultural. But creativity doesn\'t exist in a silo, and neither does innovation. I wanted to build a platform where logic and art coexist—where you can write code by day and take the stage by night. Soar was born out of that vision: a space for young innovators to bridge the gap between technology and culture, proving that you don\'t have to choose between the two.',
 
   socials: ['LinkedIn'],
 };
@@ -27,7 +27,7 @@ const MENTORS = [
     dept: 'Department of Applied Science, JMI',
     message:
       'I believe in the power of collaboration and welcome new professional connections. Whether you are interested in technology, research, career growth, or startup ventures, I am here to lend my expertise and support your aspirations.',
-    // expertise: ['Theatre', 'Literary Arts', 'Cultural Policy'],
+    isGuest: false,
   },
   {
     name: 'Dr Haroon Anwar',
@@ -36,7 +36,16 @@ const MENTORS = [
     dept: 'Department of Applied Science, JMI',
     message:
       '16+ years of vibrant Industry and Academia Experience (8+ Corporate experience in Channel Sales, Business Development, Franchise Development, Corporate Sales and 8+ years of Teaching Experience in Entrepreneurship, Financial Management and Marketing Management.) PhD, UGC NET and MBA (Marketing and Finance)',
-    // expertise: ['AI/ML', 'Web Dev', 'Open Source'],
+    isGuest: false,
+  },
+  {
+    name: 'Zehra Maam',
+    role: 'Guest Mentor',
+    avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1785172026/zehramaam_oi7jmn.jpg',
+    dept: 'Department of Applied Science, JMI',
+    message:
+      'SoarJMI is a wonderful example of what students can achieve through passion, collaboration, and initiative. It is inspiring to see young minds creating opportunities for learning, leadership, and innovation beyond the classroom. I am proud to witness their dedication and growth. I hope SOAR continues to empower students to dream bigger, think deeper, and create meaningful impact. Wishing Ali and the entire team continued success in all their future endeavors.',
+    isGuest: true,
   },
 ];
 
@@ -306,7 +315,7 @@ function FounderCard() {
 }
 
 /* ─── Mentor Card ─── */
-function MentorCard({ mentor, index }: { mentor: typeof MENTORS[0]; index: number }) {
+function MentorCard({ mentor, index }: { mentor: (typeof MENTORS)[0]; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -328,17 +337,19 @@ function MentorCard({ mentor, index }: { mentor: typeof MENTORS[0]; index: numbe
   }, [index]);
 
   return (
-    <div ref={ref} className="mentor-card">
+    <div ref={ref} className={`mentor-card${mentor.isGuest ? ' guest-card' : ''}`}>
       <div className="mentor-top">
-        <div className="mentor-avatar">
-          {mentor.avatar.startsWith('http') || mentor.avatar.startsWith('/') ? (
+        <div className={`mentor-avatar${mentor.isGuest ? ' guest-avatar' : ''}`}>
+          {mentor.avatar && (mentor.avatar.startsWith('http') || mentor.avatar.startsWith('/')) ? (
             <img src={mentor.avatar} alt={mentor.name} className="avatar-img" />
           ) : (
-            mentor.avatar
+            <span className="avatar-placeholder">{mentor.isGuest ? '✦' : mentor.avatar || '?'}</span>
           )}
         </div>
         <div className="mentor-info">
-          <span className="mentor-badge">✦ Mentor</span>
+          <span className={`mentor-badge${mentor.isGuest ? ' guest-badge' : ''}`}>
+            {mentor.isGuest ? '★ Guest' : '✦ Mentor'}
+          </span>
           <h4 className="mentor-name">{mentor.name}</h4>
           <p className="mentor-role">{mentor.role}</p>
           <p className="mentor-dept">{mentor.dept}</p>
@@ -383,6 +394,16 @@ function MentorCard({ mentor, index }: { mentor: typeof MENTORS[0]; index: numbe
           box-shadow: 0 16px 40px var(--glow);
         }
 
+        /* Guest card — same as regular */
+        .guest-card {
+          border: 1px solid var(--border);
+        }
+
+        .guest-card::before {
+          background: var(--gradient-accent);
+          opacity: 0.6;
+        }
+
         .mentor-top {
           display: flex;
           align-items: center;
@@ -402,6 +423,17 @@ function MentorCard({ mentor, index }: { mentor: typeof MENTORS[0]; index: numbe
           flex-shrink: 0;
           transition: transform 0.3s ease;
           overflow: hidden;
+        }
+
+        .guest-avatar {
+          border: 1px solid var(--border);
+          background: var(--bg-secondary);
+        }
+
+        .avatar-placeholder {
+          font-size: 1.6rem;
+          color: var(--accent-2);
+          opacity: 0.7;
         }
 
         :global(.avatar-img) {
@@ -427,6 +459,14 @@ function MentorCard({ mentor, index }: { mentor: typeof MENTORS[0]; index: numbe
           text-transform: uppercase;
           letter-spacing: 0.1em;
           color: var(--accent-2);
+        }
+
+        .guest-badge {
+          color: var(--accent-1);
+          background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
 
         .mentor-name {
@@ -553,23 +593,17 @@ export default function FounderMentorsSection() {
           margin: 0 auto;
         }
 
-        /* ── Equal 3-column grid ── */
+        /* ── Equal 2×2 grid — everyone gets equal space ── */
         .leadership-layout {
-          max-width: 1200px;
+          max-width: 1000px;
           margin: 0 auto;
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(2, 1fr);
           gap: 28px;
           align-items: stretch;
         }
 
-        @media (max-width: 960px) {
-          .leadership-layout {
-            grid-template-columns: repeat(2, 1fr);
-          }
-        }
-
-        @media (max-width: 600px) {
+        @media (max-width: 700px) {
           .leadership-layout {
             grid-template-columns: 1fr;
           }

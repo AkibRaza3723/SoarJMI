@@ -1,11 +1,5 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
-
 interface TeamMember {
   name: string;
   role: string;
@@ -32,7 +26,7 @@ const TEAM: TeamMember[] = [
     name: 'Faizan Sheikh',
     role: 'Vice President',
     avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1784204713/Faizan_or6ar8.jpg',
-    quote: 'Let’s not be strangers, let’s be family.',
+    quote: 'Let\'s not be strangers, let\'s be family.',
   },
   {
     name: 'Mohammad Ayaan',
@@ -48,48 +42,80 @@ const TEAM: TeamMember[] = [
     quote: 'Success is measured by what you achieve; character is measured by how you achieve it.',
     social: 'https://www.linkedin.com/in/muhammad-sufyan-nehal-95b29a381/',
   },
+];
+
+const HEADS: TeamMember[] = [
   {
     name: 'Iqra Akhtar',
-    role: 'HR head',
+    role: 'HR Head',
     avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1784204529/iqra_lkafer.jpg',
-    quote: 'Be a good person first, the rest will fall into place.',
+    quote: 'Be a good person',
+  },
+  {
+    name: 'Faiz Khan',
+    role: 'Content Head',
+    avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1785173327/20260717_180457_-_Faiz_Khan_j2oufc.jpg',
+    quote: 'Words that matter.',
+  },
+  {
+    name: 'Sidra Arshad',
+    role: 'Graphics Head',
+    avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1785173397/IMG_20260713_095902_-_Sidra_Arshad_qovp8v.jpg',
+    quote: 'Designing the future.',
+  },
+  {
+    name: 'Amzat Siddiqui',
+    role: 'Research Head',
+    avatar: 'RH',
+    quote: 'Discovering knowledge.',
+  },
+  {
+    name: 'Sayma Nasim',
+    role: 'Tech Head',
+    avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1785173830/sayma_v7nj9e.jpg',
+    quote: 'Building the foundation.',
+  },
+  {
+    name: 'Akib Raza',
+    role: 'Tech Head',
+    avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1785173135/akibraza_evdrbt.jpg',
+    quote: 'Destroying the foundation.',
+  },
+  {
+    name: 'Ibarat',
+    role: 'Operation Head',
+    avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1785173720/ibarat_vyy4zk.jpg',
+    quote: 'Ensuring smooth execution.',
+  },
+  {
+    name: 'Faheem Arif',
+    role: 'SMM Head',
+    avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1785174188/faheem_vnwlxe.jpg',
+    quote: 'Connecting with the world.',
+  },
+  {
+    name: 'Nischay',
+    role: 'PnV Head',
+    avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1785173270/WhatsApp_Image_2026-07-17_at_19.45.23_-_GRIM_obi7ia.jpg',
+    quote: 'Capturing moments.',
   },
 ];
 
-function MemberCard({ member, index }: { member: TeamMember; index: number }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = cardRef.current;
-    if (!el) return;
-
-    gsap.fromTo(
-      el,
-      { opacity: 0, y: 60, scale: 0.92 },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.7,
-        delay: index * 0.12,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 85%',
-          toggleActions: 'play none none reverse',
-        },
-      }
-    );
-  }, [index]);
-
+function MemberCard({ member, index, variant }: { member: TeamMember; index: number; variant: 'eb' | 'head' }) {
   const handleClick = () => {
     if (member.social) {
       window.open(member.social, '_blank');
     }
-  }
+  };
+
+  const isEB = variant === 'eb';
 
   return (
-    <div ref={cardRef} className="member-card glass-card" onClick={handleClick}>
+    <div
+      className={`member-card glass-card ${variant}-card`}
+      onClick={handleClick}
+      style={{ animationDelay: `${index * 0.1}s` }}
+    >
       <div className="card-glow" />
       <div className="member-avatar">
         {member.avatar.startsWith('http') || member.avatar.startsWith('/') ? (
@@ -110,14 +136,36 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
       <style jsx>{`
         .member-card {
           position: relative;
-          padding: 36px 28px;
+          padding: ${isEB ? '36px 28px' : '26px 20px'};
           display: flex;
           flex-direction: column;
           align-items: center;
           text-align: center;
-          gap: 10px;
+          gap: ${isEB ? '10px' : '8px'};
           overflow: hidden;
           cursor: default;
+          animation: cardFadeIn 0.6s ease-out both;
+        }
+
+        @keyframes cardFadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(40px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .eb-card {
+          width: 280px;
+          height: 380px;
+        }
+
+        .head-card {
+          width: 210px;
+          height: 285px;
         }
 
         .card-glow {
@@ -125,8 +173,8 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
           top: -50px;
           left: 50%;
           transform: translateX(-50%);
-          width: 120px;
-          height: 120px;
+          width: ${isEB ? '120px' : '90px'};
+          height: ${isEB ? '120px' : '90px'};
           background: var(--accent-1);
           border-radius: 50%;
           filter: blur(50px);
@@ -139,9 +187,9 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
         }
 
         .member-avatar {
-          font-size: 4rem;
-          width: 90px;
-          height: 90px;
+          font-size: ${isEB ? '4rem' : '2.5rem'};
+          width: ${isEB ? '90px' : '64px'};
+          height: ${isEB ? '90px' : '64px'};
           border-radius: 50%;
           background: var(--bg-secondary);
           border: 2px solid var(--border);
@@ -164,8 +212,8 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
         }
 
         .member-role {
-          margin-top: 8px;
-          font-size: 0.75rem;
+          margin-top: ${isEB ? '8px' : '4px'};
+          font-size: ${isEB ? '0.75rem' : '0.65rem'};
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.12em;
@@ -177,36 +225,36 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
         }
 
         .member-name {
-          font-size: 1.2rem;
+          font-size: ${isEB ? '1.2rem' : '0.95rem'};
           font-weight: 800;
           color: var(--text-primary);
           letter-spacing: -0.02em;
         }
 
         .member-quote {
-          font-size: 0.9rem;
+          font-size: ${isEB ? '0.9rem' : '0.75rem'};
           color: var(--text-muted);
           line-height: 1.6;
           font-style: italic;
-          max-width: 240px;
+          max-width: ${isEB ? '240px' : '180px'};
         }
 
         .card-divider {
-          width: 40px;
+          width: ${isEB ? '40px' : '30px'};
           height: 2px;
           background: var(--gradient-accent);
           border-radius: 4px;
-          margin: 6px auto;
+          margin: auto auto 6px auto;
         }
 
         .card-footer {
           display: flex;
-          gap: 8px;
+          gap: ${isEB ? '8px' : '6px'};
         }
 
         .card-tag {
-          font-size: 0.7rem;
-          padding: 3px 10px;
+          font-size: ${isEB ? '0.7rem' : '0.6rem'};
+          padding: ${isEB ? '3px 10px' : '2px 8px'};
           border-radius: 50px;
           background: var(--bg-secondary);
           border: 1px solid var(--border);
@@ -219,35 +267,13 @@ function MemberCard({ member, index }: { member: TeamMember; index: number }) {
 }
 
 export default function TeamSection() {
-  const headingRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!headingRef.current) return;
-
-    gsap.fromTo(
-      headingRef.current,
-      { opacity: 0, y: 40 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: headingRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none reverse',
-        },
-      }
-    );
-  }, []);
-
   return (
     <section id="team" className="team-section">
-      <div className="team-container">
-        <div ref={headingRef} className="section-header">
+      <div className="team-container eb-container">
+        <div className="section-header">
           <p className="section-eyebrow">The People Behind the Magic</p>
           <h2 className="section-title team-title">
-            Meet Our <span className="accent-gradient">Leadership</span>
+            Meet Our <span className="accent-gradient">Executive Members</span>
           </h2>
           <p className="section-desc">
             Passionate individuals driving SoarJMI's vision every single day.
@@ -256,7 +282,25 @@ export default function TeamSection() {
 
         <div className="team-grid">
           {TEAM.map((member, i) => (
-            <MemberCard key={member.name} member={member} index={i} />
+            <MemberCard key={member.name} member={member} index={i} variant="eb" />
+          ))}
+        </div>
+      </div>
+
+      <div className="team-container heads-container">
+        <div className="section-header" style={{ marginTop: '100px' }}>
+          <p className="section-eyebrow">Leading the Teams</p>
+          <h2 className="section-title team-title">
+            Meet Our <span className="accent-gradient">Leadership</span>
+          </h2>
+          <p className="section-desc">
+            The creative and operational force behind our success.
+          </p>
+        </div>
+
+        <div className="team-grid">
+          {HEADS.map((member, i) => (
+            <MemberCard key={`${member.role}-${i}`} member={member} index={i} variant="head" />
           ))}
         </div>
       </div>
@@ -281,8 +325,15 @@ export default function TeamSection() {
         }
 
         .team-container {
-          max-width: 1100px;
           margin: 0 auto;
+        }
+        
+        .eb-container {
+          max-width: 1100px;
+        }
+
+        .heads-container {
+          max-width: 1250px;
         }
 
         .section-header {
