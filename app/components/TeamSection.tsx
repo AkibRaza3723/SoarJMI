@@ -64,9 +64,9 @@ const HEADS: TeamMember[] = [
     quote: 'Designing the future.',
   },
   {
-    name: 'Amzat Siddiqui',
+    name: 'Azmat Siddiqui',
     role: 'Research Head',
-    avatar: 'RH',
+    avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1785176282/azmat_l4ftek.png',
     quote: 'Discovering knowledge.',
   },
   {
@@ -82,8 +82,8 @@ const HEADS: TeamMember[] = [
     quote: 'Destroying the foundation.',
   },
   {
-    name: 'Ibarat',
-    role: 'Operation Head',
+    name: 'Ibarat Ali',
+    role: 'Operations Head',
     avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1785173720/ibarat_vyy4zk.jpg',
     quote: 'Ensuring smooth execution.',
   },
@@ -94,10 +94,16 @@ const HEADS: TeamMember[] = [
     quote: 'Connecting with the world.',
   },
   {
-    name: 'Nischay',
-    role: 'PnV Head',
+    name: 'Nischay Kumar',
+    role: 'P&V Head',
     avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1785173270/WhatsApp_Image_2026-07-17_at_19.45.23_-_GRIM_obi7ia.jpg',
     quote: 'Capturing moments.',
+  },
+  {
+    name: 'Arshad Ali',
+    role: 'Sponsorship Head.',
+    avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1785176668/arshad_h6sk1z.jpg',
+    quote: 'Connecting with the world.',
   },
 ];
 

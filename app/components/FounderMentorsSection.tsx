@@ -39,7 +39,7 @@ const MENTORS = [
     isGuest: false,
   },
   {
-    name: 'Zehra Maam',
+    name: 'Dr S. Zehra',
     role: 'Guest Mentor',
     avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1785172026/zehramaam_oi7jmn.jpg',
     dept: 'Department of Applied Science, JMI',
