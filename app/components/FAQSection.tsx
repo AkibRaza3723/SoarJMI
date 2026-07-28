@@ -9,7 +9,7 @@ const FAQS = [
     a: 'Any student currently enrolled at Jamia Millia Islamia can join SoarJMI — regardless of their department, year, or background. We welcome all skill levels and interests.',
   },
   {
-    q: 'Are there membership fees?',
+    q: 'Is there any membership fee?',
     a: 'Nope! Joining SoarJMI is completely free. However, some events and workshops may have a nominal registration fee to cover logistics.',
   },
   {

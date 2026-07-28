@@ -4,8 +4,17 @@ import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 
-// Using the same generated image 5 times as requested
-const images = Array(5).fill('https://res.cloudinary.com/wyuzj0og/image/upload/v1784901183/team_wmr4la.jpg');
+const galleryImages = [
+  'https://res.cloudinary.com/wyuzj0og/image/upload/v1784901183/team_wmr4la.jpg',
+  'https://res.cloudinary.com/wyuzj0og/image/upload/v1785250735/tugofwar_iw5fyy.jpg',
+  'https://res.cloudinary.com/crxs8dfo/image/upload/v1784919975/WhatsApp_Image_2026-07-23_at_17.31.47_jushws.jpg',
+  'https://res.cloudinary.com/wyuzj0og/image/upload/v1785251541/oldmember31_mam149.jpg',
+  'https://res.cloudinary.com/wyuzj0og/image/upload/v1785251577/oldmember32_fmvhay.jpg',
+  'https://res.cloudinary.com/crxs8dfo/image/upload/v1784918280/Screenshot_2026-07-25_at_12.07.46_AM_nwxm6r.png',
+  'https://res.cloudinary.com/crxs8dfo/image/upload/v1784918791/Screenshot_2026-07-25_at_12.16.20_AM_bjpckd.png',
+  'https://res.cloudinary.com/wyuzj0og/image/upload/v1785253240/EB42_biwmep.jpg'
+];
+const images = Array.from({ length: 8 }, (_, i) => galleryImages[i % galleryImages.length]);
 
 export default function MovingGallery() {
   const containerRef = useRef<HTMLDivElement>(null);

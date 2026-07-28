@@ -78,12 +78,12 @@ export default function HeroSection() {
 
   // Society Images & Labels
   const baseBottomImages = [
-    { src: '/images/society_collaboration.png', label: theme === 'cultural' ? 'Workshop Brainstorm' : 'Project Ideation' },
-    { src: '/images/society_keynote.png', label: theme === 'cultural' ? 'Alumni Panel' : 'Guest Lectures' },
-    { src: '/images/society_tech.png', label: theme === 'cultural' ? 'Media Design' : 'Web Dev Workshop' },
-    { src: '/images/society_cultural.png', label: theme === 'cultural' ? 'Poetry Recitation' : 'UI/UX Session' },
-    { src: '/images/society_collaboration.png', label: theme === 'cultural' ? 'Organizing Team' : 'Management Group' },
-    { src: '/images/society_keynote.png', label: theme === 'cultural' ? 'Award Ceremony' : 'Demo Day' },
+    { src: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784919976/WhatsApp_Image_2026-07-23_at_17.38.49_jyq0nv.jpg', label: 'Sklate' },
+    { src: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784919974/sklate2_zg9p4t.jpg', label: 'UI-UX B-plan' },
+    { src: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784919261/IMG_5212_ig5nby.jpg', label: 'GameXPO' },
+    { src: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784920019/WhatsApp_Image_2026-07-23_at_17.38.48_zlihxx.jpg', label: 'Coding comp' },
+    { src: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784919034/Screenshot_2026-07-25_at_12.20.24_AM_jm3hwg.png', label: 'Unlocking Earnings' },
+    { src: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784810081/Screenshot_2026-07-23_at_6.04.23_PM_vnatut.png', label: 'DSA Lecture' },
   ];
 
   const bottomImages = [...baseBottomImages, ...baseBottomImages, ...baseBottomImages];
@@ -139,15 +139,15 @@ export default function HeroSection() {
             <a href="/events" className="btn-primary">
               {theme === 'cultural' ? '🎪 See Our Events' : '🚀 Explore Projects'}
             </a>
-            <a href="#team" className="btn-secondary">Meet the Team</a>
+            <a href="/members" className="btn-secondary">Meet the Crew</a>
           </motion.div>
 
           {/* Stats row */}
           <motion.div variants={itemVariants} className="hero-stats">
             {[
-              { value: '40+', label: 'Members' },
-              { value: '15+', label: 'Events' },
-              { value: '4', label: 'Years Strong' },
+              { value: '50+', label: 'Members' },
+              { value: '25+', label: 'Events' },
+              { value: '2+', label: 'Years Strong' },
             ].map((stat) => (
               <div key={stat.label} className="stat-item">
                 <span className="stat-value accent-gradient">{stat.value}</span>
