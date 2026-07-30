@@ -24,13 +24,6 @@ const TEAM: TeamMember[] = [
     social: 'https://www.linkedin.com/in/mohd-faizan-005942343/',
   },
   {
-    name: 'Nijam Rizvi',
-    role: 'Vice President',
-    avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1784903880/Screenshot_2026-07-24_at_8.06.06_PM_tymppu.png',
-    quote: 'And miles to go before I sleep.',
-    social: 'https://www.linkedin.com/in/nijam-rizvi-505184201/',
-  },
-  {
     name: 'Mohammad Ayaan',
     role: 'General Secretary',
     avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1784204076/ayaan_alhdtt.jpg',
@@ -337,7 +330,7 @@ export default function TeamSection() {
         }
         
         .eb-container {
-          max-width: 1100px;
+          max-width: 1250px;
         }
 
         .heads-container {
