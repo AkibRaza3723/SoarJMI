@@ -5,7 +5,8 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Navbar from '../components/Navbar';
 import EventPopupModal from '../components/EventPopupModal';
-import { EVENTS, SoarEvent } from '../data/events';
+import RegistrationModal from '../components/RegistrationModal';
+import { EVENTS, UPCOMING_EVENT, SoarEvent } from '../data/events';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -512,9 +513,13 @@ export default function TrialEventsPage() {
   const progressRef = useRef<SVGPathElement>(null);
   const particlesRef = useRef<HTMLDivElement>(null);
 
-  // Popup state
+  // Event popup modal state
   const [selectedEvent, setSelectedEvent] = useState<SoarEvent | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  // Registration modal state (upcoming event)
+  const [isRegModalOpen, setIsRegModalOpen] = useState(false);
+  const latestEvent = UPCOMING_EVENT; // Uses the dedicated upcoming event object
 
   const handleCardClick = useCallback((event: SoarEvent) => {
     setSelectedEvent(event);
@@ -675,7 +680,7 @@ export default function TrialEventsPage() {
         {/* Hero */}
         <header className="te-header">
           <div className="te-header-glow" aria-hidden="true" />
-          <p className="te-eyebrow">SoarJMI · 2025 · Trial Layout</p>
+          <p className="te-eyebrow">SoarJMI · Events</p>
           <h1 className="te-title">
             Our <span className="accent-gradient">Events</span>
           </h1>
@@ -687,6 +692,50 @@ export default function TrialEventsPage() {
             <small>scroll</small>
           </div>
         </header>
+
+        {/* ── Latest Event — Registration Card ── */}
+        {latestEvent && (
+          <section className="te-reg-section" aria-label="Register for latest event">
+            <div className="te-reg-card">
+              <div className="te-reg-card__orb te-reg-card__orb--1" aria-hidden="true" />
+              <div className="te-reg-card__orb te-reg-card__orb--2" aria-hidden="true" />
+              <div className="te-reg-card__info">
+                <div className="te-reg-card__badges">
+                  <span className="te-reg-card__live">
+                    <span className="te-reg-card__live-dot" aria-hidden="true" />
+                    Registrations Open
+                  </span>
+                  <span className="te-reg-card__cat">
+                    {latestEvent.category === 'Tech' ? '⚡' : '🎭'} {latestEvent.category}
+                  </span>
+                </div>
+                <h2 className="te-reg-card__title">{latestEvent.title}</h2>
+                <ul className="te-reg-card__meta">
+                  <li>📅 {latestEvent.date}</li>
+                  <li>🕐 {latestEvent.time}</li>
+                  <li>📍 {latestEvent.location}</li>
+                </ul>
+                <p className="te-reg-card__desc">
+                  {latestEvent.description.slice(0, 160)}&hellip;
+                </p>
+              </div>
+              <div className="te-reg-card__cta">
+                <p className="te-reg-card__cta-label">Secure your spot today</p>
+                <button
+                  className="te-reg-card__btn"
+                  onClick={() => setIsRegModalOpen(true)}
+                  aria-label={`Register for ${latestEvent.title}`}
+                  id="register-now-btn"
+                  type="button"
+                >
+                  Register Now
+                  <span className="te-reg-card__btn-icon" aria-hidden="true">✦</span>
+                </button>
+                <p className="te-reg-card__cta-sub">Free · Open to all students</p>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Timeline */}
         <div className="te-timeline" id="te-timeline">
@@ -751,6 +800,8 @@ export default function TrialEventsPage() {
             const side = i % 2 === 0 ? 'left' : 'right';
             return (
               <div key={ev.id} className={`te-row te-row--${side}`} id={`te-row-${ev.id}`}>
+
+
                 {/* Card */}
                 <div
                   ref={(el) => { cardRefs.current[i] = el; }}
@@ -787,6 +838,15 @@ export default function TrialEventsPage() {
           selectedEvent ? (ILLUSTRATIONS_MAP[selectedEvent.id] ?? IllustrationSoarFest) : null
         }
       />
+
+      {/* Registration Modal — top event only */}
+      {latestEvent && (
+        <RegistrationModal
+          isOpen={isRegModalOpen}
+          onClose={() => setIsRegModalOpen(false)}
+          eventName={latestEvent.title}
+        />
+      )}
 
       <style jsx global>{`
         /* ── Page ── */
@@ -959,6 +1019,237 @@ export default function TrialEventsPage() {
         .te-track-desktop { display: block; }
         .te-track-mobile { display: none; }
 
+        /* ── Registration Card Section ── */
+        .te-reg-section {
+          padding: 0 30px 60px;
+          display: flex;
+          justify-content: center;
+          position: relative;
+          z-index: 5;
+        }
+
+        .te-reg-card {
+          display: flex;
+          align-items: center;
+          gap: 0;
+          max-width: 900px;
+          width: 100%;
+          background: var(--surface-container-low);
+          border: 1px solid var(--outline-variant);
+          border-radius: 20px;
+          overflow: hidden;
+          box-shadow: 0 20px 60px rgba(0,0,0,0.18), 0 0 0 1px var(--outline-variant);
+          position: relative;
+        }
+
+        /* Animated glow orbs */
+        .te-reg-card__orb {
+          position: absolute;
+          border-radius: 50%;
+          pointer-events: none;
+          filter: blur(60px);
+          z-index: 0;
+        }
+        .te-reg-card__orb--1 {
+          width: 280px;
+          height: 280px;
+          background: var(--glow);
+          top: -100px;
+          left: -60px;
+          opacity: 0.5;
+          animation: orb-drift-1 8s ease-in-out infinite;
+        }
+        .te-reg-card__orb--2 {
+          width: 200px;
+          height: 200px;
+          background: var(--gradient-accent);
+          bottom: -80px;
+          right: 80px;
+          opacity: 0.25;
+          animation: orb-drift-2 10s ease-in-out infinite;
+        }
+        @keyframes orb-drift-1 {
+          0%,100% { transform: translate(0,0) scale(1); }
+          50%      { transform: translate(30px,20px) scale(1.1); }
+        }
+        @keyframes orb-drift-2 {
+          0%,100% { transform: translate(0,0) scale(1); }
+          50%      { transform: translate(-20px,-15px) scale(1.08); }
+        }
+
+        /* Info panel */
+        .te-reg-card__info {
+          flex: 1;
+          padding: 36px 40px;
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          position: relative;
+          z-index: 1;
+          min-width: 0;
+        }
+
+        .te-reg-card__badges {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+          flex-wrap: wrap;
+        }
+
+        /* Live pill */
+        .te-reg-card__live {
+          display: inline-flex;
+          align-items: center;
+          gap: 7px;
+          padding: 5px 12px;
+          border-radius: 9999px;
+          background: rgba(34,197,94,0.12);
+          border: 1px solid rgba(34,197,94,0.3);
+          font-family: var(--font-mono);
+          font-size: 0.65rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          color: var(--secondary);
+        }
+
+        .te-reg-card__live-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: var(--secondary);
+          box-shadow: 0 0 0 0 var(--glow);
+          animation: live-pulse 2s ease-in-out infinite;
+          flex-shrink: 0;
+        }
+        @keyframes live-pulse {
+          0%,100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+          50%      { box-shadow: 0 0 0 5px transparent; }
+        }
+
+        /* Category chip */
+        .te-reg-card__cat {
+          font-family: var(--font-mono);
+          font-size: 0.65rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          padding: 5px 10px;
+          border-radius: 4px;
+          background: var(--surface-container);
+          border: 1px solid var(--outline-variant);
+          color: var(--text-muted);
+        }
+
+        .te-reg-card__title {
+          font-family: var(--font-display);
+          font-size: clamp(1rem, 2.5vw, 1.4rem);
+          font-weight: 800;
+          color: var(--text-primary);
+          letter-spacing: -0.025em;
+          line-height: 1.2;
+          margin: 0;
+        }
+
+        /* Meta list */
+        .te-reg-card__meta {
+          list-style: none;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px 20px;
+          margin: 0;
+          padding: 0;
+        }
+        .te-reg-card__meta li {
+          font-size: 0.8rem;
+          color: var(--text-secondary);
+          display: flex;
+          align-items: center;
+          gap: 5px;
+        }
+
+        .te-reg-card__desc {
+          font-size: 0.85rem;
+          line-height: 1.6;
+          color: var(--text-muted);
+          margin: 0;
+        }
+
+        /* CTA panel */
+        .te-reg-card__cta {
+          flex-shrink: 0;
+          width: 220px;
+          background: var(--surface-container);
+          border-left: 1px solid var(--outline-variant);
+          padding: 36px 28px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          position: relative;
+          z-index: 1;
+        }
+
+        /* Subtle accent stripe at top of CTA panel */
+        .te-reg-card__cta::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 3px;
+          background: var(--gradient-accent);
+        }
+
+        .te-reg-card__cta-label {
+          font-family: var(--font-mono);
+          font-size: 0.62rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.14em;
+          color: var(--text-muted);
+          text-align: center;
+        }
+
+        .te-reg-card__btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          width: 100%;
+          padding: 13px 20px;
+          background: var(--gradient-accent);
+          color: var(--on-primary);
+          border: none;
+          border-radius: 9999px;
+          font-family: var(--font-display);
+          font-weight: 700;
+          font-size: 0.9rem;
+          cursor: pointer;
+          box-shadow: 0 4px 20px var(--glow);
+          transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .te-reg-card__btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 32px var(--glow);
+        }
+        .te-reg-card__btn:active {
+          transform: translateY(0);
+        }
+        .te-reg-card__btn-icon {
+          font-size: 0.75rem;
+          animation: te-star-spin 4s linear infinite;
+        }
+        @keyframes te-star-spin {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
+
+        .te-reg-card__cta-sub {
+          font-size: 0.68rem;
+          color: var(--text-muted);
+          text-align: center;
+        }
+
         /* ── Mobile collapse ── */
         @media (max-width: 680px) {
           .te-track-desktop { display: none; }
@@ -989,6 +1280,19 @@ export default function TrialEventsPage() {
 
           .tlc { width: 100% !important; max-width: 100% !important; flex-direction: column !important; }
           .tlc__art { width: 100% !important; height: 140px !important; border-bottom: 1px solid var(--border); }
+
+          /* Registration card mobile */
+          .te-reg-section { padding: 0 16px 40px; }
+          .te-reg-card { flex-direction: column; }
+          .te-reg-card__info { padding: 24px 20px 20px; }
+          .te-reg-card__cta {
+            width: 100%;
+            border-left: none;
+            border-top: 1px solid var(--outline-variant);
+            padding: 24px 20px;
+          }
+          .te-reg-card__cta::before { display: none; }
+          .te-reg-card__btn { width: 100%; }
         }
       `}</style>
     </>

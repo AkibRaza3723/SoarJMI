@@ -24,7 +24,7 @@ const TEAM: TeamMember[] = [
     social: 'https://www.linkedin.com/in/mohd-faizan-005942343/',
   },
   {
-    name: 'Mohammad Ayaan',
+    name: 'Mohammad Ayan Khan',
     role: 'General Secretary',
     avatar: 'https://res.cloudinary.com/wyuzj0og/image/upload/v1784204076/ayaan_alhdtt.jpg',
     quote: 'Every role is an opportunity to make a difference.',

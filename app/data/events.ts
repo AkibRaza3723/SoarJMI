@@ -295,3 +295,16 @@ export const EVENTS: SoarEvent[] = rawEvents.map((event, index) => ({
   ...event,
   id: index + 1,
 }));
+
+export const UPCOMING_EVENT: SoarEvent | null = {
+  id: 0,
+  title: 'UPCOMING EVENT TITLE',
+  date: 'August 15, 2026',
+  time: '10:00 AM – 5:00 PM',
+  location: 'Auditorium',
+  category: 'Tech',
+  tag: 'Event',
+  description: 'This is a placeholder for the upcoming event. Update these details in app/data/events.ts to change the registration card on the events page.',
+  image: null,
+  gallery: [],
+};
