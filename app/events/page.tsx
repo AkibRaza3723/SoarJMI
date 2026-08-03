@@ -701,10 +701,16 @@ export default function TrialEventsPage() {
               <div className="te-reg-card__orb te-reg-card__orb--2" aria-hidden="true" />
               <div className="te-reg-card__info">
                 <div className="te-reg-card__badges">
-                  <span className="te-reg-card__live">
-                    <span className="te-reg-card__live-dot" aria-hidden="true" />
-                    Registrations Open
-                  </span>
+                  {latestEvent.isRegistrationOpen ? (
+                    <span className="te-reg-card__live">
+                      <span className="te-reg-card__live-dot" aria-hidden="true" />
+                      Registrations Open
+                    </span>
+                  ) : (
+                    <span className="te-reg-card__closed" style={{ background: 'rgba(255, 60, 60, 0.15)', color: '#ff6b6b', padding: '4px 10px', borderRadius: '50px', fontSize: '0.65rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', display: 'flex', alignItems: 'center', gap: '6px', border: '1px solid rgba(255, 60, 60, 0.3)' }}>
+                      Registration Closed
+                    </span>
+                  )}
                   <span className="te-reg-card__cat">
                     {latestEvent.category === 'Tech' ? '⚡' : '🎭'} {latestEvent.category}
                   </span>
@@ -723,13 +729,15 @@ export default function TrialEventsPage() {
                 <p className="te-reg-card__cta-label">Secure your spot today</p>
                 <button
                   className="te-reg-card__btn"
-                  onClick={() => setIsRegModalOpen(true)}
+                  onClick={() => latestEvent.isRegistrationOpen && setIsRegModalOpen(true)}
                   aria-label={`Register for ${latestEvent.title}`}
                   id="register-now-btn"
                   type="button"
+                  disabled={!latestEvent.isRegistrationOpen}
+                  style={!latestEvent.isRegistrationOpen ? { opacity: 0.5, cursor: 'not-allowed', filter: 'grayscale(100%)' } : {}}
                 >
-                  Register Now
-                  <span className="te-reg-card__btn-icon" aria-hidden="true">✦</span>
+                  {latestEvent.isRegistrationOpen ? 'Register Now' : 'Registration Closed'}
+                  {latestEvent.isRegistrationOpen && <span className="te-reg-card__btn-icon" aria-hidden="true">✦</span>}
                 </button>
                 <p className="te-reg-card__cta-sub">Free · Open to all students</p>
               </div>

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Link from 'next/link';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -26,6 +27,7 @@ export default function ContactPage() {
   const subRef = useRef<HTMLParagraphElement>(null);
   const infoRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
   const ptRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -53,6 +55,12 @@ export default function ContactPage() {
           scrollTrigger: { trigger: mapRef.current, start: 'top 82%' },
         });
       }
+      if (ctaRef.current) {
+        gsap.from(ctaRef.current, {
+          opacity: 0, y: 40, duration: 0.8, ease: 'power2.out',
+          scrollTrigger: { trigger: ctaRef.current, start: 'top 88%' },
+        });
+      }
     }, pageRef);
     return () => ctx.revert();
   }, []);
@@ -73,10 +81,32 @@ export default function ContactPage() {
             We&rsquo;d Love to&nbsp;<span className="accent-gradient">Hear From You</span>
           </h1>
           <p ref={subRef} className="contact-sub">
-            Reach out to our HR team for collaborations, queries, or just to say hello. We&rsquo;re always around to help.
+            Reach out to our HR team for collaborations, queries, or just to say hello &mdash; or apply to join our team below.
           </p>
         </header>
 
+        {/* ── Recruitment CTA Card ── */}
+        <section ref={ctaRef} className="recruit-cta-section">
+          <div className="recruit-cta-card">
+            <div className="recruit-cta-content">
+              <div className="recruit-cta-icon-row">
+                <span className="recruit-cta-emoji">🚀</span>
+                <span className="recruit-cta-badge">Now Recruiting</span>
+              </div>
+              <h2 className="recruit-cta-title">Want to be a part of SoarJMI?</h2>
+              <p className="recruit-cta-desc">
+                We&rsquo;re looking for passionate individuals across Tech, Graphics, Content, Video Editing, and more. Apply now and soar with us!
+              </p>
+              <Link href="/contact/apply" className="recruit-cta-btn" id="contact-apply-cta">
+                Apply Now →
+              </Link>
+            </div>
+            <div className="recruit-cta-deco" aria-hidden="true">
+              <span className="recruit-cta-ring" />
+              <span className="recruit-cta-ring recruit-cta-ring--2" />
+            </div>
+          </div>
+        </section>
 
 
         <section className="info-section">
@@ -141,6 +171,22 @@ export default function ContactPage() {
         .contact-heading { color:var(--text-primary); margin-bottom:20px; }
         .contact-sub { font-size:1.05rem; line-height:1.8; color:var(--text-secondary); max-width:520px; margin:0 auto; }
 
+        /* ── Recruitment CTA ── */
+        .recruit-cta-section { position:relative; z-index:2; max-width:1100px; margin:0 auto; padding:30px 6% 40px; }
+        .recruit-cta-card { position:relative; background:var(--bg-card); border:1px solid var(--border); border-radius:28px; padding:40px 36px; box-shadow:var(--shadow-card); display:flex; align-items:center; justify-content:space-between; gap:24px; overflow:hidden; transition:border-color 0.3s, box-shadow 0.3s; }
+        .recruit-cta-card:hover { border-color:var(--accent-1); box-shadow:0 8px 40px var(--glow); }
+        .recruit-cta-content { position:relative; z-index:2; flex:1; }
+        .recruit-cta-icon-row { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+        .recruit-cta-emoji { font-size:1.8rem; filter:drop-shadow(0 4px 12px var(--glow)); }
+        .recruit-cta-badge { font-family:var(--font-mono); font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:var(--on-primary); background:var(--gradient-accent); padding:4px 12px; border-radius:50px; }
+        .recruit-cta-title { font-family:var(--font-display); font-size:clamp(1.2rem, 3vw, 1.6rem); font-weight:800; color:var(--text-primary); letter-spacing:-0.02em; margin-bottom:8px; }
+        .recruit-cta-desc { font-size:0.92rem; color:var(--text-secondary); line-height:1.7; max-width:500px; margin-bottom:20px; }
+        .recruit-cta-btn { display:inline-flex; align-items:center; gap:6px; padding:12px 32px; background:var(--gradient-accent); color:var(--on-primary); border:none; border-radius:9999px; font-family:var(--font-display); font-weight:700; font-size:0.92rem; text-decoration:none; box-shadow:0 4px 20px var(--glow); transition:transform 0.2s, box-shadow 0.2s; cursor:pointer; }
+        .recruit-cta-btn:hover { transform:translateY(-2px); box-shadow:0 8px 32px var(--glow); }
+        .recruit-cta-deco { position:absolute; right:-40px; top:50%; transform:translateY(-50%); pointer-events:none; z-index:1; }
+        .recruit-cta-ring { display:block; width:180px; height:180px; border-radius:50%; border:2px solid var(--accent-1); opacity:0.12; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); }
+        .recruit-cta-ring--2 { width:250px; height:250px; opacity:0.06; }
+
         .info-section { position:relative; z-index:2; display:grid; grid-template-columns:1fr 1fr; gap:32px; max-width:1100px; margin:0 auto; padding:0 6% 100px; }
         .info-panel { background:var(--bg-card); border:1px solid var(--border); border-radius:28px; padding:40px 36px; box-shadow:var(--shadow-card); display:flex; flex-direction:column; gap:28px; }
         .info-panel-header { display:flex; align-items:center; gap:16px; }
@@ -173,12 +219,17 @@ export default function ContactPage() {
         @media (max-width:860px) {
           .info-section { grid-template-columns:1fr; }
           .contact-hero { padding:40px 5% 10px; }
+          .recruit-cta-card { flex-direction:column; text-align:center; }
+          .recruit-cta-desc { margin-left:auto; margin-right:auto; }
+          .recruit-cta-icon-row { justify-content:center; }
+          .recruit-cta-deco { display:none; }
         }
         @media (max-width:480px) {
           .info-panel { padding:24px 20px; }
           .info-item { flex-direction:column; gap:8px; }
           .info-icon { margin-top:0; }
           .contact-hero { padding:20px 5% 10px; }
+          .recruit-cta-card { padding:24px 20px; }
         }
       `}</style>
     </>

@@ -32,6 +32,7 @@ const orbitron = Orbitron({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'),
   title: 'SoarJMI',
   description:
     'SoarJMI is the official cultural and tech society of Jamia Millia Islamia, New Delhi. Explore events, meet our team, and join a community that soars.',

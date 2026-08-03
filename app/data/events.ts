@@ -10,6 +10,7 @@ export interface SoarEvent {
   description: string;
   image: string | null;       
   gallery: string[];         
+  isRegistrationOpen?: boolean;
 }
 
 const rawEvents: Omit<SoarEvent, 'id'>[] = [
@@ -298,13 +299,15 @@ export const EVENTS: SoarEvent[] = rawEvents.map((event, index) => ({
 
 export const UPCOMING_EVENT: SoarEvent | null = {
   id: 0,
-  title: 'UPCOMING EVENT TITLE',
-  date: 'August 15, 2026',
+  title: 'CAREER GUIDANCE AND RESUME BUILDING',
+  date: 'July 05, 2026',
   time: '10:00 AM – 5:00 PM',
-  location: 'Auditorium',
+  location: 'FET',
   category: 'Tech',
   tag: 'Event',
-  description: 'This is a placeholder for the upcoming event. Update these details in app/data/events.ts to change the registration card on the events page.',
-  image: null,
+  description:
+      'Career Guidance and Resume Building is an insightful session designed to equip students with essential career skills. From mastering resume building and interview techniques to understanding Generative AI and GDPR compliance, the event aims to prepare participants for today\'s competitive professional landscape.',
+  image: 'https://res.cloudinary.com/crxs8dfo/image/upload/v1784809702/WhatsApp_Image_2026-07-23_at_17.58.00_ywtpfn.jpg',
   gallery: [],
+  isRegistrationOpen: false, 
 };

@@ -12,7 +12,10 @@ const galleryImages = [
   'https://res.cloudinary.com/wyuzj0og/image/upload/v1785251577/oldmember32_fmvhay.jpg',
   'https://res.cloudinary.com/crxs8dfo/image/upload/v1784918280/Screenshot_2026-07-25_at_12.07.46_AM_nwxm6r.png',
   'https://res.cloudinary.com/crxs8dfo/image/upload/v1784918791/Screenshot_2026-07-25_at_12.16.20_AM_bjpckd.png',
-  'https://res.cloudinary.com/wyuzj0og/image/upload/v1785253240/EB42_biwmep.jpg'
+  'https://res.cloudinary.com/wyuzj0og/image/upload/v1785253240/EB42_biwmep.jpg',
+  'https://res.cloudinary.com/wyuzj0og/image/upload/v1785738685/saveg1_lea6it.jpg',
+  'https://res.cloudinary.com/wyuzj0og/image/upload/v1785738733/saveg2_wyvlbl.jpg',
+  'https://res.cloudinary.com/wyuzj0og/image/upload/v1785738746/saveg3_iib2to.jpg'
 ];
 const images = Array.from({ length: 8 }, (_, i) => galleryImages[i % galleryImages.length]);
 
