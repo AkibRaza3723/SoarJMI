@@ -226,44 +226,261 @@ export default function RecruitmentForm() {
 
   // ── Success Screen ──────────────────────────────────────────────────────────
   if (status === 'success') {
+    const WA_PATH = 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z';
+
     return (
-      <div className="recruit-success" aria-live="polite">
-        <div className="recruit-success__confetti" aria-hidden="true">
-          {[...Array(24)].map((_, i) => (
+      <div style={{
+        textAlign: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+        padding: '56px 24px 64px',
+        maxWidth: '520px',
+        margin: '0 auto',
+      }} aria-live="polite">
+
+        {/* ── Confetti ── */}
+        <div style={{ position: 'absolute', top: '40%', left: '50%', pointerEvents: 'none' }} aria-hidden="true">
+          {[...Array(30)].map((_, i) => (
             <span
               key={i}
               className="confetti-piece"
               style={{
-                '--delay': `${i * 0.08}s`,
-                '--x': `${(Math.random() - 0.5) * 300}px`,
-                '--y': `${-Math.random() * 250 - 50}px`,
+                '--delay': `${i * 0.06}s`,
+                '--x': `${(Math.random() - 0.5) * 360}px`,
+                '--y': `${-Math.random() * 300 - 60}px`,
                 '--r': `${Math.random() * 720 - 360}deg`,
-                '--color': ['var(--secondary)', 'var(--tertiary)', 'var(--accent-1)', 'var(--accent-3)', '#FFD700', '#FF6B6B'][i % 6],
+                '--color': ['var(--secondary)', 'var(--tertiary)', 'var(--accent-1)', '#25d366', '#FFD700', '#a78bfa'][i % 6],
               } as React.CSSProperties}
             />
           ))}
         </div>
-        <div className="recruit-success__icon">🎉</div>
-        <h2 className="recruit-success__title">Application Submitted!</h2>
-        <p className="recruit-success__sub">
-          Thank you, <strong>{basicInfo.name}</strong>! Your application has been received.
-          <br />
-          <span className="recruit-success__teams">
-            {selectedTeam1?.icon} {selectedTeam1?.label} &nbsp;·&nbsp; {selectedTeam2?.icon} {selectedTeam2?.label}
-          </span>
-          <br />
-          We&rsquo;ll get back to you soon.
+
+        {/* ── Success Icon — Animated Checkmark ── */}
+        <div style={{
+          width: '80px', height: '80px', borderRadius: '50%',
+          background: 'var(--gradient-accent)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          margin: '0 auto 28px',
+          boxShadow: '0 0 0 8px rgba(var(--secondary-rgb, 34,197,94), 0.1), 0 12px 40px rgba(var(--secondary-rgb, 34,197,94), 0.18)',
+          animation: 'successPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both',
+        }}>
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ animation: 'checkDraw 0.5s ease-out 0.3s both' }}>
+            <path d="M20 6L9 17l-5-5" />
+          </svg>
+        </div>
+
+        {/* ── Heading ── */}
+        <h2 style={{
+          fontFamily: 'var(--font-display)',
+          fontSize: 'clamp(1.5rem, 4vw, 2.1rem)',
+          fontWeight: 800,
+          color: 'var(--text-primary)',
+          marginBottom: '8px',
+          letterSpacing: '-0.03em',
+          lineHeight: 1.2,
+        }}>You&rsquo;re In! 🎉</h2>
+
+        <p style={{
+          fontFamily: 'var(--font-body)',
+          fontSize: '1rem',
+          color: 'var(--text-secondary)',
+          lineHeight: 1.7,
+          maxWidth: '400px',
+          margin: '0 auto 10px',
+        }}>
+          Thank you, <strong style={{ color: 'var(--text-primary)' }}>{basicInfo.name}</strong>.
+          <br />Your application has been received successfully.
         </p>
+
+        {/* ── Team Chips ── */}
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+          marginBottom: '28px', flexWrap: 'wrap',
+        }}>
+          {[selectedTeam1, selectedTeam2].filter(Boolean).map((team, idx) => (
+            <span key={team!.id} style={{
+              display: 'inline-flex', alignItems: 'center', gap: '6px',
+              padding: '6px 16px', borderRadius: '9999px',
+              background: idx === 0 ? 'var(--gradient-accent)' : 'var(--surface-container)',
+              color: idx === 0 ? 'var(--on-primary)' : 'var(--text-primary)',
+              fontFamily: 'var(--font-display)', fontSize: '0.78rem', fontWeight: 700,
+              border: idx === 0 ? 'none' : '1px solid var(--outline-variant)',
+              letterSpacing: '0.01em',
+            }}>
+              <span>{team!.icon}</span> {team!.label}
+            </span>
+          ))}
+        </div>
+
+        {/* ── Application ID Card ── */}
         {appId && (
-          <div style={{ background: '#f0fff0', border: '1px solid rgba(34,197,94,0.25)', borderRadius: '10px', padding: '12px 24px', display: 'inline-block', marginBottom: '24px' }}>
-            <p style={{ margin: '0 0 4px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: '#3a8a54' }}>Your Application ID</p>
-            <p style={{ margin: 0, fontSize: '18px', fontWeight: 800, fontFamily: 'monospace', color: 'var(--secondary)', letterSpacing: '0.04em' }}>{appId}</p>
+          <div style={{
+            background: 'var(--surface-container-low)',
+            border: '1px solid var(--outline-variant)',
+            borderRadius: '14px',
+            padding: '16px 28px',
+            display: 'inline-block',
+            marginBottom: '32px',
+            position: 'relative',
+          }}>
+            <p style={{
+              margin: '0 0 6px', fontSize: '0.6rem', fontWeight: 700,
+              textTransform: 'uppercase', letterSpacing: '0.14em',
+              fontFamily: 'var(--font-mono)',
+              color: 'var(--text-muted)',
+            }}>Application ID</p>
+            <p style={{
+              margin: 0, fontSize: '1.15rem', fontWeight: 800,
+              fontFamily: 'var(--font-mono)', color: 'var(--secondary)',
+              letterSpacing: '0.06em',
+            }}>{appId}</p>
           </div>
         )}
-        <br />
-        <a href="/contact" className="recruit-success__back">
+
+        {/* ── Divider ── */}
+        <div style={{
+          width: '48px', height: '2px',
+          background: 'var(--outline-variant)',
+          margin: '0 auto 32px',
+          borderRadius: '2px',
+        }} />
+
+        {/* ── Next Steps Label ── */}
+        <p style={{
+          fontFamily: 'var(--font-mono)', fontSize: '0.6rem', fontWeight: 700,
+          textTransform: 'uppercase', letterSpacing: '0.14em',
+          color: 'var(--text-muted)', marginBottom: '16px',
+        }}>Next Steps</p>
+
+        {/* ── WhatsApp Cards Container ── */}
+        <div style={{
+          display: 'flex', flexDirection: 'column', gap: '12px',
+          maxWidth: '440px', margin: '0 auto 36px', width: '100%',
+        }}>
+
+          {/* PRIMARY — Recruitment Group */}
+          <a
+            href="https://chat.whatsapp.com/J6cMktpFefT5U594pkyIYG?s=cl&p=a&mlu=0"
+            target="_blank"
+            rel="noopener noreferrer"
+            id="recruit-join-recruitment-group"
+            style={{
+              display: 'flex', alignItems: 'center', gap: '16px',
+              padding: '18px 22px',
+              background: '#25d366',
+              borderRadius: '16px',
+              textDecoration: 'none',
+              color: '#fff',
+              transition: 'transform 0.2s, box-shadow 0.2s',
+              boxShadow: '0 4px 20px rgba(37,211,102,0.25)',
+              cursor: 'pointer',
+              border: 'none',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(37,211,102,0.35)'; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(37,211,102,0.25)'; }}
+          >
+            <div style={{
+              width: '48px', height: '48px', borderRadius: '14px',
+              background: 'rgba(255,255,255,0.2)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              flexShrink: 0, backdropFilter: 'blur(4px)',
+            }}>
+              <svg viewBox="0 0 24 24" fill="#fff" width="24" height="24"><path d={WA_PATH}/></svg>
+            </div>
+            <div style={{ flex: 1, textAlign: 'left' }}>
+              <div style={{
+                fontFamily: 'var(--font-display)', fontSize: '0.95rem', fontWeight: 700,
+                marginBottom: '2px',
+              }}>Join Recruitment Group</div>
+              <div style={{
+                fontSize: '0.75rem', opacity: 0.85, lineHeight: 1.4,
+              }}>Get interview schedules, updates &amp; results</div>
+            </div>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, opacity: 0.7 }}>
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </a>
+
+          {/* SECONDARY — Community Group */}
+          <a
+            href="https://chat.whatsapp.com/KxJkGxzshsf0xTAKunIhBw?s=sw&p=a&ilr=1"
+            target="_blank"
+            rel="noopener noreferrer"
+            id="recruit-join-community-group"
+            style={{
+              display: 'flex', alignItems: 'center', gap: '16px',
+              padding: '16px 22px',
+              background: 'var(--surface-container-low)',
+              border: '1px solid var(--outline-variant)',
+              borderRadius: '16px',
+              textDecoration: 'none',
+              color: 'var(--text-primary)',
+              transition: 'transform 0.2s, border-color 0.2s, box-shadow 0.2s',
+              cursor: 'pointer',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.borderColor = '#25d366'; e.currentTarget.style.boxShadow = '0 4px 16px rgba(37,211,102,0.1)'; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'var(--outline-variant)'; e.currentTarget.style.boxShadow = 'none'; }}
+          >
+            <div style={{
+              width: '42px', height: '42px', borderRadius: '12px',
+              background: 'rgba(37,211,102,0.08)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              flexShrink: 0,
+            }}>
+              <svg viewBox="0 0 24 24" fill="#25d366" width="22" height="22"><path d={WA_PATH}/></svg>
+            </div>
+            <div style={{ flex: 1, textAlign: 'left' }}>
+              <div style={{
+                fontFamily: 'var(--font-display)', fontSize: '0.88rem', fontWeight: 700,
+                color: 'var(--text-primary)', marginBottom: '1px',
+              }}>SoarJMI Community</div>
+              <div style={{
+                fontSize: '0.72rem', color: 'var(--text-muted)', lineHeight: 1.4,
+              }}>Events, resources &amp; networking</div>
+            </div>
+            <span style={{
+              padding: '6px 16px', borderRadius: '9999px',
+              border: '1.5px solid #25d366', color: '#25d366',
+              fontFamily: 'var(--font-display)', fontSize: '0.75rem', fontWeight: 700,
+              whiteSpace: 'nowrap', flexShrink: 0,
+            }}>Join</span>
+          </a>
+        </div>
+
+        {/* ── Back Link ── */}
+        <a
+          href="/contact"
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: '6px',
+            padding: '12px 28px',
+            background: 'var(--surface-container)',
+            color: 'var(--text-secondary)',
+            border: '1px solid var(--outline-variant)',
+            borderRadius: '9999px',
+            fontFamily: 'var(--font-display)',
+            fontWeight: 600,
+            fontSize: '0.85rem',
+            textDecoration: 'none',
+            transition: 'transform 0.2s, border-color 0.2s, color 0.2s',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.borderColor = 'var(--secondary)'; e.currentTarget.style.color = 'var(--secondary)'; }}
+          onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'var(--outline-variant)'; e.currentTarget.style.color = 'var(--text-secondary)'; }}
+        >
           ← Back to Contact
         </a>
+
+        {/* ── Keyframes ── */}
+        <style>{`
+          @keyframes successPop {
+            0% { transform: scale(0); opacity: 0; }
+            60% { transform: scale(1.15); }
+            100% { transform: scale(1); opacity: 1; }
+          }
+          @keyframes checkDraw {
+            0% { stroke-dasharray: 30; stroke-dashoffset: 30; opacity: 0; }
+            100% { stroke-dasharray: 30; stroke-dashoffset: 0; opacity: 1; }
+          }
+        `}</style>
       </div>
     );
   }
@@ -1021,21 +1238,7 @@ export default function RecruitmentForm() {
           to { transform: rotate(360deg); }
         }
 
-        /* ─── Success Screen ─── */
-        .recruit-success {
-          text-align: center;
-          padding: 48px 24px 56px;
-          position: relative;
-          overflow: hidden;
-        }
-
-        .recruit-success__confetti {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          pointer-events: none;
-        }
-
+        /* ─── Success Screen — confetti only ─── */
         .confetti-piece {
           position: absolute;
           width: 8px;
@@ -1050,54 +1253,6 @@ export default function RecruitmentForm() {
         @keyframes confetti-burst {
           0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
           100% { transform: translate(var(--x), var(--y)) rotate(var(--r)); opacity: 0; }
-        }
-
-        .recruit-success__icon { font-size: 3.5rem; margin-bottom: 16px; }
-
-        .recruit-success__title {
-          font-family: var(--font-display);
-          font-size: clamp(1.4rem, 4vw, 2rem);
-          font-weight: 800;
-          color: var(--text-primary);
-          margin-bottom: 12px;
-          letter-spacing: -0.02em;
-        }
-
-        .recruit-success__sub {
-          font-size: 0.95rem;
-          color: var(--text-secondary);
-          line-height: 1.7;
-          max-width: 420px;
-          margin: 0 auto 28px;
-        }
-
-        .recruit-success__teams {
-          display: inline-block;
-          margin-top: 6px;
-          font-weight: 700;
-          color: var(--secondary);
-        }
-
-        .recruit-success__back {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          padding: 12px 28px;
-          background: var(--gradient-accent);
-          color: var(--on-primary);
-          border: none;
-          border-radius: 9999px;
-          font-family: var(--font-display);
-          font-weight: 700;
-          font-size: 0.9rem;
-          text-decoration: none;
-          box-shadow: 0 4px 20px var(--glow);
-          transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .recruit-success__back:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 32px var(--glow);
         }
 
         /* ─── Responsive ─── */

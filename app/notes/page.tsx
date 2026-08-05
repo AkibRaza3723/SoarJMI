@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 
 const COURSES = [
   {
-    title: 'B.Tech 1st Sem',
+    title: 'B.Tech 1st Year',
     description: 'Comprehensive study materials, lecture notes, and previous year question papers for engineering freshmen.',
     subjects: [
       { name: 'Sem 1', link: 'https://drive.google.com/drive/folders/1V_MejIW96nSzHdbgIphz7_hiN3s-Wqf5', icon: '➗' },

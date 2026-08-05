@@ -39,7 +39,7 @@ export const TEAMS: Team[] = [
     questions: [
       { key: 'graphics_q1', label: 'Why do you want to join the graphics team?' },
       { key: 'graphics_q2', label: 'What will you do if your design gets rejected or needs changes?' },
-      { key: 'graphics_q3', label: 'Do you have any previous work to show?' },
+      { key: 'graphics_q3', label: 'Do you have any previous work to show? Enter the link of google drive to show the workpeice.' },
     ],
   },
   {
@@ -78,7 +78,7 @@ export const TEAMS: Team[] = [
     icon: '📸',
     questions: [
       { key: 'photo_q1', label: 'What interests you more—photography, videography, or editing? Why?' },
-      { key: 'photo_q2', label: 'Which camera(s) or smartphone do you usually use?' },
+      { key: 'photo_q2', label: 'Provide us with some of your old work. (Google Drive link)' },
       { key: 'photo_q3', label: 'Which editing software are you familiar with? (e.g., Adobe Lightroom, Photoshop, Premiere Pro, DaVinci Resolve, CapCut)' },
     ],
   },
